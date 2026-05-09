@@ -1,0 +1,386 @@
+{
+  "instance_id": "PYSEC-2022-229",
+  "repo_name": "gradio-app__gradio",
+  "language": "python",
+  "advisory_id": "PYSEC-2022-229",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "80fea89117358ee105973453fdc402398ae20239",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "5f907e4235058bf46fa85f27b9df876d54690fc3",
+    "fixed_commit": "80fea89117358ee105973453fdc402398ae20239"
+  },
+  "affected_files": [
+    "gradio/flagging.py",
+    "gradio/utils.py",
+    "test/test_utils.py"
+  ],
+  "affected_source_files": [
+    "gradio/flagging.py",
+    "gradio/utils.py",
+    "test/test_utils.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "`gradio` is an open source framework for building interactive machine learning models and demos. Prior to version 2.8.11, `gradio` suffers from Improper Neutralization of Formula Elements in a CSV File. The `gradio` library has a flagging functionality which saves input/output data into a CSV file on the developer's computer. This can allow a user to save arbitrary text into the CSV file, such as commands. If a program like MS Excel opens such a file, then it automatically runs these commands, w",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "gradio/flagging.py",
+      "gradio/utils.py",
+      "test/test_utils.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2022-229/test_poc.py",
+    "property": "oracles/PYSEC-2022-229/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2022-229/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2022-229/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2022-229/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "`gradio` is an open source framework for building interactive machine learning models and demos. Prior to version 2.8.11, `gradio` suffers from Improper Neutralization of Formula Elements in a CSV File. The `gradio` library has a flagging functionality which saves input/output data into a CSV file on the developer's computer. This can allow a user to save arbitrary text into the CSV file, such as commands. If a program like MS Excel opens such a file, then it automatically runs these commands, w",
+      "cwe_only": "CWE-94",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/gradio-app/gradio/security/advisories/GHSA-f8xq-q7px-wg8c",
+    "https://github.com/gradio-app/gradio/pull/817",
+    "https://github.com/gradio-app/gradio/commit/80fea89117358ee105973453fdc402398ae20239"
+  ],
+  "patch_stats": {
+    "files_changed": 3,
+    "lines_added": 68,
+    "lines_deleted": 12,
+    "lines_changed": 80
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "gradio-app__gradio-py39",
+    "repo_slug": "gradio-app__gradio",
+    "python_version": "3.9",
+    "python_requires_detected": "",
+    "docker_image": "pysec-env-gradio-app__gradio-py39:latest",
+    "dockerfile": "environments/gradio-app__gradio-py39/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "no_functional_tests_selected",
+    "selected": [],
+    "functional_test": null,
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "test/test_flagging.py",
+      "test/test_utils.py",
+      "test/test_processing_utils.py"
+    ],
+    "affected_files_used": [
+      "gradio/flagging.py",
+      "gradio/utils.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-gradio-app__gradio-py39:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/test_flagging.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__test_flagging.py.log"
+        },
+        "test/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.85,
+          "log": "/io/logs/test__test_utils.py.log"
+        },
+        "test/test_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.11,
+          "log": "/io/logs/test__test_processing_utils.py.log"
+        }
+      },
+      "R_fix": {
+        "test/test_flagging.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.22,
+          "log": "/io/logs/test__test_flagging.py.log"
+        },
+        "test/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.18,
+          "log": "/io/logs/test__test_utils.py.log"
+        },
+        "test/test_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.25,
+          "log": "/io/logs/test__test_processing_utils.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [
+      "test/test_utils.py"
+    ],
+    "candidate_tests": [
+      "test/test_utils.py",
+      "test/test_flagging.py",
+      "test/test_processing_utils.py",
+      "test/test_inputs.py",
+      "test/test_outputs.py",
+      "test/test_demos.py",
+      "test/test_interfaces.py",
+      "test/test_routes.py",
+      "test/test_external.py",
+      "test/test_networking.py",
+      "test/test_interpretation.py",
+      "test/test_mix.py",
+      "test/test_encryptor.py",
+      "test/test_queuing.py",
+      "test/test_tunneling.py"
+    ],
+    "affected_files_used": [
+      "gradio/flagging.py",
+      "gradio/utils.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-gradio-app__gradio-py39:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__test_utils.py.log"
+        },
+        "test/test_flagging.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.16,
+          "log": "/io/logs/test__test_flagging.py.log"
+        },
+        "test/test_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.21,
+          "log": "/io/logs/test__test_processing_utils.py.log"
+        },
+        "test/test_inputs.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.52,
+          "log": "/io/logs/test__test_inputs.py.log"
+        },
+        "test/test_outputs.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.97,
+          "log": "/io/logs/test__test_outputs.py.log"
+        },
+        "test/test_demos.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.5,
+          "log": "/io/logs/test__test_demos.py.log"
+        },
+        "test/test_interfaces.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.12,
+          "log": "/io/logs/test__test_interfaces.py.log"
+        },
+        "test/test_routes.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.37,
+          "log": "/io/logs/test__test_routes.py.log"
+        },
+        "test/test_external.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__test_external.py.log"
+        },
+        "test/test_networking.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.14,
+          "log": "/io/logs/test__test_networking.py.log"
+        },
+        "test/test_interpretation.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.05,
+          "log": "/io/logs/test__test_interpretation.py.log"
+        },
+        "test/test_mix.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.2,
+          "log": "/io/logs/test__test_mix.py.log"
+        },
+        "test/test_encryptor.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.19,
+          "log": "/io/logs/test__test_encryptor.py.log"
+        },
+        "test/test_queuing.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__test_queuing.py.log"
+        },
+        "test/test_tunneling.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.28,
+          "log": "/io/logs/test__test_tunneling.py.log"
+        }
+      },
+      "R_fix": {
+        "test/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.89,
+          "log": "/io/logs/test__test_utils.py.log"
+        },
+        "test/test_flagging.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.94,
+          "log": "/io/logs/test__test_flagging.py.log"
+        },
+        "test/test_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.29,
+          "log": "/io/logs/test__test_processing_utils.py.log"
+        },
+        "test/test_inputs.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.57,
+          "log": "/io/logs/test__test_inputs.py.log"
+        },
+        "test/test_outputs.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.2,
+          "log": "/io/logs/test__test_outputs.py.log"
+        },
+        "test/test_demos.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.7,
+          "log": "/io/logs/test__test_demos.py.log"
+        },
+        "test/test_interfaces.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.31,
+          "log": "/io/logs/test__test_interfaces.py.log"
+        },
+        "test/test_routes.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.47,
+          "log": "/io/logs/test__test_routes.py.log"
+        },
+        "test/test_external.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.28,
+          "log": "/io/logs/test__test_external.py.log"
+        },
+        "test/test_networking.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.57,
+          "log": "/io/logs/test__test_networking.py.log"
+        },
+        "test/test_interpretation.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.53,
+          "log": "/io/logs/test__test_interpretation.py.log"
+        },
+        "test/test_mix.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.23,
+          "log": "/io/logs/test__test_mix.py.log"
+        },
+        "test/test_encryptor.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.18,
+          "log": "/io/logs/test__test_encryptor.py.log"
+        },
+        "test/test_queuing.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.17,
+          "log": "/io/logs/test__test_queuing.py.log"
+        },
+        "test/test_tunneling.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.61,
+          "log": "/io/logs/test__test_tunneling.py.log"
+        }
+      }
+    }
+  }
+}

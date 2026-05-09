@@ -1,0 +1,33 @@
+{
+  "instance_id": "PYSEC-2021-859",
+  "repo_url": "https://github.com/nltk/nltk",
+  "vulnerable_commit": "0b7b076247ec41f9b6b8a94400d48ea299e4b507",
+  "fixed_commit": "1405aad979c6b8080dbbc8e0858f89b2e3690341",
+  "vulnerable_snapshot": "snapshots/PYSEC-2021-859/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2021-859/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2021-859.patch",
+  "aliases": [
+    "CVE-2021-43854",
+    "GHSA-f8m6-h2c7-8h9x"
+  ],
+  "cwe": [
+    "CWE-400",
+    "CWE-94"
+  ],
+  "signal_probe": {
+    "full_advisory": "NLTK (Natural Language Toolkit) is a suite of open source Python modules, data sets, and tutorials supporting research and development in Natural Language Processing. Versions prior to 3.6.5 are vulnerable to regular expression denial of service (ReDoS) attacks. The vulnerability is present in PunktSentenceTokenizer, sent_tokenize and word_tokenize. Any users of this class, or these two functions, are vulnerable to the ReDoS attack. In short, a specifically crafted long input to any of these vul",
+    "cwe_only": "CWE-400,CWE-94",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-nltk__nltk-py38:latest",
+    "dockerfile": "environments/nltk__nltk-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q nltk/test/unit/test_chunk.py nltk/test/unit/test_classify.py nltk/test/unit/test_collocations.py nltk/test/unit/test_corenlp.py nltk/test/unit/test_data.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

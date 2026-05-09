@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2019-138",
+  "repo_url": "https://github.com/Pylons/waitress",
+  "vulnerable_commit": "f11093a6b3240fc26830b6111e826128af7771c3",
+  "fixed_commit": "11d9e138125ad46e951027184b13242a3c1de017",
+  "vulnerable_snapshot": "snapshots/PYSEC-2019-138/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2019-138/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2019-138.patch",
+  "aliases": [
+    "CVE-2019-16789",
+    "GHSA-968f-66r5-5v74"
+  ],
+  "cwe": [
+    "CWE-444"
+  ],
+  "signal_probe": {
+    "full_advisory": "In Waitress through version 1.4.0, if a proxy server is used in front of waitress, an invalid request may be sent by an attacker that bypasses the front-end and is parsed differently by waitress leading to a potential for HTTP request smuggling. Specially crafted requests containing special whitespace characters in the Transfer-Encoding header would get parsed by Waitress as being a chunked request, but a front-end server would use the Content-Length instead as the Transfer-Encoding header is co",
+    "cwe_only": "CWE-444",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-Pylons__waitress-py38:latest",
+    "dockerfile": "environments/Pylons__waitress-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

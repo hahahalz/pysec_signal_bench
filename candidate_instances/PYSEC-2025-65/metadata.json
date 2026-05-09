@@ -1,0 +1,944 @@
+{
+  "instance_id": "PYSEC-2025-65",
+  "repo_name": "run-llama__llama_index",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-65",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "cdeaab91a204d1c3527f177dac37390327aef274",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "4ab43c376fe2f10f67e7fe429cc51b1ed7e13e6c",
+    "fixed_commit": "cdeaab91a204d1c3527f177dac37390327aef274"
+  },
+  "affected_files": [
+    "llama-index-core/llama_index/core/schema.py",
+    "llama-index-core/tests/multi_modal_llms/test_generic_utils.py",
+    "llama-index-core/tests/schema/test_image_document.py",
+    "llama-index-core/tests/schema/test_schema.py"
+  ],
+  "affected_source_files": [
+    "llama-index-core/llama_index/core/schema.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "A path traversal vulnerability exists in run-llama/llama_index versions 0.12.27 through 0.12.40, specifically within the `encode_image` function in `generic_utils.py`. This vulnerability allows an attacker to manipulate the `image_path` input to read arbitrary files on the server, including sensitive system files. The issue arises due to improper validation or sanitization of the file path, enabling path traversal sequences to access files outside the intended directory. The vulnerability is fixed in version 0.12.41.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "llama-index-core/llama_index/core/schema.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-65/test_poc.py",
+    "property": "oracles/PYSEC-2025-65/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-65/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-65/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-65/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "A path traversal vulnerability exists in run-llama/llama_index versions 0.12.27 through 0.12.40, specifically within the `encode_image` function in `generic_utils.py`. This vulnerability allows an attacker to manipulate the `image_path` input to read arbitrary files on the server, including sensitive system files. The issue arises due to improper validation or sanitization of the file path, enabling path traversal sequences to access files outside the intended directory. The vulnerability is fixed in version 0.12.41.",
+      "cwe_only": "CWE-22",
+      "symptom_only": "arbitrary file",
+      "exploit_hint_only": "path",
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/run-llama/llama_index/commit/cdeaab91a204d1c3527f177dac37390327aef274",
+    "https://huntr.com/bounties/e89d14f8-bfe8-4c9a-bb2a-656c01cc9a68"
+  ],
+  "patch_stats": {
+    "files_changed": 4,
+    "lines_added": 113,
+    "lines_deleted": 23,
+    "lines_changed": 136
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "run-llama__llama_index-py310",
+    "repo_slug": "run-llama__llama_index",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9,<4.0",
+    "docker_image": "pysec-env-run-llama__llama_index-py310:latest",
+    "dockerfile": "environments/run-llama__llama_index-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "extracted_poc_oracle": {
+    "oracle_dir": "oracles/PYSEC-2025-65/extracted_poc",
+    "runner": "oracles/PYSEC-2025-65/extracted_poc/run_extracted_poc.py",
+    "manifest": "oracles/PYSEC-2025-65/extracted_poc/manifest.json",
+    "test_files": [
+      "llama-index-core/tests/schema/test_image_document.py"
+    ]
+  },
+  "functional_test_selection": {
+    "status": "selected",
+    "selected": [
+      "llama-index-core/tests/schema/test_schema.py",
+      "llama-index-core/tests/schema/test_base_component.py",
+      "llama-index-core/tests/schema/test_base_node.py",
+      "llama-index-core/tests/schema/test_media_resource.py",
+      "llama-index-core/tests/schema/test_node.py"
+    ],
+    "functional_test": "pytest -q llama-index-core/tests/schema/test_schema.py llama-index-core/tests/schema/test_base_component.py llama-index-core/tests/schema/test_base_node.py llama-index-core/tests/schema/test_media_resource.py llama-index-core/tests/schema/test_node.py",
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "llama-index-core/tests/schema/test_schema.py",
+      "llama-index-core/tests/schema/test_base_component.py",
+      "llama-index-core/tests/schema/test_base_node.py",
+      "llama-index-core/tests/schema/test_media_resource.py",
+      "llama-index-core/tests/schema/test_node.py",
+      "llama-index-core/tests/callbacks/test_llama_debug.py",
+      "llama-index-core/tests/indices/document_summary/test_index.py",
+      "llama-index-core/tests/indices/list/test_index.py",
+      "llama-index-core/tests/indices/tree/test_index.py",
+      "llama-index-core/tests/test_async_utils.py",
+      "llama-index-core/tests/test_utils.py",
+      "llama-index-core/tests/callbacks/test_token_counter.py",
+      "llama-index-core/tests/chat_engine/test_condense_plus_context.py",
+      "llama-index-core/tests/chat_engine/test_condense_question.py",
+      "llama-index-core/tests/chat_engine/test_context.py",
+      "llama-index-core/tests/chat_engine/test_simple.py",
+      "llama-index-core/tests/embeddings/test_base.py",
+      "llama-index-core/tests/embeddings/test_utils.py",
+      "llama-index-core/tests/embeddings/test_with_cache.py",
+      "llama-index-core/tests/evaluation/test_base.py",
+      "llama-index-core/tests/evaluation/test_batch_runner.py",
+      "llama-index-core/tests/evaluation/test_dataset_generation.py",
+      "llama-index-core/tests/evaluation/test_metrics.py",
+      "llama-index-core/tests/evaluation/test_platform_eval.py",
+      "llama-index-core/tests/extractors/test_document_context_extractor.py",
+      "llama-index-core/tests/graph_stores/test_simple_lpg.py",
+      "llama-index-core/tests/indices/test_loading.py",
+      "llama-index-core/tests/indices/test_loading_graph.py",
+      "llama-index-core/tests/indices/test_prompt_helper.py",
+      "llama-index-core/tests/indices/test_utils.py"
+    ],
+    "affected_files_used": [
+      "llama-index-core/llama_index/core/schema.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-run-llama__llama_index-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "llama-index-core/tests/schema/test_schema.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.08,
+          "log": "/io/logs/llama-index-core__tests__schema__test_schema.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_component.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.81,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_component.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.91,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_node.py.log"
+        },
+        "llama-index-core/tests/schema/test_media_resource.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.64,
+          "log": "/io/logs/llama-index-core__tests__schema__test_media_resource.py.log"
+        },
+        "llama-index-core/tests/schema/test_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.76,
+          "log": "/io/logs/llama-index-core__tests__schema__test_node.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_llama_debug.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.34,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_llama_debug.py.log"
+        },
+        "llama-index-core/tests/indices/document_summary/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.56,
+          "log": "/io/logs/llama-index-core__tests__indices__document_summary__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/list/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.88,
+          "log": "/io/logs/llama-index-core__tests__indices__list__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/tree/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.89,
+          "log": "/io/logs/llama-index-core__tests__indices__tree__test_index.py.log"
+        },
+        "llama-index-core/tests/test_async_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.69,
+          "log": "/io/logs/llama-index-core__tests__test_async_utils.py.log"
+        },
+        "llama-index-core/tests/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.96,
+          "log": "/io/logs/llama-index-core__tests__test_utils.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_token_counter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.87,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_token_counter.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_condense_plus_context.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.05,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_condense_plus_context.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_condense_question.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.85,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_condense_question.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_context.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.63,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_context.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_simple.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.79,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_simple.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.05,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_base.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.85,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_utils.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_with_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.91,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_with_cache.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.16,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_base.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_batch_runner.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.69,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_batch_runner.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_dataset_generation.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.2,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_dataset_generation.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_metrics.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.9,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_metrics.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_platform_eval.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.97,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_platform_eval.py.log"
+        },
+        "llama-index-core/tests/extractors/test_document_context_extractor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.58,
+          "log": "/io/logs/llama-index-core__tests__extractors__test_document_context_extractor.py.log"
+        },
+        "llama-index-core/tests/graph_stores/test_simple_lpg.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.86,
+          "log": "/io/logs/llama-index-core__tests__graph_stores__test_simple_lpg.py.log"
+        },
+        "llama-index-core/tests/indices/test_loading.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.02,
+          "log": "/io/logs/llama-index-core__tests__indices__test_loading.py.log"
+        },
+        "llama-index-core/tests/indices/test_loading_graph.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.97,
+          "log": "/io/logs/llama-index-core__tests__indices__test_loading_graph.py.log"
+        },
+        "llama-index-core/tests/indices/test_prompt_helper.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.89,
+          "log": "/io/logs/llama-index-core__tests__indices__test_prompt_helper.py.log"
+        },
+        "llama-index-core/tests/indices/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.75,
+          "log": "/io/logs/llama-index-core__tests__indices__test_utils.py.log"
+        }
+      },
+      "R_fix": {
+        "llama-index-core/tests/schema/test_schema.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.14,
+          "log": "/io/logs/llama-index-core__tests__schema__test_schema.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_component.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.7,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_component.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.72,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_node.py.log"
+        },
+        "llama-index-core/tests/schema/test_media_resource.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.33,
+          "log": "/io/logs/llama-index-core__tests__schema__test_media_resource.py.log"
+        },
+        "llama-index-core/tests/schema/test_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.65,
+          "log": "/io/logs/llama-index-core__tests__schema__test_node.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_llama_debug.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.61,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_llama_debug.py.log"
+        },
+        "llama-index-core/tests/indices/document_summary/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.84,
+          "log": "/io/logs/llama-index-core__tests__indices__document_summary__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/list/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.93,
+          "log": "/io/logs/llama-index-core__tests__indices__list__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/tree/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.44,
+          "log": "/io/logs/llama-index-core__tests__indices__tree__test_index.py.log"
+        },
+        "llama-index-core/tests/test_async_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.64,
+          "log": "/io/logs/llama-index-core__tests__test_async_utils.py.log"
+        },
+        "llama-index-core/tests/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.9,
+          "log": "/io/logs/llama-index-core__tests__test_utils.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_token_counter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.83,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_token_counter.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_condense_plus_context.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.98,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_condense_plus_context.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_condense_question.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.78,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_condense_question.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_context.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.07,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_context.py.log"
+        },
+        "llama-index-core/tests/chat_engine/test_simple.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.16,
+          "log": "/io/logs/llama-index-core__tests__chat_engine__test_simple.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.78,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_base.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.73,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_utils.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_with_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.44,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_with_cache.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.79,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_base.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_batch_runner.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.76,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_batch_runner.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_dataset_generation.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.15,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_dataset_generation.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_metrics.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.1,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_metrics.py.log"
+        },
+        "llama-index-core/tests/evaluation/test_platform_eval.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.07,
+          "log": "/io/logs/llama-index-core__tests__evaluation__test_platform_eval.py.log"
+        },
+        "llama-index-core/tests/extractors/test_document_context_extractor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.21,
+          "log": "/io/logs/llama-index-core__tests__extractors__test_document_context_extractor.py.log"
+        },
+        "llama-index-core/tests/graph_stores/test_simple_lpg.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.15,
+          "log": "/io/logs/llama-index-core__tests__graph_stores__test_simple_lpg.py.log"
+        },
+        "llama-index-core/tests/indices/test_loading.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.42,
+          "log": "/io/logs/llama-index-core__tests__indices__test_loading.py.log"
+        },
+        "llama-index-core/tests/indices/test_loading_graph.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.34,
+          "log": "/io/logs/llama-index-core__tests__indices__test_loading_graph.py.log"
+        },
+        "llama-index-core/tests/indices/test_prompt_helper.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.56,
+          "log": "/io/logs/llama-index-core__tests__indices__test_prompt_helper.py.log"
+        },
+        "llama-index-core/tests/indices/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.89,
+          "log": "/io/logs/llama-index-core__tests__indices__test_utils.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "selected",
+    "selected": [
+      "llama-index-core/tests/schema/test_image_document.py"
+    ],
+    "poc_test": "python /bench/oracles/PYSEC-2025-65/extracted_poc/run_extracted_poc.py",
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [
+      "llama-index-core/tests/multi_modal_llms/test_generic_utils.py",
+      "llama-index-core/tests/schema/test_image_document.py",
+      "llama-index-core/tests/schema/test_schema.py"
+    ],
+    "candidate_tests": [
+      "llama-index-core/tests/multi_modal_llms/test_generic_utils.py",
+      "llama-index-core/tests/schema/test_image_document.py",
+      "llama-index-core/tests/schema/test_schema.py",
+      "llama-index-core/tests/node_parser/test_markdown_element.py",
+      "llama-index-core/tests/schema/test_media_resource.py",
+      "llama-index-core/tests/schema/test_base_node.py",
+      "llama-index-core/tests/readers/file/test_base.py",
+      "llama-index-core/tests/schema/test_base_component.py",
+      "llama-index-core/tests/schema/test_node.py",
+      "llama-index-core/tests/readers/test_json.py",
+      "llama-index-core/tests/base/llms/test_types.py",
+      "llama-index-core/tests/query_pipeline/test_query.py",
+      "llama-index-core/tests/text_splitter/test_sentence_splitter.py",
+      "llama-index-core/tests/workflow/test_workflow.py",
+      "llama-index-core/tests/instrumentation/test_dispatcher.py",
+      "llama-index-core/tests/callbacks/test_llama_debug.py",
+      "llama-index-core/tests/indices/tree/test_index.py",
+      "llama-index-core/tests/memory/blocks/test_static.py",
+      "llama-index-core/tests/tools/test_base.py",
+      "llama-index-core/tests/indices/list/test_index.py",
+      "llama-index-core/tests/indices/document_summary/test_index.py",
+      "llama-index-core/tests/node_parser/test_markdown.py",
+      "llama-index-core/tests/postprocessor/test_base.py",
+      "llama-index-core/tests/test_utils.py",
+      "llama-index-core/tests/multi_modal_llms/test_base_multi_modal_llm_metadata.py",
+      "llama-index-core/tests/tools/test_eval_query_engine_tool.py",
+      "llama-index-core/tests/tools/test_query_engine_tool.py",
+      "llama-index-core/tests/workflow/test_utils.py",
+      "llama-index-core/tests/embeddings/test_utils.py",
+      "llama-index-core/tests/indices/struct_store/test_json_query.py"
+    ],
+    "affected_files_used": [
+      "llama-index-core/llama_index/core/schema.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": true,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-run-llama__llama_index-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "llama-index-core/tests/multi_modal_llms/test_generic_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.98,
+          "log": "/io/logs/llama-index-core__tests__multi_modal_llms__test_generic_utils.py.log"
+        },
+        "llama-index-core/tests/schema/test_image_document.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.29,
+          "log": "/io/logs/llama-index-core__tests__schema__test_image_document.py.log"
+        },
+        "llama-index-core/tests/schema/test_schema.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.25,
+          "log": "/io/logs/llama-index-core__tests__schema__test_schema.py.log"
+        },
+        "llama-index-core/tests/node_parser/test_markdown_element.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 12.97,
+          "log": "/io/logs/llama-index-core__tests__node_parser__test_markdown_element.py.log"
+        },
+        "llama-index-core/tests/schema/test_media_resource.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.41,
+          "log": "/io/logs/llama-index-core__tests__schema__test_media_resource.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.09,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_node.py.log"
+        },
+        "llama-index-core/tests/readers/file/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.53,
+          "log": "/io/logs/llama-index-core__tests__readers__file__test_base.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_component.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.83,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_component.py.log"
+        },
+        "llama-index-core/tests/schema/test_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.82,
+          "log": "/io/logs/llama-index-core__tests__schema__test_node.py.log"
+        },
+        "llama-index-core/tests/readers/test_json.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.05,
+          "log": "/io/logs/llama-index-core__tests__readers__test_json.py.log"
+        },
+        "llama-index-core/tests/base/llms/test_types.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.89,
+          "log": "/io/logs/llama-index-core__tests__base__llms__test_types.py.log"
+        },
+        "llama-index-core/tests/query_pipeline/test_query.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.02,
+          "log": "/io/logs/llama-index-core__tests__query_pipeline__test_query.py.log"
+        },
+        "llama-index-core/tests/text_splitter/test_sentence_splitter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.27,
+          "log": "/io/logs/llama-index-core__tests__text_splitter__test_sentence_splitter.py.log"
+        },
+        "llama-index-core/tests/workflow/test_workflow.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 8.28,
+          "log": "/io/logs/llama-index-core__tests__workflow__test_workflow.py.log"
+        },
+        "llama-index-core/tests/instrumentation/test_dispatcher.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.07,
+          "log": "/io/logs/llama-index-core__tests__instrumentation__test_dispatcher.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_llama_debug.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.72,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_llama_debug.py.log"
+        },
+        "llama-index-core/tests/indices/tree/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.81,
+          "log": "/io/logs/llama-index-core__tests__indices__tree__test_index.py.log"
+        },
+        "llama-index-core/tests/memory/blocks/test_static.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.3,
+          "log": "/io/logs/llama-index-core__tests__memory__blocks__test_static.py.log"
+        },
+        "llama-index-core/tests/tools/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.88,
+          "log": "/io/logs/llama-index-core__tests__tools__test_base.py.log"
+        },
+        "llama-index-core/tests/indices/list/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.89,
+          "log": "/io/logs/llama-index-core__tests__indices__list__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/document_summary/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.95,
+          "log": "/io/logs/llama-index-core__tests__indices__document_summary__test_index.py.log"
+        },
+        "llama-index-core/tests/node_parser/test_markdown.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.67,
+          "log": "/io/logs/llama-index-core__tests__node_parser__test_markdown.py.log"
+        },
+        "llama-index-core/tests/postprocessor/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.98,
+          "log": "/io/logs/llama-index-core__tests__postprocessor__test_base.py.log"
+        },
+        "llama-index-core/tests/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.95,
+          "log": "/io/logs/llama-index-core__tests__test_utils.py.log"
+        },
+        "llama-index-core/tests/multi_modal_llms/test_base_multi_modal_llm_metadata.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.85,
+          "log": "/io/logs/llama-index-core__tests__multi_modal_llms__test_base_multi_modal_llm_metadata.py.log"
+        },
+        "llama-index-core/tests/tools/test_eval_query_engine_tool.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.86,
+          "log": "/io/logs/llama-index-core__tests__tools__test_eval_query_engine_tool.py.log"
+        },
+        "llama-index-core/tests/tools/test_query_engine_tool.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.72,
+          "log": "/io/logs/llama-index-core__tests__tools__test_query_engine_tool.py.log"
+        },
+        "llama-index-core/tests/workflow/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.83,
+          "log": "/io/logs/llama-index-core__tests__workflow__test_utils.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.16,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_utils.py.log"
+        },
+        "llama-index-core/tests/indices/struct_store/test_json_query.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.72,
+          "log": "/io/logs/llama-index-core__tests__indices__struct_store__test_json_query.py.log"
+        }
+      },
+      "R_fix": {
+        "llama-index-core/tests/multi_modal_llms/test_generic_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 11.18,
+          "log": "/io/logs/llama-index-core__tests__multi_modal_llms__test_generic_utils.py.log"
+        },
+        "llama-index-core/tests/schema/test_image_document.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.07,
+          "log": "/io/logs/llama-index-core__tests__schema__test_image_document.py.log"
+        },
+        "llama-index-core/tests/schema/test_schema.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.17,
+          "log": "/io/logs/llama-index-core__tests__schema__test_schema.py.log"
+        },
+        "llama-index-core/tests/node_parser/test_markdown_element.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 8.7,
+          "log": "/io/logs/llama-index-core__tests__node_parser__test_markdown_element.py.log"
+        },
+        "llama-index-core/tests/schema/test_media_resource.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.6,
+          "log": "/io/logs/llama-index-core__tests__schema__test_media_resource.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.97,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_node.py.log"
+        },
+        "llama-index-core/tests/readers/file/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.5,
+          "log": "/io/logs/llama-index-core__tests__readers__file__test_base.py.log"
+        },
+        "llama-index-core/tests/schema/test_base_component.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.99,
+          "log": "/io/logs/llama-index-core__tests__schema__test_base_component.py.log"
+        },
+        "llama-index-core/tests/schema/test_node.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.11,
+          "log": "/io/logs/llama-index-core__tests__schema__test_node.py.log"
+        },
+        "llama-index-core/tests/readers/test_json.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.03,
+          "log": "/io/logs/llama-index-core__tests__readers__test_json.py.log"
+        },
+        "llama-index-core/tests/base/llms/test_types.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.99,
+          "log": "/io/logs/llama-index-core__tests__base__llms__test_types.py.log"
+        },
+        "llama-index-core/tests/query_pipeline/test_query.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.3,
+          "log": "/io/logs/llama-index-core__tests__query_pipeline__test_query.py.log"
+        },
+        "llama-index-core/tests/text_splitter/test_sentence_splitter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 9.26,
+          "log": "/io/logs/llama-index-core__tests__text_splitter__test_sentence_splitter.py.log"
+        },
+        "llama-index-core/tests/workflow/test_workflow.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 9.15,
+          "log": "/io/logs/llama-index-core__tests__workflow__test_workflow.py.log"
+        },
+        "llama-index-core/tests/instrumentation/test_dispatcher.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.0,
+          "log": "/io/logs/llama-index-core__tests__instrumentation__test_dispatcher.py.log"
+        },
+        "llama-index-core/tests/callbacks/test_llama_debug.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.53,
+          "log": "/io/logs/llama-index-core__tests__callbacks__test_llama_debug.py.log"
+        },
+        "llama-index-core/tests/indices/tree/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.57,
+          "log": "/io/logs/llama-index-core__tests__indices__tree__test_index.py.log"
+        },
+        "llama-index-core/tests/memory/blocks/test_static.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.62,
+          "log": "/io/logs/llama-index-core__tests__memory__blocks__test_static.py.log"
+        },
+        "llama-index-core/tests/tools/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.69,
+          "log": "/io/logs/llama-index-core__tests__tools__test_base.py.log"
+        },
+        "llama-index-core/tests/indices/list/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.99,
+          "log": "/io/logs/llama-index-core__tests__indices__list__test_index.py.log"
+        },
+        "llama-index-core/tests/indices/document_summary/test_index.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.1,
+          "log": "/io/logs/llama-index-core__tests__indices__document_summary__test_index.py.log"
+        },
+        "llama-index-core/tests/node_parser/test_markdown.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.02,
+          "log": "/io/logs/llama-index-core__tests__node_parser__test_markdown.py.log"
+        },
+        "llama-index-core/tests/postprocessor/test_base.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.33,
+          "log": "/io/logs/llama-index-core__tests__postprocessor__test_base.py.log"
+        },
+        "llama-index-core/tests/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.13,
+          "log": "/io/logs/llama-index-core__tests__test_utils.py.log"
+        },
+        "llama-index-core/tests/multi_modal_llms/test_base_multi_modal_llm_metadata.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.85,
+          "log": "/io/logs/llama-index-core__tests__multi_modal_llms__test_base_multi_modal_llm_metadata.py.log"
+        },
+        "llama-index-core/tests/tools/test_eval_query_engine_tool.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.8,
+          "log": "/io/logs/llama-index-core__tests__tools__test_eval_query_engine_tool.py.log"
+        },
+        "llama-index-core/tests/tools/test_query_engine_tool.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.88,
+          "log": "/io/logs/llama-index-core__tests__tools__test_query_engine_tool.py.log"
+        },
+        "llama-index-core/tests/workflow/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.16,
+          "log": "/io/logs/llama-index-core__tests__workflow__test_utils.py.log"
+        },
+        "llama-index-core/tests/embeddings/test_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.66,
+          "log": "/io/logs/llama-index-core__tests__embeddings__test_utils.py.log"
+        },
+        "llama-index-core/tests/indices/struct_store/test_json_query.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.38,
+          "log": "/io/logs/llama-index-core__tests__indices__struct_store__test_json_query.py.log"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,926 @@
+{
+  "instance_id": "PYSEC-2025-49",
+  "repo_name": "pypa__setuptools",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-49",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "250a6d17978f9f6ac3ac887091f2d32886fbbb0b",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "d8390feaa99091d1ba9626bec0e4ba7072fc507a",
+    "fixed_commit": "250a6d17978f9f6ac3ac887091f2d32886fbbb0b"
+  },
+  "affected_files": [
+    "setuptools/package_index.py"
+  ],
+  "affected_source_files": [
+    "setuptools/package_index.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "setuptools is a package that allows users to download, build, install, upgrade, and uninstall Python packages. A path traversal vulnerability in `PackageIndex` is present in setuptools prior to version 78.1.1. An attacker would be allowed to write files to arbitrary locations on the filesystem with the permissions of the process running the Python code, which could escalate to remote code execution depending on the context. Version 78.1.1 fixes the issue.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "setuptools/package_index.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-49/test_poc.py",
+    "property": "oracles/PYSEC-2025-49/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-49/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-49/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-49/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "setuptools is a package that allows users to download, build, install, upgrade, and uninstall Python packages. A path traversal vulnerability in `PackageIndex` is present in setuptools prior to version 78.1.1. An attacker would be allowed to write files to arbitrary locations on the filesystem with the permissions of the process running the Python code, which could escalate to remote code execution depending on the context. Version 78.1.1 fixes the issue.",
+      "cwe_only": "CWE-22,CWE-94",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/pypa/setuptools/security/advisories/GHSA-5rjg-fvgr-3xxf",
+    "https://lists.debian.org/debian-lts-announce/2025/05/msg00035.html",
+    "https://github.com/pypa/setuptools/issues/4946",
+    "https://github.com/pypa/setuptools/security/advisories/GHSA-5rjg-fvgr-3xxf",
+    "https://github.com/pypa/setuptools/commit/250a6d17978f9f6ac3ac887091f2d32886fbbb0b",
+    "https://github.com/pypa/setuptools/issues/4946",
+    "https://github.com/pypa/setuptools/blob/6ead555c5fb29bc57fe6105b1bffc163f56fd558/setuptools/package_index.py#L810C1-L825C88"
+  ],
+  "patch_stats": {
+    "files_changed": 1,
+    "lines_added": 16,
+    "lines_deleted": 2,
+    "lines_changed": 18
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "pypa__setuptools-py310",
+    "repo_slug": "pypa__setuptools",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9",
+    "docker_image": "pysec-env-pypa__setuptools-py310:latest",
+    "dockerfile": "environments/pypa__setuptools-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "no_functional_tests_selected",
+    "selected": [],
+    "functional_test": null,
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "setuptools/tests/test_packageindex.py",
+      "setuptools/tests/test_find_packages.py",
+      "setuptools/tests/test_setuptools.py",
+      "setuptools/command/test.py",
+      "setuptools/tests/test_archive_util.py",
+      "setuptools/tests/test_bdist_deprecations.py",
+      "setuptools/tests/test_bdist_egg.py",
+      "setuptools/tests/test_bdist_wheel.py",
+      "setuptools/tests/test_build.py",
+      "setuptools/tests/test_build_clib.py",
+      "setuptools/tests/test_build_ext.py",
+      "setuptools/tests/test_build_meta.py",
+      "setuptools/tests/test_build_py.py",
+      "setuptools/tests/test_config_discovery.py",
+      "setuptools/tests/test_core_metadata.py",
+      "setuptools/tests/test_depends.py",
+      "setuptools/tests/test_develop.py",
+      "setuptools/tests/test_dist.py",
+      "setuptools/tests/test_dist_info.py",
+      "setuptools/tests/test_distutils_adoption.py",
+      "setuptools/tests/test_easy_install.py",
+      "setuptools/tests/test_editable_install.py",
+      "setuptools/tests/test_egg_info.py",
+      "setuptools/tests/test_extern.py",
+      "setuptools/tests/test_find_py_modules.py",
+      "setuptools/tests/test_glob.py",
+      "setuptools/tests/test_install_scripts.py",
+      "setuptools/tests/test_logging.py",
+      "setuptools/tests/test_manifest.py",
+      "setuptools/tests/test_namespaces.py"
+    ],
+    "affected_files_used": [
+      "setuptools/package_index.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-pypa__setuptools-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "setuptools/tests/test_packageindex.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_packageindex.py.log"
+        },
+        "setuptools/tests/test_find_packages.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.65,
+          "log": "/io/logs/setuptools__tests__test_find_packages.py.log"
+        },
+        "setuptools/tests/test_setuptools.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_setuptools.py.log"
+        },
+        "setuptools/command/test.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.65,
+          "log": "/io/logs/setuptools__command__test.py.log"
+        },
+        "setuptools/tests/test_archive_util.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.67,
+          "log": "/io/logs/setuptools__tests__test_archive_util.py.log"
+        },
+        "setuptools/tests/test_bdist_deprecations.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_bdist_deprecations.py.log"
+        },
+        "setuptools/tests/test_bdist_egg.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_bdist_egg.py.log"
+        },
+        "setuptools/tests/test_bdist_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_bdist_wheel.py.log"
+        },
+        "setuptools/tests/test_build.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_build.py.log"
+        },
+        "setuptools/tests/test_build_clib.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_build_clib.py.log"
+        },
+        "setuptools/tests/test_build_ext.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_build_ext.py.log"
+        },
+        "setuptools/tests/test_build_meta.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_build_meta.py.log"
+        },
+        "setuptools/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_build_py.py.log"
+        },
+        "setuptools/tests/test_config_discovery.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_config_discovery.py.log"
+        },
+        "setuptools/tests/test_core_metadata.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_core_metadata.py.log"
+        },
+        "setuptools/tests/test_depends.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_depends.py.log"
+        },
+        "setuptools/tests/test_develop.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_develop.py.log"
+        },
+        "setuptools/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.64,
+          "log": "/io/logs/setuptools__tests__test_dist.py.log"
+        },
+        "setuptools/tests/test_dist_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_dist_info.py.log"
+        },
+        "setuptools/tests/test_distutils_adoption.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_distutils_adoption.py.log"
+        },
+        "setuptools/tests/test_easy_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.65,
+          "log": "/io/logs/setuptools__tests__test_easy_install.py.log"
+        },
+        "setuptools/tests/test_editable_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__test_editable_install.py.log"
+        },
+        "setuptools/tests/test_egg_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_egg_info.py.log"
+        },
+        "setuptools/tests/test_extern.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_extern.py.log"
+        },
+        "setuptools/tests/test_find_py_modules.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.65,
+          "log": "/io/logs/setuptools__tests__test_find_py_modules.py.log"
+        },
+        "setuptools/tests/test_glob.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_glob.py.log"
+        },
+        "setuptools/tests/test_install_scripts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 1.31,
+          "log": "/io/logs/setuptools__tests__test_install_scripts.py.log"
+        },
+        "setuptools/tests/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__test_logging.py.log"
+        },
+        "setuptools/tests/test_manifest.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__test_manifest.py.log"
+        },
+        "setuptools/tests/test_namespaces.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_namespaces.py.log"
+        }
+      },
+      "R_fix": {
+        "setuptools/tests/test_packageindex.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_packageindex.py.log"
+        },
+        "setuptools/tests/test_find_packages.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_find_packages.py.log"
+        },
+        "setuptools/tests/test_setuptools.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_setuptools.py.log"
+        },
+        "setuptools/command/test.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__command__test.py.log"
+        },
+        "setuptools/tests/test_archive_util.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_archive_util.py.log"
+        },
+        "setuptools/tests/test_bdist_deprecations.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.66,
+          "log": "/io/logs/setuptools__tests__test_bdist_deprecations.py.log"
+        },
+        "setuptools/tests/test_bdist_egg.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_bdist_egg.py.log"
+        },
+        "setuptools/tests/test_bdist_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.64,
+          "log": "/io/logs/setuptools__tests__test_bdist_wheel.py.log"
+        },
+        "setuptools/tests/test_build.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__test_build.py.log"
+        },
+        "setuptools/tests/test_build_clib.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_build_clib.py.log"
+        },
+        "setuptools/tests/test_build_ext.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.65,
+          "log": "/io/logs/setuptools__tests__test_build_ext.py.log"
+        },
+        "setuptools/tests/test_build_meta.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_build_meta.py.log"
+        },
+        "setuptools/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_build_py.py.log"
+        },
+        "setuptools/tests/test_config_discovery.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_config_discovery.py.log"
+        },
+        "setuptools/tests/test_core_metadata.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_core_metadata.py.log"
+        },
+        "setuptools/tests/test_depends.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.14,
+          "log": "/io/logs/setuptools__tests__test_depends.py.log"
+        },
+        "setuptools/tests/test_develop.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_develop.py.log"
+        },
+        "setuptools/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_dist.py.log"
+        },
+        "setuptools/tests/test_dist_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_dist_info.py.log"
+        },
+        "setuptools/tests/test_distutils_adoption.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_distutils_adoption.py.log"
+        },
+        "setuptools/tests/test_easy_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_easy_install.py.log"
+        },
+        "setuptools/tests/test_editable_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.55,
+          "log": "/io/logs/setuptools__tests__test_editable_install.py.log"
+        },
+        "setuptools/tests/test_egg_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_egg_info.py.log"
+        },
+        "setuptools/tests/test_extern.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_extern.py.log"
+        },
+        "setuptools/tests/test_find_py_modules.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_find_py_modules.py.log"
+        },
+        "setuptools/tests/test_glob.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_glob.py.log"
+        },
+        "setuptools/tests/test_install_scripts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__test_install_scripts.py.log"
+        },
+        "setuptools/tests/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_logging.py.log"
+        },
+        "setuptools/tests/test_manifest.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_manifest.py.log"
+        },
+        "setuptools/tests/test_namespaces.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_namespaces.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [],
+    "candidate_tests": [
+      "setuptools/tests/test_packageindex.py",
+      "setuptools/tests/test_easy_install.py",
+      "setuptools/tests/test_editable_install.py",
+      "setuptools/tests/test_build_meta.py",
+      "setuptools/tests/test_egg_info.py",
+      "setuptools/tests/test_sdist.py",
+      "setuptools/_distutils/tests/test_build_ext.py",
+      "setuptools/tests/test_setuptools.py",
+      "setuptools/tests/test_bdist_wheel.py",
+      "setuptools/tests/test_core_metadata.py",
+      "setuptools/tests/test_develop.py",
+      "setuptools/_distutils/tests/test_sysconfig.py",
+      "setuptools/tests/integration/test_pip_install_sdist.py",
+      "setuptools/tests/test_windows_wrappers.py",
+      "setuptools/tests/test_wheel.py",
+      "setuptools/tests/test_config_discovery.py",
+      "setuptools/tests/test_find_packages.py",
+      "setuptools/tests/config/test_apply_pyprojecttoml.py",
+      "setuptools/tests/config/test_expand.py",
+      "pkg_resources/tests/test_resources.py",
+      "setuptools/_distutils/tests/test_sdist.py",
+      "setuptools/tests/test_manifest.py",
+      "setuptools/tests/test_build_py.py",
+      "pkg_resources/tests/test_pkg_resources.py",
+      "setuptools/_distutils/tests/test_dist.py",
+      "setuptools/tests/config/test_setupcfg.py",
+      "setuptools/tests/test_dist_info.py",
+      "setuptools/_distutils/tests/test_build_py.py",
+      "setuptools/tests/config/test_pyprojecttoml.py",
+      "setuptools/tests/test_dist.py"
+    ],
+    "affected_files_used": [
+      "setuptools/package_index.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-pypa__setuptools-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "setuptools/tests/test_packageindex.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_packageindex.py.log"
+        },
+        "setuptools/tests/test_easy_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_easy_install.py.log"
+        },
+        "setuptools/tests/test_editable_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.55,
+          "log": "/io/logs/setuptools__tests__test_editable_install.py.log"
+        },
+        "setuptools/tests/test_build_meta.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_build_meta.py.log"
+        },
+        "setuptools/tests/test_egg_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.54,
+          "log": "/io/logs/setuptools__tests__test_egg_info.py.log"
+        },
+        "setuptools/tests/test_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 1.39,
+          "log": "/io/logs/setuptools__tests__test_sdist.py.log"
+        },
+        "setuptools/_distutils/tests/test_build_ext.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools___distutils__tests__test_build_ext.py.log"
+        },
+        "setuptools/tests/test_setuptools.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_setuptools.py.log"
+        },
+        "setuptools/tests/test_bdist_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_bdist_wheel.py.log"
+        },
+        "setuptools/tests/test_core_metadata.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_core_metadata.py.log"
+        },
+        "setuptools/tests/test_develop.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_develop.py.log"
+        },
+        "setuptools/_distutils/tests/test_sysconfig.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools___distutils__tests__test_sysconfig.py.log"
+        },
+        "setuptools/tests/integration/test_pip_install_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools__tests__integration__test_pip_install_sdist.py.log"
+        },
+        "setuptools/tests/test_windows_wrappers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_windows_wrappers.py.log"
+        },
+        "setuptools/tests/test_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_wheel.py.log"
+        },
+        "setuptools/tests/test_config_discovery.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_config_discovery.py.log"
+        },
+        "setuptools/tests/test_find_packages.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_find_packages.py.log"
+        },
+        "setuptools/tests/config/test_apply_pyprojecttoml.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__config__test_apply_pyprojecttoml.py.log"
+        },
+        "setuptools/tests/config/test_expand.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__config__test_expand.py.log"
+        },
+        "pkg_resources/tests/test_resources.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/pkg_resources__tests__test_resources.py.log"
+        },
+        "setuptools/_distutils/tests/test_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.64,
+          "log": "/io/logs/setuptools___distutils__tests__test_sdist.py.log"
+        },
+        "setuptools/tests/test_manifest.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_manifest.py.log"
+        },
+        "setuptools/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__test_build_py.py.log"
+        },
+        "pkg_resources/tests/test_pkg_resources.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/pkg_resources__tests__test_pkg_resources.py.log"
+        },
+        "setuptools/_distutils/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools___distutils__tests__test_dist.py.log"
+        },
+        "setuptools/tests/config/test_setupcfg.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__config__test_setupcfg.py.log"
+        },
+        "setuptools/tests/test_dist_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__test_dist_info.py.log"
+        },
+        "setuptools/_distutils/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools___distutils__tests__test_build_py.py.log"
+        },
+        "setuptools/tests/config/test_pyprojecttoml.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.6,
+          "log": "/io/logs/setuptools__tests__config__test_pyprojecttoml.py.log"
+        },
+        "setuptools/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__test_dist.py.log"
+        }
+      },
+      "R_fix": {
+        "setuptools/tests/test_packageindex.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.61,
+          "log": "/io/logs/setuptools__tests__test_packageindex.py.log"
+        },
+        "setuptools/tests/test_easy_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_easy_install.py.log"
+        },
+        "setuptools/tests/test_editable_install.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_editable_install.py.log"
+        },
+        "setuptools/tests/test_build_meta.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_build_meta.py.log"
+        },
+        "setuptools/tests/test_egg_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_egg_info.py.log"
+        },
+        "setuptools/tests/test_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_sdist.py.log"
+        },
+        "setuptools/_distutils/tests/test_build_ext.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools___distutils__tests__test_build_ext.py.log"
+        },
+        "setuptools/tests/test_setuptools.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_setuptools.py.log"
+        },
+        "setuptools/tests/test_bdist_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__test_bdist_wheel.py.log"
+        },
+        "setuptools/tests/test_core_metadata.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_core_metadata.py.log"
+        },
+        "setuptools/tests/test_develop.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_develop.py.log"
+        },
+        "setuptools/_distutils/tests/test_sysconfig.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.62,
+          "log": "/io/logs/setuptools___distutils__tests__test_sysconfig.py.log"
+        },
+        "setuptools/tests/integration/test_pip_install_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__integration__test_pip_install_sdist.py.log"
+        },
+        "setuptools/tests/test_windows_wrappers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_windows_wrappers.py.log"
+        },
+        "setuptools/tests/test_wheel.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools__tests__test_wheel.py.log"
+        },
+        "setuptools/tests/test_config_discovery.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_config_discovery.py.log"
+        },
+        "setuptools/tests/test_find_packages.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.55,
+          "log": "/io/logs/setuptools__tests__test_find_packages.py.log"
+        },
+        "setuptools/tests/config/test_apply_pyprojecttoml.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__config__test_apply_pyprojecttoml.py.log"
+        },
+        "setuptools/tests/config/test_expand.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.58,
+          "log": "/io/logs/setuptools__tests__config__test_expand.py.log"
+        },
+        "pkg_resources/tests/test_resources.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.55,
+          "log": "/io/logs/pkg_resources__tests__test_resources.py.log"
+        },
+        "setuptools/_distutils/tests/test_sdist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.07,
+          "log": "/io/logs/setuptools___distutils__tests__test_sdist.py.log"
+        },
+        "setuptools/tests/test_manifest.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_manifest.py.log"
+        },
+        "setuptools/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_build_py.py.log"
+        },
+        "pkg_resources/tests/test_pkg_resources.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/pkg_resources__tests__test_pkg_resources.py.log"
+        },
+        "setuptools/_distutils/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools___distutils__tests__test_dist.py.log"
+        },
+        "setuptools/tests/config/test_setupcfg.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.59,
+          "log": "/io/logs/setuptools__tests__config__test_setupcfg.py.log"
+        },
+        "setuptools/tests/test_dist_info.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.55,
+          "log": "/io/logs/setuptools__tests__test_dist_info.py.log"
+        },
+        "setuptools/_distutils/tests/test_build_py.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.56,
+          "log": "/io/logs/setuptools___distutils__tests__test_build_py.py.log"
+        },
+        "setuptools/tests/config/test_pyprojecttoml.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.63,
+          "log": "/io/logs/setuptools__tests__config__test_pyprojecttoml.py.log"
+        },
+        "setuptools/tests/test_dist.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 0.57,
+          "log": "/io/logs/setuptools__tests__test_dist.py.log"
+        }
+      }
+    }
+  }
+}

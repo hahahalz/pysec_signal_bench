@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2025-20",
+  "repo_url": "https://github.com/mmaitre314/picklescan",
+  "vulnerable_commit": "f34d091824cb8775711f039b5299c277e2ecc663",
+  "fixed_commit": "e58e45e0d9e091159c1554f9b04828bbb40b9781",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-20/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-20/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-20.patch",
+  "aliases": [
+    "CVE-2025-1944",
+    "GHSA-7q5r-7gvp-wc82"
+  ],
+  "cwe": [
+    "CWE-502"
+  ],
+  "signal_probe": {
+    "full_advisory": "picklescan before 0.0.23 is vulnerable to a ZIP archive manipulation attack that causes it to crash when attempting to extract and scan PyTorch model archives. By modifying the filename in the ZIP header while keeping the original filename in the directory listing, an attacker can make PickleScan raise a BadZipFile error. However, PyTorch's more forgiving ZIP implementation still allows the model to be loaded, enabling malicious payloads to bypass detection.",
+    "cwe_only": "CWE-502",
+    "symptom_only": "bypass",
+    "exploit_hint_only": "payload,malicious,header,pickle",
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "dockerfile": "environments/mmaitre314__picklescan-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

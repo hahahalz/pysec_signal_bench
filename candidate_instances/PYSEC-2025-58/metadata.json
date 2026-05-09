@@ -1,0 +1,96 @@
+{
+  "instance_id": "PYSEC-2025-58",
+  "repo_name": "vllm-project__vllm",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-58",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "d3d6bb13fb62da3234addf6574922a4ec0513d04",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "24b0205f58c28e05ac060ec6f0e4defe8e9c32eb",
+    "fixed_commit": "d3d6bb13fb62da3234addf6574922a4ec0513d04"
+  },
+  "affected_files": [
+    "vllm/assets/image.py",
+    "vllm/lora/models.py",
+    "vllm/model_executor/model_loader/weight_utils.py",
+    "vllm/prompt_adapter/utils.py"
+  ],
+  "affected_source_files": [
+    "vllm/assets/image.py",
+    "vllm/lora/models.py",
+    "vllm/model_executor/model_loader/weight_utils.py",
+    "vllm/prompt_adapter/utils.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "vLLM is a library for LLM inference and serving. vllm/model_executor/weight_utils.py implements hf_model_weights_iterator to load the model checkpoint, which is downloaded from huggingface. It uses the torch.load function and the weights_only parameter defaults to False. When torch.load loads malicious pickle data, it will execute arbitrary code during unpickling. This vulnerability is fixed in v0.7.0.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "vllm/assets/image.py",
+      "vllm/lora/models.py",
+      "vllm/model_executor/model_loader/weight_utils.py",
+      "vllm/prompt_adapter/utils.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-58/test_poc.py",
+    "property": "oracles/PYSEC-2025-58/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-58/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/runai_model_streamer/test_weight_utils.py tests/weight_loading/test_weight_loading.py tests/v1/test_utils.py tests/v1/core/test_kv_cache_utils.py tests/test_utils.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-58/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-58/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "vLLM is a library for LLM inference and serving. vllm/model_executor/weight_utils.py implements hf_model_weights_iterator to load the model checkpoint, which is downloaded from huggingface. It uses the torch.load function and the weights_only parameter defaults to False. When torch.load loads malicious pickle data, it will execute arbitrary code during unpickling. This vulnerability is fixed in v0.7.0.",
+      "cwe_only": "CWE-502",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/vllm-project/vllm/security/advisories/GHSA-rh4j-5rhw-hr54",
+    "https://github.com/vllm-project/vllm/commit/d3d6bb13fb62da3234addf6574922a4ec0513d04",
+    "https://github.com/vllm-project/vllm/pull/12366",
+    "https://github.com/vllm-project/vllm/pull/12366",
+    "https://pytorch.org/docs/stable/generated/torch.load.html"
+  ],
+  "patch_stats": {
+    "files_changed": 4,
+    "lines_added": 10,
+    "lines_deleted": 6,
+    "lines_changed": 16
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "vllm-project__vllm-py310",
+    "repo_slug": "vllm-project__vllm",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9",
+    "docker_image": "pysec-env-vllm-project__vllm-py310:latest",
+    "dockerfile": "environments/vllm-project__vllm-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  }
+}

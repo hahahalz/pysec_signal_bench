@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2025-26",
+  "repo_url": "https://github.com/snowflakedb/snowflake-connector-python",
+  "vulnerable_commit": "3769b43822357c3874c40f5e74068458c2dc79af",
+  "fixed_commit": "f3f9b666518d29c31a49384bbaa9a65889e72056",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-26/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-26/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-26.patch",
+  "aliases": [
+    "CVE-2025-24793",
+    "GHSA-2vpq-fh52-j3wv"
+  ],
+  "cwe": [
+    "CWE-89"
+  ],
+  "signal_probe": {
+    "full_advisory": "The Snowflake Connector for Python provides an interface for developing Python applications that can connect to Snowflake and perform all standard operations. Snowflake discovered and remediated a vulnerability in the Snowflake Connector for Python. A function from the snowflake.connector.pandas_tools module is vulnerable to SQL injection. This vulnerability affects versions 2.2.5 through 3.13.0. Snowflake fixed the issue in version 3.13.1.",
+    "cwe_only": "CWE-89",
+    "symptom_only": null,
+    "exploit_hint_only": "sql",
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-snowflakedb__snowflake-connector-python-py310:latest",
+    "dockerfile": "environments/snowflakedb__snowflake-connector-python-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q test/unit/test_cursor.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

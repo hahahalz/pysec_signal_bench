@@ -1,0 +1,344 @@
+{
+  "instance_id": "PYSEC-2022-260",
+  "repo_name": "sqlalchemy__mako",
+  "language": "python",
+  "advisory_id": "PYSEC-2022-260",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "925760291d6efec64fda6e9dd1fd9cfbd5be068c",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "7c5b28ac47755598e8c5bdfc995eaf220132e672",
+    "fixed_commit": "925760291d6efec64fda6e9dd1fd9cfbd5be068c"
+  },
+  "affected_files": [
+    "doc/build/unreleased/366.rst",
+    "mako/lexer.py",
+    "test/test_lexer.py"
+  ],
+  "affected_source_files": [
+    "mako/lexer.py",
+    "test/test_lexer.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "Sqlalchemy mako before 1.2.2 is vulnerable to Regular expression Denial of Service when using the Lexer class to parse. This also affects babelplugin and linguaplugin.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "mako/lexer.py",
+      "test/test_lexer.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2022-260/test_poc.py",
+    "property": "oracles/PYSEC-2022-260/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2022-260/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2022-260/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2022-260/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "Sqlalchemy mako before 1.2.2 is vulnerable to Regular expression Denial of Service when using the Lexer class to parse. This also affects babelplugin and linguaplugin.",
+      "cwe_only": "CWE-400",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/sqlalchemy/mako/commit/925760291d6efec64fda6e9dd1fd9cfbd5be068c",
+    "https://pyup.io/vulnerabilities/CVE-2022-40023/50870/",
+    "https://github.com/sqlalchemy/mako/issues/366",
+    "https://github.com/sqlalchemy/mako/blob/c2f392e0be52dc67d1b9770ab8cce6a9c736d547/mako/ext/extract.py#L21",
+    "https://github.com/advisories/GHSA-v973-fxgf-6xhp"
+  ],
+  "patch_stats": {
+    "files_changed": 3,
+    "lines_added": 34,
+    "lines_deleted": 8,
+    "lines_changed": 42
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "sqlalchemy__mako-py39",
+    "repo_slug": "sqlalchemy__mako",
+    "python_version": "3.9",
+    "python_requires_detected": ">=3.7",
+    "docker_image": "pysec-env-sqlalchemy__mako-py39:latest",
+    "dockerfile": "environments/sqlalchemy__mako-py39/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "extracted_poc_oracle": {
+    "oracle_dir": "oracles/PYSEC-2022-260/extracted_poc",
+    "runner": "oracles/PYSEC-2022-260/extracted_poc/run_extracted_poc.py",
+    "manifest": "oracles/PYSEC-2022-260/extracted_poc/manifest.json",
+    "test_files": [
+      "test/test_lexer.py"
+    ]
+  },
+  "functional_test_selection": {
+    "status": "selected",
+    "selected": [
+      "test/test_lexer.py"
+    ],
+    "functional_test": "pytest -q test/test_lexer.py",
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "test/test_lexer.py"
+    ],
+    "affected_files_used": [
+      "mako/lexer.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-sqlalchemy__mako-py39:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/test_lexer.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.68,
+          "log": "/io/logs/test__test_lexer.py.log"
+        }
+      },
+      "R_fix": {
+        "test/test_lexer.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.05,
+          "log": "/io/logs/test__test_lexer.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "selected",
+    "selected": [
+      "test/test_lexer.py"
+    ],
+    "poc_test": "python /bench/oracles/PYSEC-2022-260/extracted_poc/run_extracted_poc.py",
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [
+      "test/test_lexer.py"
+    ],
+    "candidate_tests": [
+      "test/test_lexer.py",
+      "test/test_template.py",
+      "test/ext/test_babelplugin.py",
+      "test/test_cache.py",
+      "test/test_call.py",
+      "test/test_def.py",
+      "test/test_loop.py",
+      "test/test_ast.py",
+      "test/test_cmd.py",
+      "test/test_filters.py",
+      "test/test_inheritance.py",
+      "test/test_namespace.py",
+      "test/test_util.py"
+    ],
+    "affected_files_used": [
+      "mako/lexer.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": true,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-sqlalchemy__mako-py39:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/test_lexer.py": {
+          "status": "FAIL",
+          "returncode": 124,
+          "duration_sec": 315.13,
+          "log": "/io/logs/test__test_lexer.py.log"
+        },
+        "test/test_template.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.33,
+          "log": "/io/logs/test__test_template.py.log"
+        },
+        "test/ext/test_babelplugin.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__ext__test_babelplugin.py.log"
+        },
+        "test/test_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.34,
+          "log": "/io/logs/test__test_cache.py.log"
+        },
+        "test/test_call.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.12,
+          "log": "/io/logs/test__test_call.py.log"
+        },
+        "test/test_def.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.12,
+          "log": "/io/logs/test__test_def.py.log"
+        },
+        "test/test_loop.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 1.08,
+          "log": "/io/logs/test__test_loop.py.log"
+        },
+        "test/test_ast.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.13,
+          "log": "/io/logs/test__test_ast.py.log"
+        },
+        "test/test_cmd.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.04,
+          "log": "/io/logs/test__test_cmd.py.log"
+        },
+        "test/test_filters.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.06,
+          "log": "/io/logs/test__test_filters.py.log"
+        },
+        "test/test_inheritance.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.04,
+          "log": "/io/logs/test__test_inheritance.py.log"
+        },
+        "test/test_namespace.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.09,
+          "log": "/io/logs/test__test_namespace.py.log"
+        },
+        "test/test_util.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.01,
+          "log": "/io/logs/test__test_util.py.log"
+        }
+      },
+      "R_fix": {
+        "test/test_lexer.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.02,
+          "log": "/io/logs/test__test_lexer.py.log"
+        },
+        "test/test_template.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.24,
+          "log": "/io/logs/test__test_template.py.log"
+        },
+        "test/ext/test_babelplugin.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.01,
+          "log": "/io/logs/test__ext__test_babelplugin.py.log"
+        },
+        "test/test_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.25,
+          "log": "/io/logs/test__test_cache.py.log"
+        },
+        "test/test_call.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.0,
+          "log": "/io/logs/test__test_call.py.log"
+        },
+        "test/test_def.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.06,
+          "log": "/io/logs/test__test_def.py.log"
+        },
+        "test/test_loop.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 0.96,
+          "log": "/io/logs/test__test_loop.py.log"
+        },
+        "test/test_ast.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 0.98,
+          "log": "/io/logs/test__test_ast.py.log"
+        },
+        "test/test_cmd.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 0.99,
+          "log": "/io/logs/test__test_cmd.py.log"
+        },
+        "test/test_filters.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.04,
+          "log": "/io/logs/test__test_filters.py.log"
+        },
+        "test/test_inheritance.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.02,
+          "log": "/io/logs/test__test_inheritance.py.log"
+        },
+        "test/test_namespace.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.1,
+          "log": "/io/logs/test__test_namespace.py.log"
+        },
+        "test/test_util.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 0.98,
+          "log": "/io/logs/test__test_util.py.log"
+        }
+      }
+    }
+  }
+}

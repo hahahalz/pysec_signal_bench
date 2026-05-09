@@ -1,0 +1,31 @@
+{
+  "instance_id": "PYSEC-2025-57",
+  "repo_url": "https://github.com/zenml-io/zenml",
+  "vulnerable_commit": "9a6044b57f07e78b967ee78cf990693399eb5a88",
+  "fixed_commit": "cba152eb9ca3071c8372b0b91c02d9d3351de48d",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-57/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-57/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-57.patch",
+  "aliases": [
+    "CVE-2024-9340"
+  ],
+  "cwe": [
+    "CWE-94"
+  ],
+  "signal_probe": {
+    "full_advisory": "A Denial of Service (DoS) vulnerability in zenml-io/zenml version 0.66.0 allows unauthenticated attackers to cause excessive resource consumption by sending malformed multipart requests with arbitrary characters appended to the end of multipart boundaries. This flaw in the multipart request boundary processing mechanism leads to an infinite loop, resulting in a complete denial of service for all users. Affected endpoints include `/api/v1/login` and `/api/v1/device_authorization`.",
+    "cwe_only": "CWE-94",
+    "symptom_only": "denial of service",
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-zenml-io__zenml-py310:latest",
+    "dockerfile": "environments/zenml-io__zenml-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

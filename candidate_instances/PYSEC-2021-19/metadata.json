@@ -1,0 +1,90 @@
+{
+  "instance_id": "PYSEC-2021-19",
+  "repo_name": "lxml__lxml",
+  "language": "python",
+  "advisory_id": "PYSEC-2021-19",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "2d01a1ba8984e0483ce6619b972832377f208a0d",
+    "fixed_commit": "a5f9cb52079dc57477c460dbe6ba0f775e14a999"
+  },
+  "affected_files": [
+    "CHANGES.txt",
+    "doc/main.txt",
+    "src/lxml/__init__.py"
+  ],
+  "affected_source_files": [
+    "src/lxml/__init__.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "An XSS vulnerability was discovered in python-lxml's clean module versions before 4.6.3. When disabling the safe_attrs_only and forms arguments, the Cleaner class does not remove the formaction attribute allowing for JS to bypass the sanitizer. A remote attacker could exploit this flaw to run arbitrary JS code on users who interact with incorrectly sanitized HTML. This issue is patched in lxml 4.6.3.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "src/lxml/__init__.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2021-19/test_poc.py",
+    "property": "oracles/PYSEC-2021-19/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2021-19/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2021-19/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2021-19/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "An XSS vulnerability was discovered in python-lxml's clean module versions before 4.6.3. When disabling the safe_attrs_only and forms arguments, the Cleaner class does not remove the formaction attribute allowing for JS to bypass the sanitizer. A remote attacker could exploit this flaw to run arbitrary JS code on users who interact with incorrectly sanitized HTML. This issue is patched in lxml 4.6.3.",
+      "cwe_only": "CWE-79",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://bugs.launchpad.net/lxml/+bug/1888153",
+    "https://github.com/lxml/lxml/pull/316/commits/10ec1b4e9f93713513a3264ed6158af22492f270",
+    "https://lists.debian.org/debian-lts-announce/2021/03/msg00031.html",
+    "https://github.com/lxml/lxml/commit/a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+    "https://www.debian.org/security/2021/dsa-4880",
+    "https://github.com/advisories/GHSA-jq4v-f5q6-mjqq"
+  ],
+  "patch_stats": {
+    "files_changed": 3,
+    "lines_added": 19,
+    "lines_deleted": 4,
+    "lines_changed": 23
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "lxml__lxml-py38",
+    "repo_slug": "lxml__lxml",
+    "python_version": "3.8",
+    "python_requires_detected": "",
+    "docker_image": "pysec-env-lxml__lxml-py38:latest",
+    "dockerfile": "environments/lxml__lxml-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "instance_id": "PYSEC-2025-17",
+  "repo_name": "mlflow__mlflow",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-17",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "149c9e18aa219bc47e86b432e130e467a36f4a17",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "e334862b6685d12de73245ef4caf30d864c6e3be",
+    "fixed_commit": "149c9e18aa219bc47e86b432e130e467a36f4a17"
+  },
+  "affected_files": [
+    "mlflow/server/auth/__init__.py"
+  ],
+  "affected_source_files": [
+    "mlflow/server/auth/__init__.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a password. This vulnerability could lead to security risks, as accounts without passwords may be susceptible to unauthorized access. Additionally, this issue violates best practices for secure user account management. The issue is fixed in version 2.19.0.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "mlflow/server/auth/__init__.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-17/test_poc.py",
+    "property": "oracles/PYSEC-2025-17/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-17/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/server/test_init.py tests/metrics/test_metric_definitions.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-17/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-17/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a password. This vulnerability could lead to security risks, as accounts without passwords may be susceptible to unauthorized access. Additionally, this issue violates best practices for secure user account management. The issue is fixed in version 2.19.0.",
+      "cwe_only": null,
+      "symptom_only": "unauthorized",
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://huntr.com/bounties/e79f7774-10fe-46b2-b522-e73b748e3b2d",
+    "https://github.com/mlflow/mlflow/commit/149c9e18aa219bc47e86b432e130e467a36f4a17",
+    "https://huntr.com/bounties/e79f7774-10fe-46b2-b522-e73b748e3b2d"
+  ],
+  "patch_stats": {
+    "files_changed": 1,
+    "lines_added": 2,
+    "lines_deleted": 2,
+    "lines_changed": 4
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "mlflow__mlflow-py310",
+    "repo_slug": "mlflow__mlflow",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9",
+    "docker_image": "pysec-env-mlflow__mlflow-py310:latest",
+    "dockerfile": "environments/mlflow__mlflow-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "selected",
+    "selected": [
+      "tests/server/auth/test_cli.py",
+      "tests/server/auth/test_client.py",
+      "tests/server/auth/test_sqlalchemy_store.py",
+      "tests/server/auth/db/test_cli.py",
+      "tests/store/artifact/test_mlflow_artifact_repo.py"
+    ],
+    "functional_test": "pytest -q tests/server/auth/test_cli.py tests/server/auth/test_client.py tests/server/auth/test_sqlalchemy_store.py tests/server/auth/db/test_cli.py tests/store/artifact/test_mlflow_artifact_repo.py",
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "tests/server/auth/test_auth.py",
+      "tests/server/auth/test_cli.py",
+      "tests/server/auth/test_client.py",
+      "tests/server/auth/test_sqlalchemy_store.py",
+      "tests/server/auth/db/test_cli.py",
+      "tests/deployments/server/test_server_app.py",
+      "tests/deployments/server/test_server_cli.py",
+      "tests/deployments/mlflow/test_mlflow.py",
+      "tests/server/test_handlers.py",
+      "tests/server/test_init.py",
+      "tests/server/test_prometheus_exporter.py",
+      "tests/tensorflow/test_mlflow_callback.py",
+      "tests/tracking/test_mlflow_artifacts.py",
+      "tests/gateway/providers/test_mlflow.py",
+      "tests/store/artifact/test_mlflow_artifact_repo.py",
+      "tests/tracing/export/test_mlflow_exporter.py",
+      "tests/tracing/processor/test_mlflow_processor.py",
+      "tests/pyfunc/test_mlserver.py",
+      "tests/pyfunc/test_scoring_server.py",
+      "tests/dev/test_update_mlflow_versions.py",
+      "tests/tracking/request_auth/test_registry.py"
+    ],
+    "affected_files_used": [
+      "mlflow/server/auth/__init__.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-mlflow__mlflow-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/server/auth/test_auth.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.5,
+          "log": "/io/logs/tests__server__auth__test_auth.py.log"
+        },
+        "tests/server/auth/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.78,
+          "log": "/io/logs/tests__server__auth__test_cli.py.log"
+        },
+        "tests/server/auth/test_client.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 40.11,
+          "log": "/io/logs/tests__server__auth__test_client.py.log"
+        },
+        "tests/server/auth/test_sqlalchemy_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.88,
+          "log": "/io/logs/tests__server__auth__test_sqlalchemy_store.py.log"
+        },
+        "tests/server/auth/db/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.72,
+          "log": "/io/logs/tests__server__auth__db__test_cli.py.log"
+        },
+        "tests/deployments/server/test_server_app.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.23,
+          "log": "/io/logs/tests__deployments__server__test_server_app.py.log"
+        },
+        "tests/deployments/server/test_server_cli.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 2.03,
+          "log": "/io/logs/tests__deployments__server__test_server_cli.py.log"
+        },
+        "tests/deployments/mlflow/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.24,
+          "log": "/io/logs/tests__deployments__mlflow__test_mlflow.py.log"
+        },
+        "tests/server/test_handlers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.54,
+          "log": "/io/logs/tests__server__test_handlers.py.log"
+        },
+        "tests/server/test_init.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.39,
+          "log": "/io/logs/tests__server__test_init.py.log"
+        },
+        "tests/server/test_prometheus_exporter.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.38,
+          "log": "/io/logs/tests__server__test_prometheus_exporter.py.log"
+        },
+        "tests/tensorflow/test_mlflow_callback.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.23,
+          "log": "/io/logs/tests__tensorflow__test_mlflow_callback.py.log"
+        },
+        "tests/tracking/test_mlflow_artifacts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 18.22,
+          "log": "/io/logs/tests__tracking__test_mlflow_artifacts.py.log"
+        },
+        "tests/gateway/providers/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.37,
+          "log": "/io/logs/tests__gateway__providers__test_mlflow.py.log"
+        },
+        "tests/store/artifact/test_mlflow_artifact_repo.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.24,
+          "log": "/io/logs/tests__store__artifact__test_mlflow_artifact_repo.py.log"
+        },
+        "tests/tracing/export/test_mlflow_exporter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.31,
+          "log": "/io/logs/tests__tracing__export__test_mlflow_exporter.py.log"
+        },
+        "tests/tracing/processor/test_mlflow_processor.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.4,
+          "log": "/io/logs/tests__tracing__processor__test_mlflow_processor.py.log"
+        },
+        "tests/pyfunc/test_mlserver.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.24,
+          "log": "/io/logs/tests__pyfunc__test_mlserver.py.log"
+        },
+        "tests/pyfunc/test_scoring_server.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.4,
+          "log": "/io/logs/tests__pyfunc__test_scoring_server.py.log"
+        },
+        "tests/dev/test_update_mlflow_versions.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.99,
+          "log": "/io/logs/tests__dev__test_update_mlflow_versions.py.log"
+        },
+        "tests/tracking/request_auth/test_registry.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.03,
+          "log": "/io/logs/tests__tracking__request_auth__test_registry.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/server/auth/test_auth.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.2,
+          "log": "/io/logs/tests__server__auth__test_auth.py.log"
+        },
+        "tests/server/auth/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.7,
+          "log": "/io/logs/tests__server__auth__test_cli.py.log"
+        },
+        "tests/server/auth/test_client.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 38.81,
+          "log": "/io/logs/tests__server__auth__test_client.py.log"
+        },
+        "tests/server/auth/test_sqlalchemy_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.91,
+          "log": "/io/logs/tests__server__auth__test_sqlalchemy_store.py.log"
+        },
+        "tests/server/auth/db/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.77,
+          "log": "/io/logs/tests__server__auth__db__test_cli.py.log"
+        },
+        "tests/deployments/server/test_server_app.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.32,
+          "log": "/io/logs/tests__deployments__server__test_server_app.py.log"
+        },
+        "tests/deployments/server/test_server_cli.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 2.18,
+          "log": "/io/logs/tests__deployments__server__test_server_cli.py.log"
+        },
+        "tests/deployments/mlflow/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.31,
+          "log": "/io/logs/tests__deployments__mlflow__test_mlflow.py.log"
+        },
+        "tests/server/test_handlers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.62,
+          "log": "/io/logs/tests__server__test_handlers.py.log"
+        },
+        "tests/server/test_init.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.55,
+          "log": "/io/logs/tests__server__test_init.py.log"
+        },
+        "tests/server/test_prometheus_exporter.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.37,
+          "log": "/io/logs/tests__server__test_prometheus_exporter.py.log"
+        },
+        "tests/tensorflow/test_mlflow_callback.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.22,
+          "log": "/io/logs/tests__tensorflow__test_mlflow_callback.py.log"
+        },
+        "tests/tracking/test_mlflow_artifacts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 17.12,
+          "log": "/io/logs/tests__tracking__test_mlflow_artifacts.py.log"
+        },
+        "tests/gateway/providers/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.28,
+          "log": "/io/logs/tests__gateway__providers__test_mlflow.py.log"
+        },
+        "tests/store/artifact/test_mlflow_artifact_repo.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.22,
+          "log": "/io/logs/tests__store__artifact__test_mlflow_artifact_repo.py.log"
+        },
+        "tests/tracing/export/test_mlflow_exporter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.07,
+          "log": "/io/logs/tests__tracing__export__test_mlflow_exporter.py.log"
+        },
+        "tests/tracing/processor/test_mlflow_processor.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.18,
+          "log": "/io/logs/tests__tracing__processor__test_mlflow_processor.py.log"
+        },
+        "tests/pyfunc/test_mlserver.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.03,
+          "log": "/io/logs/tests__pyfunc__test_mlserver.py.log"
+        },
+        "tests/pyfunc/test_scoring_server.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.27,
+          "log": "/io/logs/tests__pyfunc__test_scoring_server.py.log"
+        },
+        "tests/dev/test_update_mlflow_versions.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.1,
+          "log": "/io/logs/tests__dev__test_update_mlflow_versions.py.log"
+        },
+        "tests/tracking/request_auth/test_registry.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.18,
+          "log": "/io/logs/tests__tracking__request_auth__test_registry.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [],
+    "candidate_tests": [
+      "tests/server/auth/test_auth.py",
+      "tests/server/auth/test_client.py",
+      "tests/server/auth/test_sqlalchemy_store.py",
+      "tests/server/test_handlers.py",
+      "tests/server/auth/db/test_cli.py",
+      "tests/server/auth/test_cli.py",
+      "tests/deployments/server/test_server_app.py",
+      "tests/deployments/server/test_server_cli.py",
+      "tests/deployments/mlflow/test_mlflow.py",
+      "tests/tracing/export/test_mlflow_exporter.py",
+      "tests/server/test_init.py",
+      "tests/server/test_prometheus_exporter.py",
+      "tests/gateway/providers/test_mlflow.py",
+      "tests/tensorflow/test_mlflow_callback.py",
+      "tests/tracing/processor/test_mlflow_processor.py",
+      "tests/transformers/test_transformers_model_export.py",
+      "tests/pyfunc/test_scoring_server.py",
+      "tests/store/artifact/test_mlflow_artifact_repo.py",
+      "tests/tracking/test_mlflow_artifacts.py",
+      "tests/sagemaker/test_sagemaker_deployment_client.py",
+      "tests/store/tracking/test_file_store.py",
+      "tests/evaluate/test_evaluation.py",
+      "tests/tracking/test_rest_tracking.py",
+      "tests/utils/test_uri.py",
+      "tests/pyfunc/test_mlserver.py",
+      "tests/dev/test_update_mlflow_versions.py",
+      "tests/sklearn/test_sklearn_autolog.py",
+      "tests/tensorflow/test_keras_model_export.py",
+      "tests/evaluate/test_default_evaluator.py",
+      "tests/models/test_cli.py"
+    ],
+    "affected_files_used": [
+      "mlflow/server/auth/__init__.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-mlflow__mlflow-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/server/auth/test_auth.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.4,
+          "log": "/io/logs/tests__server__auth__test_auth.py.log"
+        },
+        "tests/server/auth/test_client.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 37.89,
+          "log": "/io/logs/tests__server__auth__test_client.py.log"
+        },
+        "tests/server/auth/test_sqlalchemy_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.18,
+          "log": "/io/logs/tests__server__auth__test_sqlalchemy_store.py.log"
+        },
+        "tests/server/test_handlers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.52,
+          "log": "/io/logs/tests__server__test_handlers.py.log"
+        },
+        "tests/server/auth/db/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.7,
+          "log": "/io/logs/tests__server__auth__db__test_cli.py.log"
+        },
+        "tests/server/auth/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.59,
+          "log": "/io/logs/tests__server__auth__test_cli.py.log"
+        },
+        "tests/deployments/server/test_server_app.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.25,
+          "log": "/io/logs/tests__deployments__server__test_server_app.py.log"
+        },
+        "tests/deployments/server/test_server_cli.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 2.03,
+          "log": "/io/logs/tests__deployments__server__test_server_cli.py.log"
+        },
+        "tests/deployments/mlflow/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.82,
+          "log": "/io/logs/tests__deployments__mlflow__test_mlflow.py.log"
+        },
+        "tests/tracing/export/test_mlflow_exporter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.11,
+          "log": "/io/logs/tests__tracing__export__test_mlflow_exporter.py.log"
+        },
+        "tests/server/test_init.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.3,
+          "log": "/io/logs/tests__server__test_init.py.log"
+        },
+        "tests/server/test_prometheus_exporter.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.35,
+          "log": "/io/logs/tests__server__test_prometheus_exporter.py.log"
+        },
+        "tests/gateway/providers/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.24,
+          "log": "/io/logs/tests__gateway__providers__test_mlflow.py.log"
+        },
+        "tests/tensorflow/test_mlflow_callback.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.29,
+          "log": "/io/logs/tests__tensorflow__test_mlflow_callback.py.log"
+        },
+        "tests/tracing/processor/test_mlflow_processor.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.18,
+          "log": "/io/logs/tests__tracing__processor__test_mlflow_processor.py.log"
+        },
+        "tests/transformers/test_transformers_model_export.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 1.4,
+          "log": "/io/logs/tests__transformers__test_transformers_model_export.py.log"
+        },
+        "tests/pyfunc/test_scoring_server.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.29,
+          "log": "/io/logs/tests__pyfunc__test_scoring_server.py.log"
+        },
+        "tests/store/artifact/test_mlflow_artifact_repo.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.22,
+          "log": "/io/logs/tests__store__artifact__test_mlflow_artifact_repo.py.log"
+        },
+        "tests/tracking/test_mlflow_artifacts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 24.85,
+          "log": "/io/logs/tests__tracking__test_mlflow_artifacts.py.log"
+        },
+        "tests/sagemaker/test_sagemaker_deployment_client.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__sagemaker__test_sagemaker_deployment_client.py.log"
+        },
+        "tests/store/tracking/test_file_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 6.07,
+          "log": "/io/logs/tests__store__tracking__test_file_store.py.log"
+        },
+        "tests/evaluate/test_evaluation.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 4.13,
+          "log": "/io/logs/tests__evaluate__test_evaluation.py.log"
+        },
+        "tests/tracking/test_rest_tracking.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 284.86,
+          "log": "/io/logs/tests__tracking__test_rest_tracking.py.log"
+        },
+        "tests/utils/test_uri.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.65,
+          "log": "/io/logs/tests__utils__test_uri.py.log"
+        },
+        "tests/pyfunc/test_mlserver.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.37,
+          "log": "/io/logs/tests__pyfunc__test_mlserver.py.log"
+        },
+        "tests/dev/test_update_mlflow_versions.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.32,
+          "log": "/io/logs/tests__dev__test_update_mlflow_versions.py.log"
+        },
+        "tests/sklearn/test_sklearn_autolog.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 257.21,
+          "log": "/io/logs/tests__sklearn__test_sklearn_autolog.py.log"
+        },
+        "tests/tensorflow/test_keras_model_export.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.45,
+          "log": "/io/logs/tests__tensorflow__test_keras_model_export.py.log"
+        },
+        "tests/evaluate/test_default_evaluator.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 3.07,
+          "log": "/io/logs/tests__evaluate__test_default_evaluator.py.log"
+        },
+        "tests/models/test_cli.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 237.59,
+          "log": "/io/logs/tests__models__test_cli.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/server/auth/test_auth.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.32,
+          "log": "/io/logs/tests__server__auth__test_auth.py.log"
+        },
+        "tests/server/auth/test_client.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 41.34,
+          "log": "/io/logs/tests__server__auth__test_client.py.log"
+        },
+        "tests/server/auth/test_sqlalchemy_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.55,
+          "log": "/io/logs/tests__server__auth__test_sqlalchemy_store.py.log"
+        },
+        "tests/server/test_handlers.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.76,
+          "log": "/io/logs/tests__server__test_handlers.py.log"
+        },
+        "tests/server/auth/db/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.92,
+          "log": "/io/logs/tests__server__auth__db__test_cli.py.log"
+        },
+        "tests/server/auth/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.78,
+          "log": "/io/logs/tests__server__auth__test_cli.py.log"
+        },
+        "tests/deployments/server/test_server_app.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.37,
+          "log": "/io/logs/tests__deployments__server__test_server_app.py.log"
+        },
+        "tests/deployments/server/test_server_cli.py": {
+          "status": "FAIL",
+          "returncode": 5,
+          "duration_sec": 2.19,
+          "log": "/io/logs/tests__deployments__server__test_server_cli.py.log"
+        },
+        "tests/deployments/mlflow/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.3,
+          "log": "/io/logs/tests__deployments__mlflow__test_mlflow.py.log"
+        },
+        "tests/tracing/export/test_mlflow_exporter.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.68,
+          "log": "/io/logs/tests__tracing__export__test_mlflow_exporter.py.log"
+        },
+        "tests/server/test_init.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.44,
+          "log": "/io/logs/tests__server__test_init.py.log"
+        },
+        "tests/server/test_prometheus_exporter.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.49,
+          "log": "/io/logs/tests__server__test_prometheus_exporter.py.log"
+        },
+        "tests/gateway/providers/test_mlflow.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.32,
+          "log": "/io/logs/tests__gateway__providers__test_mlflow.py.log"
+        },
+        "tests/tensorflow/test_mlflow_callback.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.34,
+          "log": "/io/logs/tests__tensorflow__test_mlflow_callback.py.log"
+        },
+        "tests/tracing/processor/test_mlflow_processor.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.34,
+          "log": "/io/logs/tests__tracing__processor__test_mlflow_processor.py.log"
+        },
+        "tests/transformers/test_transformers_model_export.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 1.43,
+          "log": "/io/logs/tests__transformers__test_transformers_model_export.py.log"
+        },
+        "tests/pyfunc/test_scoring_server.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.32,
+          "log": "/io/logs/tests__pyfunc__test_scoring_server.py.log"
+        },
+        "tests/store/artifact/test_mlflow_artifact_repo.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.19,
+          "log": "/io/logs/tests__store__artifact__test_mlflow_artifact_repo.py.log"
+        },
+        "tests/tracking/test_mlflow_artifacts.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 17.11,
+          "log": "/io/logs/tests__tracking__test_mlflow_artifacts.py.log"
+        },
+        "tests/sagemaker/test_sagemaker_deployment_client.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.68,
+          "log": "/io/logs/tests__sagemaker__test_sagemaker_deployment_client.py.log"
+        },
+        "tests/store/tracking/test_file_store.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 5.58,
+          "log": "/io/logs/tests__store__tracking__test_file_store.py.log"
+        },
+        "tests/evaluate/test_evaluation.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 3.18,
+          "log": "/io/logs/tests__evaluate__test_evaluation.py.log"
+        },
+        "tests/tracking/test_rest_tracking.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 285.81,
+          "log": "/io/logs/tests__tracking__test_rest_tracking.py.log"
+        },
+        "tests/utils/test_uri.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.65,
+          "log": "/io/logs/tests__utils__test_uri.py.log"
+        },
+        "tests/pyfunc/test_mlserver.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.42,
+          "log": "/io/logs/tests__pyfunc__test_mlserver.py.log"
+        },
+        "tests/dev/test_update_mlflow_versions.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.17,
+          "log": "/io/logs/tests__dev__test_update_mlflow_versions.py.log"
+        },
+        "tests/sklearn/test_sklearn_autolog.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 262.96,
+          "log": "/io/logs/tests__sklearn__test_sklearn_autolog.py.log"
+        },
+        "tests/tensorflow/test_keras_model_export.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.51,
+          "log": "/io/logs/tests__tensorflow__test_keras_model_export.py.log"
+        },
+        "tests/evaluate/test_default_evaluator.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 3.23,
+          "log": "/io/logs/tests__evaluate__test_default_evaluator.py.log"
+        },
+        "tests/models/test_cli.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 238.16,
+          "log": "/io/logs/tests__models__test_cli.py.log"
+        }
+      }
+    }
+  }
+}

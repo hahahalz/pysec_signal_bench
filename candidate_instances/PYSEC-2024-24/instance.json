@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2024-24",
+  "repo_url": "https://github.com/aio-libs/aiohttp",
+  "vulnerable_commit": "33ccdfb0a12690af5bb49bda2319ec0907fa7827",
+  "fixed_commit": "1c335944d6a8b1298baf179b7c0b3069f10c514b",
+  "vulnerable_snapshot": "snapshots/PYSEC-2024-24/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2024-24/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2024-24.patch",
+  "aliases": [
+    "CVE-2024-23334",
+    "GHSA-5h86-8mv2-jq9f"
+  ],
+  "cwe": [
+    "CWE-22"
+  ],
+  "signal_probe": {
+    "full_advisory": "aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. When using aiohttp as a web server and configuring static routes, it is necessary to specify the root path for static files. Additionally, the option 'follow_symlinks' can be used to determine whether to follow symbolic links outside the static root directory. When 'follow_symlinks' is set to True, there is no validation to check if reading a file is within the root directory. This can lead to directory traversal vul",
+    "cwe_only": "CWE-22",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-aio-libs__aiohttp-py38:latest",
+    "dockerfile": "environments/aio-libs__aiohttp-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q tests/test_web_urldispatcher.py",
+    "poc_test": "pytest -q oracles/PYSEC-2024-24/test_poc.py",
+    "property_test": "pytest -q oracles/PYSEC-2024-24/test_property.py"
+  }
+}

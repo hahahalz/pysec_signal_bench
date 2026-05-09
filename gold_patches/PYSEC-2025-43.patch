@@ -1,0 +1,195 @@
+diff --git a/tests/multimodal/assets/image1.png b/tests/multimodal/assets/image1.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..17c7d4cdffe914614b9f53622dbf91c9df9db310
+GIT binary patch
+literal 1837
+zcmeAS@N?(olHy`uVBq!ia0y~yV4MJC2XHV0Nrr!y|1mHyGX(gAxc>kDA1DAJK~ke&
+zGz3Oc2&l||(+bQBFFaiwLn`LHnRRj2Vg(*I&rko}?}=A!VNtquZSJj^|L?3}WqqQ-
+z`A!6X(0mY2JRf~se(t7K@#P;5ZCLl{Xk_K)<BvUaLzR^FhO}txjyRvCK3`ZV`S!2Z
+zM<qMgZe>cFrxn)xYsZAS=YCERc=t5!#7y%QoD+?<6s{Gp(`~WWIwJdQ?|aUL?Gx&9
+zcUOoNB`H)p#XT|SxcR<T^~l^$eFBXWZhYSKy>-Hxh2||Dow<9?<O^Nuel?Ms>34p|
+z{;q9Hdpr-Xh}|pfyKU0(l9#1h-%2<qttfh%V)&-e=i7#irDo?``r96x-gdn7!Z+ze
+zvD3ETyPxmAuiafbyJrGpk8_2I!|hCyZy}|bt-jf|8cQbx&A!X#xOdGC<2e&9D)F<H
+z3mEa750~S(n7Tmoqm##*Ox2g4r*TzYvDJ5Zl*2BcGJRc3&-?g2kI!>Fe8S4-zQ?cn
+zbxZh;wV_M7F4mXM%h@W?wqdVAsohp9(M?}7KHsU^{%z~rx8>5&8~b8;7Jdv{JoC%B
+zdY*Z`G8~)%pD&8>Y}#?N<qD_P*PCY+)y!Az-V@Aok#&XN4!N9X$>*a2ZgGC((O0?i
+z;E%yQHxDuAFsCIuQdO3P$8{W=X7j$NKewJaT`?p`v9@)wW5<UIw*JU#A7$?wu2|pt
+zgLk*zVlf{li+-i6Q(W7UY_}RlC`&12mCksVuwqS%$n_7M*8eJQo%TN}P_6hYO3!e`
+z^{dZXCd}(sb*vS+w0t&yYk|^}KeIjrDn8{^4DIwgt?g7*HRY&4o?KVko8_${>Q6dd
+zf30r$(z=&B^JaF3;+=BolX^3CT_^9W_h|7D2#OQGB;OUUtrBO$`nBwGyOT>)$hnp)
+zDvu&K<aHu5r)@1h9xv*A!bt9;`1`cTIq8uumyf8;_uC`z(&?AmC&i#W0=KwdiF}%|
+zb%MP5$xVk=Ofzgbu}xO@^rg&;B^4gko}1<--d?^!FuzhLC`fTz@|)du+k<6VjvW6#
+z&8bZwyo~FY^ZE|f_y0IsH!aAs{`Tdzr}&|FvrjZm*tW6oKG&UNmyQWcb6Bf&S@yZp
+z54QP!6?)p-igi{c6V>HfZ+!Cq*t~k{qH2D1moTRt+=-p>tGaxCZceTD<(PQkJBK8f
+zcZdmh;cv@H`zBpExnb+7t2f&Z{;3Z=(~;t2AuMF4CnkR`%JZXBNrCO#yS~X@EB5Of
+zalUj<vRC~#@o>c4_i1hSi=E8O;y1qZa}%-3KbbJ^WvzC&t^W11C-2HX{C_&My#Ar{
+zujj2X7tc&xeeAwikzn|`M*>C03M`n}^oQ9$R!}|nk43I>)?XJOn}Na8)z4*}Q$iB}
+DJQVJy
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/multimodal/assets/image2.png b/tests/multimodal/assets/image2.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..0f13ce5d983d15565e1d3930b041f6917d95ce5f
+GIT binary patch
+literal 1837
+zcmeAS@N?(olHy`uVBq!ia0y~yV4MJC2XHV0Nrr!y|1mHyGX(gAxc>kDA0)!S0B1nB
+zqvU7^jD!$4!8XYNm=|7nx;TbZ%y~2G;;h9AJZ_$!{=MH5uiC<*bnDvOTQmRPS;NZu
+zM1%942>u}XAf9+W`nvqwO{?O|KOEYy?$Oc6%FV|gd*+5JDeVnu(byevK1+SRuu}5v
+zU$2i!cCOvZlr~Q*tohfD33Jc=oFee<Y21mK<|{ZS8f__DD`2PFVy|^X_SxR|oD170
+z)aCB35GzVjsCJ5bV$N~%eXZ(|xu5z38YkTNyy<)Egf$DzTRb{*_ngTWy43w@A~)0T
+z{Eq!y+m`lt9$pc<SJ-#kq~j$oOSit2a86oL^ftxtO`*@X4H-+#&bjorJvP1Vc<F_2
+z(urcHZNYax-+f=ZyL5KX1jZic3KNIhnI_*tN;6x1vu!n&P6(QPm(6kSnjOY-CR|kF
+zXDt^n;yE8K$8j-rf#ydik2jgBFF#M?s=Q*W@A4>zT|Q;{x|W{z@p~Sh=Xm&pmCt>T
+zU-j#j@EvPImvUXKFP)dORibUfUWHP-tyZF&zGi&BQ@8!w*12!XrK30Y#quot7`Axk
+zmvi+z^Lk}CI0HUk6yw>n<7UehPOYyu&n&8$uiCvQnCBwv3cnq4InR>MM+MyC{K%uP
+za_7MxgL`fsV$NYsOLnBHEDMk8I5y4ZeNlgIJ#)HZNRVP}>te@_4;5_vk=H)T-Zxya
+zzV!$1ZokE1K28?>N>``2wk6qaHH=V}Qpzfw@h)M-nii4kA3Cl7Ropu5e^j7a@mG|d
+z;fm{5pS4Vw*RSeWD{^W1Z2r~)r6+%8eF#*1%BvXK>33S&sj6zqQGq<UuC_PJTSe5L
+zbh`dp-SVY%FL&n6><+~{<<ckhX6m|5-dFF@;vo<eCw@u3D_&bA&W81C+2wX8m#C0)
+zEmu??MR3ULL}pIgT6{cS)cJ&w+(+^EX_0f%BV8^ZQJe3#N8qK?FSk#ML3;#lalaDz
+zG-K-odG(W<4y~AG*m7c<tnTScnHNhcJgPl6%}u<$e1%|srBG0i;<n^ByY03I%d{Lh
+z{(qWNn?QIO*DvSw9jx#Fakg$+kZ1kv%WY5bL+@svXq>QZW8r<SJI5{^6PV_(R_n6t
+zbEh9{^ZhFHw7C`QtV$-T%eCJ4<o~gG_0~nz{OT@YPCK|0JL6Y%`TX3RTJOs-@xpfw
+zNiOdY6Yj#_mXr2Px^i;E)>T(;wjcacA9|)E#mPcg$WBj8{#=yjN2ihk+qZXplf72#
+z*EiyP>7Hb-`fuXlh`I06+U^%SnVH3JeCg*VVwHa~VcyGH?QmQD>t|2im4EpEbZB|~
+zL+4-5TVpPsnY#MeeX%0J@O6&_ii{OlFth0ovwy6hO70(vT;;64E<iQ|gQu&X%Q~lo
+FCIF(W?gIb-
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/multimodal/test_hasher.py b/tests/multimodal/test_hasher.py
+new file mode 100644
+index 000000000..17b36b368
+--- /dev/null
++++ b/tests/multimodal/test_hasher.py
+@@ -0,0 +1,61 @@
++# SPDX-License-Identifier: Apache-2.0
++from pathlib import Path
++
++import numpy as np
++import pytest
++import torch
++from PIL import Image, ImageDraw
++
++from vllm.multimodal.hasher import MultiModalHasher
++
++ASSETS_DIR = Path(__file__).parent / "assets"
++assert ASSETS_DIR.exists()
++
++
++# NOTE: Images that are the same visually are allowed to have the same hash
++@pytest.mark.parametrize("mode_pair", [("1", "L"), ("RGBA", "CMYK")])
++def test_hash_collision_image_mode(mode_pair):
++    mode1, mode2 = mode_pair
++    image1 = Image.new(mode1, size=(10, 10), color=1)
++    image2 = Image.new(mode2, size=(10, 10), color=1)
++
++    hasher = MultiModalHasher
++    assert hasher.hash_kwargs(image=image1) != hasher.hash_kwargs(image=image2)
++
++
++def test_hash_collision_image_palette():
++    # These images differ only in Image.palette._palette
++    image1 = Image.open(ASSETS_DIR / "image1.png")
++    image2 = Image.open(ASSETS_DIR / "image2.png")
++
++    hasher = MultiModalHasher
++    assert hasher.hash_kwargs(image=image1) != hasher.hash_kwargs(image=image2)
++
++
++def test_hash_collision_image_transpose():
++    image1 = Image.new("1", size=(10, 20))
++    ImageDraw.Draw(image1).line([(0, 0), (10, 0)])
++
++    image2 = Image.new("1", size=(20, 10))
++    ImageDraw.Draw(image2).line([(0, 0), (0, 10)])
++
++    hasher = MultiModalHasher
++    assert hasher.hash_kwargs(image=image1) != hasher.hash_kwargs(image=image2)
++
++
++def test_hash_collision_tensor_shape():
++    # The hash should be different though the data is the same when flattened
++    arr1 = torch.zeros((5, 10, 20, 3))
++    arr2 = torch.zeros((10, 20, 5, 3))
++
++    hasher = MultiModalHasher
++    assert hasher.hash_kwargs(data=arr1) != hasher.hash_kwargs(data=arr2)
++
++
++def test_hash_collision_array_shape():
++    # The hash should be different though the data is the same when flattened
++    arr1 = np.zeros((5, 10, 20, 3))
++    arr2 = np.zeros((10, 20, 5, 3))
++
++    hasher = MultiModalHasher
++    assert hasher.hash_kwargs(data=arr1) != hasher.hash_kwargs(data=arr2)
+diff --git a/vllm/multimodal/hasher.py b/vllm/multimodal/hasher.py
+index 11665ef66..53e289370 100644
+--- a/vllm/multimodal/hasher.py
++++ b/vllm/multimodal/hasher.py
+@@ -31,16 +31,20 @@ class MultiModalHasher:
+             return obj.encode("utf-8")
+         if isinstance(obj, bytes):
+             return obj
+-        if isinstance(obj, Image.Image):
+-            return obj.tobytes()
++        if isinstance(obj, (int, float)):
++            return np.array(obj).tobytes()
+ 
+-        # Convertible to NumPy arrays
++        if isinstance(obj, Image.Image):
++            return cls.item_to_bytes("image", np.array(obj.convert("RGBA")))
+         if isinstance(obj, torch.Tensor):
+-            obj = obj.numpy()
+-        if isinstance(obj, (int, float)):
+-            obj = np.array(obj)
++            return cls.item_to_bytes("tensor", obj.numpy())
+         if isinstance(obj, np.ndarray):
+-            return obj.tobytes()
++            return cls.item_to_bytes(
++                "ndarray", {
++                    "dtype": obj.dtype.str,
++                    "shape": obj.shape,
++                    "data": obj.data.tobytes(),
++                })
+ 
+         logger.warning(
+             "No serialization method found for %s. "
+@@ -53,14 +57,22 @@ class MultiModalHasher:
+         cls,
+         key: str,
+         obj: object,
++    ) -> bytes:
++        return b''.join(kb + vb for kb, vb in cls.iter_item_to_bytes(key, obj))
++
++    @classmethod
++    def iter_item_to_bytes(
++        cls,
++        key: str,
++        obj: object,
+     ) -> Iterable[tuple[bytes, bytes]]:
+         # Recursive cases
+         if isinstance(obj, (list, tuple)):
+             for i, elem in enumerate(obj):
+-                yield from cls.item_to_bytes(f"{key}.{i}", elem)
++                yield from cls.iter_item_to_bytes(f"{key}.{i}", elem)
+         elif isinstance(obj, dict):
+             for k, v in obj.items():
+-                yield from cls.item_to_bytes(f"{key}.{k}", v)
++                yield from cls.iter_item_to_bytes(f"{key}.{k}", v)
+         else:
+             key_bytes = cls.serialize_item(key)
+             value_bytes = cls.serialize_item(obj)
+@@ -71,7 +83,7 @@ class MultiModalHasher:
+         hasher = blake3()
+ 
+         for k, v in kwargs.items():
+-            for k_bytes, v_bytes in cls.item_to_bytes(k, v):
++            for k_bytes, v_bytes in cls.iter_item_to_bytes(k, v):
+                 hasher.update(k_bytes)
+                 hasher.update(v_bytes)
+ 

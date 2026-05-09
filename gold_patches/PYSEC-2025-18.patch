@@ -1,0 +1,71 @@
+diff --git a/src/picklescan/scanner.py b/src/picklescan/scanner.py
+index 4a07635..909c2fc 100644
+--- a/src/picklescan/scanner.py
++++ b/src/picklescan/scanner.py
+@@ -130,6 +130,7 @@ _unsafe_globals = {
+     "bdb": "*",
+     "pdb": "*",
+     "asyncio": "*",
++    "pip": "*",
+ }
+ 
+ #
+diff --git a/tests/data/malicious16.pkl b/tests/data/malicious16.pkl
+new file mode 100644
+index 0000000000000000000000000000000000000000..d3411e30502a40eb415e28ac4fc1f14f53ad01d4
+GIT binary patch
+literal 146
+zcmXYqI|{=<5JP*N#LWgf|6C)5TQh7HGh{ysGlm>Ln~*|<cuy!&i6UCT5yOx<Vb*Fc
+zIfHx1Y^|iFNY<!rvxO3$vL^7*SqQZSt=t?ue)|hNLDqjdPj5B1Aknq;i*uJ0y!^Im
+REsLiIc!fA`xN{n@`v9KDE&%`l
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/test_scanner.py b/tests/test_scanner.py
+index 8c1d775..70ddf62 100644
+--- a/tests/test_scanner.py
++++ b/tests/test_scanner.py
+@@ -15,6 +15,7 @@ import subprocess
+ import sys
+ from unittest import TestCase
+ import zipfile
++import pip
+ 
+ from picklescan.cli import main
+ from picklescan.scanner import (
+@@ -100,6 +101,11 @@ class Malicious15:
+             'import os\nos.system("whoami")',
+         )
+ 
++class Malicious16:
++    def __reduce__(self):
++        return pip.main, (
++            ['install', 'some_malicious_package', '--no-input', '-q', '-q', '-q',
++             '--exists-action', 'i', '--isolated'],)
+ 
+ class HTTPResponse:
+     def __init__(self, status, data=None):
+@@ -412,6 +418,7 @@ def initialize_pickle_files():
+     )  # runpy
+     initialize_pickle_file(f"{_root_path}/data/malicious15a.pkl", Malicious15(), 2)
+     initialize_pickle_file(f"{_root_path}/data/malicious15b.pkl", Malicious15(), 4)
++    initialize_pickle_file(f"{_root_path}/data/malicious16.pkl", Malicious16(), 0)
+ 
+     initialize_7z_file(
+         f"{_root_path}/data/malicious1.7z",
+@@ -752,10 +759,11 @@ def test_scan_directory_path():
+             Global("bdb", "Bdb.run", SafetyLevel.Dangerous),
+             Global("builtins", "exec", SafetyLevel.Dangerous),
+             Global("builtins", "eval", SafetyLevel.Dangerous),
++            Global("pip", "main", SafetyLevel.Dangerous),
+         ],
+-        scanned_files=32,
+-        issues_count=32,
+-        infected_files=27,
++        scanned_files=33,
++        issues_count=33,
++        infected_files=28,
+         scan_err=True,
+     )
+     compare_scan_results(scan_directory_path(f"{_root_path}/data/"), sr)

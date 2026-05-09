@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2023-251",
+  "repo_url": "https://github.com/aio-libs/aiohttp",
+  "vulnerable_commit": "476c4f2445f649fe2ec32db96535b988d69e71b5",
+  "fixed_commit": "e4ae01c2077d2cfa116aa82e4ff6866857f7c466",
+  "vulnerable_snapshot": "snapshots/PYSEC-2023-251/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2023-251/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2023-251.patch",
+  "aliases": [
+    "CVE-2023-49082",
+    "GHSA-qvrw-v9rv-5rjx"
+  ],
+  "cwe": [
+    "CWE-444"
+  ],
+  "signal_probe": {
+    "full_advisory": "aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. Improper validation makes it possible for an attacker to modify the HTTP request (e.g. insert a new header) or even create a new HTTP request if the attacker controls the HTTP method. The vulnerability occurs only if the attacker can control the HTTP method (GET, POST etc.) of the request. If the attacker can control the HTTP version of the request it will be able to modify the request (request smuggling). This issue",
+    "cwe_only": "CWE-444",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-aio-libs__aiohttp-py38:latest",
+    "dockerfile": "environments/aio-libs__aiohttp-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q tests/test_client_ws_functional.py tests/test_client_ws.py tests/test_client_session.py tests/test_client_response.py tests/test_client_request.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

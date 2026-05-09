@@ -1,0 +1,31 @@
+{
+  "instance_id": "PYSEC-2025-40",
+  "repo_url": "https://github.com/huggingface/transformers",
+  "vulnerable_commit": "72861e11ebe0b9d9123929b82708a1784ab1900e",
+  "fixed_commit": "8cb522b4190bd556ce51be04942720650b1a3e57",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-40/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-40/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-40.patch",
+  "aliases": [
+    "CVE-2025-2099"
+  ],
+  "cwe": [
+    "CWE-400"
+  ],
+  "signal_probe": {
+    "full_advisory": "A vulnerability in the `preprocess_string()` function of the `transformers.testing_utils` module in huggingface/transformers version v4.48.3 allows for a Regular Expression Denial of Service (ReDoS) attack. The regular expression used to process code blocks in docstrings contains nested quantifiers, leading to exponential backtracking when processing input with a large number of newline characters. An attacker can exploit this by providing a specially crafted payload, causing high CPU usage and potential application downtime, effectively resulting in a Denial of Service (DoS) scenario.",
+    "cwe_only": "CWE-400",
+    "symptom_only": "denial of service",
+    "exploit_hint_only": "payload,crafted,regular expression",
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-huggingface__transformers-py310:latest",
+    "dockerfile": "environments/huggingface__transformers-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q tests/utils/test_activations.py tests/utils/test_activations_tf.py tests/utils/test_add_new_model_like.py tests/utils/test_backbone_utils.py tests/utils/test_cache_utils.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

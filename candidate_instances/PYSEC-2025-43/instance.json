@@ -1,0 +1,30 @@
+{
+  "instance_id": "PYSEC-2025-43",
+  "repo_url": "https://github.com/vllm-project/vllm",
+  "vulnerable_commit": "785d75a03b73a903ff86cd9aa23a3addcdbbd8ab",
+  "fixed_commit": "99404f53c72965b41558aceb1bc2380875f5d848",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-43/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-43/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-43.patch",
+  "aliases": [
+    "CVE-2025-46722",
+    "GHSA-c65p-x677-fgj6"
+  ],
+  "cwe": [],
+  "signal_probe": {
+    "full_advisory": "vLLM is an inference and serving engine for large language models (LLMs). In versions starting from 0.7.0 to before 0.9.0, in the file vllm/multimodal/hasher.py, the MultiModalHasher class has a security and data integrity issue in its image hashing method. Currently, it serializes PIL.Image.Image objects using only obj.tobytes(), which returns only the raw pixel data, without including metadata such as the image’s shape (width, height, mode). As a result, two images of different sizes (e.g., 30x100 and 100x30) with the same pixel byte sequence could generate the same hash value. This may lead to hash collisions, incorrect cache hits, and even data leakage or security risks. This issue has been patched in version 0.9.0.",
+    "cwe_only": null,
+    "symptom_only": "data leak",
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-vllm-project__vllm-py310:latest",
+    "dockerfile": "environments/vllm-project__vllm-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "instance_id": "PYSEC-2025-17",
+  "repo_url": "https://github.com/mlflow/mlflow",
+  "vulnerable_commit": "e334862b6685d12de73245ef4caf30d864c6e3be",
+  "fixed_commit": "149c9e18aa219bc47e86b432e130e467a36f4a17",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-17/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-17/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-17.patch",
+  "aliases": [
+    "CVE-2025-1474"
+  ],
+  "cwe": [],
+  "signal_probe": {
+    "full_advisory": "In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a password. This vulnerability could lead to security risks, as accounts without passwords may be susceptible to unauthorized access. Additionally, this issue violates best practices for secure user account management. The issue is fixed in version 2.19.0.",
+    "cwe_only": null,
+    "symptom_only": "unauthorized",
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-mlflow__mlflow-py310:latest",
+    "dockerfile": "environments/mlflow__mlflow-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q tests/server/auth/test_cli.py tests/server/auth/test_client.py tests/server/auth/test_sqlalchemy_store.py tests/server/auth/db/test_cli.py tests/store/artifact/test_mlflow_artifact_repo.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "instance_id": "PYSEC-2025-43",
+  "repo_name": "vllm-project__vllm",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-43",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "99404f53c72965b41558aceb1bc2380875f5d848",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "785d75a03b73a903ff86cd9aa23a3addcdbbd8ab",
+    "fixed_commit": "99404f53c72965b41558aceb1bc2380875f5d848"
+  },
+  "affected_files": [
+    "tests/multimodal/assets/image1.png",
+    "tests/multimodal/assets/image2.png",
+    "tests/multimodal/test_hasher.py",
+    "vllm/multimodal/hasher.py"
+  ],
+  "affected_source_files": [
+    "vllm/multimodal/hasher.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "vLLM is an inference and serving engine for large language models (LLMs). In versions starting from 0.7.0 to before 0.9.0, in the file vllm/multimodal/hasher.py, the MultiModalHasher class has a security and data integrity issue in its image hashing method. Currently, it serializes PIL.Image.Image objects using only obj.tobytes(), which returns only the raw pixel data, without including metadata such as the image’s shape (width, height, mode). As a result, two images of different sizes (e.g., 30x100 and 100x30) with the same pixel byte sequence could generate the same hash value. This may lead to hash collisions, incorrect cache hits, and even data leakage or security risks. This issue has been patched in version 0.9.0.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "vllm/multimodal/hasher.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-43/test_poc.py",
+    "property": "oracles/PYSEC-2025-43/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-43/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-43/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-43/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "vLLM is an inference and serving engine for large language models (LLMs). In versions starting from 0.7.0 to before 0.9.0, in the file vllm/multimodal/hasher.py, the MultiModalHasher class has a security and data integrity issue in its image hashing method. Currently, it serializes PIL.Image.Image objects using only obj.tobytes(), which returns only the raw pixel data, without including metadata such as the image’s shape (width, height, mode). As a result, two images of different sizes (e.g., 30x100 and 100x30) with the same pixel byte sequence could generate the same hash value. This may lead to hash collisions, incorrect cache hits, and even data leakage or security risks. This issue has been patched in version 0.9.0.",
+      "cwe_only": null,
+      "symptom_only": "data leak",
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/vllm-project/vllm/security/advisories/GHSA-c65p-x677-fgj6",
+    "https://github.com/vllm-project/vllm/commit/99404f53c72965b41558aceb1bc2380875f5d848",
+    "https://github.com/vllm-project/vllm/pull/17378"
+  ],
+  "patch_stats": {
+    "files_changed": 4,
+    "lines_added": 83,
+    "lines_deleted": 10,
+    "lines_changed": 93
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "vllm-project__vllm-py310",
+    "repo_slug": "vllm-project__vllm",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9,<3.13",
+    "docker_image": "pysec-env-vllm-project__vllm-py310:latest",
+    "dockerfile": "environments/vllm-project__vllm-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  }
+}

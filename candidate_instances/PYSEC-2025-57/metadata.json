@@ -1,0 +1,815 @@
+{
+  "instance_id": "PYSEC-2025-57",
+  "repo_name": "zenml-io__zenml",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-57",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "cba152eb9ca3071c8372b0b91c02d9d3351de48d",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "9a6044b57f07e78b967ee78cf990693399eb5a88",
+    "fixed_commit": "cba152eb9ca3071c8372b0b91c02d9d3351de48d"
+  },
+  "affected_files": [
+    "src/zenml/config/server_config.py",
+    "src/zenml/constants.py",
+    "src/zenml/zen_server/zen_server_api.py"
+  ],
+  "affected_source_files": [
+    "src/zenml/config/server_config.py",
+    "src/zenml/constants.py",
+    "src/zenml/zen_server/zen_server_api.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "A Denial of Service (DoS) vulnerability in zenml-io/zenml version 0.66.0 allows unauthenticated attackers to cause excessive resource consumption by sending malformed multipart requests with arbitrary characters appended to the end of multipart boundaries. This flaw in the multipart request boundary processing mechanism leads to an infinite loop, resulting in a complete denial of service for all users. Affected endpoints include `/api/v1/login` and `/api/v1/device_authorization`.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "src/zenml/config/server_config.py",
+      "src/zenml/constants.py",
+      "src/zenml/zen_server/zen_server_api.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-57/test_poc.py",
+    "property": "oracles/PYSEC-2025-57/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-57/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/integration/functional/test_zen_server_api.py tests/unit/test_constants.py tests/unit/entrypoints/test_base_entrypoint_configuration.py tests/unit/config/test_step_configurations.py tests/unit/config/test_global_config.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-57/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-57/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "A Denial of Service (DoS) vulnerability in zenml-io/zenml version 0.66.0 allows unauthenticated attackers to cause excessive resource consumption by sending malformed multipart requests with arbitrary characters appended to the end of multipart boundaries. This flaw in the multipart request boundary processing mechanism leads to an infinite loop, resulting in a complete denial of service for all users. Affected endpoints include `/api/v1/login` and `/api/v1/device_authorization`.",
+      "cwe_only": "CWE-94",
+      "symptom_only": "denial of service",
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://huntr.com/bounties/c9200654-7dc0-4c1d-8573-ab79a87fb4f6",
+    "https://github.com/zenml-io/zenml/commit/cba152eb9ca3071c8372b0b91c02d9d3351de48d",
+    "https://huntr.com/bounties/c9200654-7dc0-4c1d-8573-ab79a87fb4f6"
+  ],
+  "patch_stats": {
+    "files_changed": 3,
+    "lines_added": 95,
+    "lines_deleted": 2,
+    "lines_changed": 97
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "zenml-io__zenml-py310",
+    "repo_slug": "zenml-io__zenml",
+    "python_version": "3.10",
+    "python_requires_detected": "",
+    "docker_image": "pysec-env-zenml-io__zenml-py310:latest",
+    "dockerfile": "environments/zenml-io__zenml-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "no_functional_tests_selected",
+    "selected": [],
+    "functional_test": null,
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "tests/integration/functional/test_zen_server_api.py",
+      "tests/integration/functional/zen_server/test_zen_server.py",
+      "tests/unit/zen_server/test_exceptions.py",
+      "tests/unit/zen_server/test_jwt.py",
+      "tests/unit/test_constants.py",
+      "tests/integration/functional/cli/test_config.py",
+      "tests/integration/functional/cli/test_server.py",
+      "tests/integration/functional/zen_stores/test_zen_store.py",
+      "tests/unit/config/test_base_settings.py",
+      "tests/unit/config/test_compiler.py",
+      "tests/unit/config/test_docker_settings.py",
+      "tests/unit/config/test_global_config.py",
+      "tests/unit/config/test_resource_settings.py",
+      "tests/unit/config/test_secret_reference_mixin.py",
+      "tests/unit/config/test_settings_resolver.py",
+      "tests/unit/config/test_step_configurations.py",
+      "tests/unit/entrypoints/test_base_entrypoint_configuration.py",
+      "tests/integration/functional/artifacts/test_artifact_config.py",
+      "tests/integration/functional/pipelines/test_pipeline_config.py",
+      "tests/integration/functional/zen_stores/test_secrets_store.py",
+      "tests/integration/integrations/label_studio/label_config_generators/test_label_config_generators.py"
+    ],
+    "affected_files_used": [
+      "src/zenml/config/server_config.py",
+      "src/zenml/constants.py",
+      "src/zenml/zen_server/zen_server_api.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-zenml-io__zenml-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/integration/functional/test_zen_server_api.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.88,
+          "log": "/io/logs/tests__integration__functional__test_zen_server_api.py.log"
+        },
+        "tests/integration/functional/zen_server/test_zen_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.36,
+          "log": "/io/logs/tests__integration__functional__zen_server__test_zen_server.py.log"
+        },
+        "tests/unit/zen_server/test_exceptions.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.7,
+          "log": "/io/logs/tests__unit__zen_server__test_exceptions.py.log"
+        },
+        "tests/unit/zen_server/test_jwt.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.88,
+          "log": "/io/logs/tests__unit__zen_server__test_jwt.py.log"
+        },
+        "tests/unit/test_constants.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.66,
+          "log": "/io/logs/tests__unit__test_constants.py.log"
+        },
+        "tests/integration/functional/cli/test_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.68,
+          "log": "/io/logs/tests__integration__functional__cli__test_config.py.log"
+        },
+        "tests/integration/functional/cli/test_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.1,
+          "log": "/io/logs/tests__integration__functional__cli__test_server.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_zen_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.77,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_zen_store.py.log"
+        },
+        "tests/unit/config/test_base_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.89,
+          "log": "/io/logs/tests__unit__config__test_base_settings.py.log"
+        },
+        "tests/unit/config/test_compiler.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.81,
+          "log": "/io/logs/tests__unit__config__test_compiler.py.log"
+        },
+        "tests/unit/config/test_docker_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.29,
+          "log": "/io/logs/tests__unit__config__test_docker_settings.py.log"
+        },
+        "tests/unit/config/test_global_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.7,
+          "log": "/io/logs/tests__unit__config__test_global_config.py.log"
+        },
+        "tests/unit/config/test_resource_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.63,
+          "log": "/io/logs/tests__unit__config__test_resource_settings.py.log"
+        },
+        "tests/unit/config/test_secret_reference_mixin.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.18,
+          "log": "/io/logs/tests__unit__config__test_secret_reference_mixin.py.log"
+        },
+        "tests/unit/config/test_settings_resolver.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.08,
+          "log": "/io/logs/tests__unit__config__test_settings_resolver.py.log"
+        },
+        "tests/unit/config/test_step_configurations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.95,
+          "log": "/io/logs/tests__unit__config__test_step_configurations.py.log"
+        },
+        "tests/unit/entrypoints/test_base_entrypoint_configuration.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.22,
+          "log": "/io/logs/tests__unit__entrypoints__test_base_entrypoint_configuration.py.log"
+        },
+        "tests/integration/functional/artifacts/test_artifact_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.75,
+          "log": "/io/logs/tests__integration__functional__artifacts__test_artifact_config.py.log"
+        },
+        "tests/integration/functional/pipelines/test_pipeline_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.75,
+          "log": "/io/logs/tests__integration__functional__pipelines__test_pipeline_config.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_secrets_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.57,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_secrets_store.py.log"
+        },
+        "tests/integration/integrations/label_studio/label_config_generators/test_label_config_generators.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.59,
+          "log": "/io/logs/tests__integration__integrations__label_studio__label_config_generators__test_label_config_generators.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/integration/functional/test_zen_server_api.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.58,
+          "log": "/io/logs/tests__integration__functional__test_zen_server_api.py.log"
+        },
+        "tests/integration/functional/zen_server/test_zen_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.04,
+          "log": "/io/logs/tests__integration__functional__zen_server__test_zen_server.py.log"
+        },
+        "tests/unit/zen_server/test_exceptions.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.54,
+          "log": "/io/logs/tests__unit__zen_server__test_exceptions.py.log"
+        },
+        "tests/unit/zen_server/test_jwt.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.48,
+          "log": "/io/logs/tests__unit__zen_server__test_jwt.py.log"
+        },
+        "tests/unit/test_constants.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.51,
+          "log": "/io/logs/tests__unit__test_constants.py.log"
+        },
+        "tests/integration/functional/cli/test_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.51,
+          "log": "/io/logs/tests__integration__functional__cli__test_config.py.log"
+        },
+        "tests/integration/functional/cli/test_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__integration__functional__cli__test_server.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_zen_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.56,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_zen_store.py.log"
+        },
+        "tests/unit/config/test_base_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.49,
+          "log": "/io/logs/tests__unit__config__test_base_settings.py.log"
+        },
+        "tests/unit/config/test_compiler.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.48,
+          "log": "/io/logs/tests__unit__config__test_compiler.py.log"
+        },
+        "tests/unit/config/test_docker_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.62,
+          "log": "/io/logs/tests__unit__config__test_docker_settings.py.log"
+        },
+        "tests/unit/config/test_global_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.75,
+          "log": "/io/logs/tests__unit__config__test_global_config.py.log"
+        },
+        "tests/unit/config/test_resource_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.1,
+          "log": "/io/logs/tests__unit__config__test_resource_settings.py.log"
+        },
+        "tests/unit/config/test_secret_reference_mixin.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.73,
+          "log": "/io/logs/tests__unit__config__test_secret_reference_mixin.py.log"
+        },
+        "tests/unit/config/test_settings_resolver.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.72,
+          "log": "/io/logs/tests__unit__config__test_settings_resolver.py.log"
+        },
+        "tests/unit/config/test_step_configurations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.64,
+          "log": "/io/logs/tests__unit__config__test_step_configurations.py.log"
+        },
+        "tests/unit/entrypoints/test_base_entrypoint_configuration.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.65,
+          "log": "/io/logs/tests__unit__entrypoints__test_base_entrypoint_configuration.py.log"
+        },
+        "tests/integration/functional/artifacts/test_artifact_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.69,
+          "log": "/io/logs/tests__integration__functional__artifacts__test_artifact_config.py.log"
+        },
+        "tests/integration/functional/pipelines/test_pipeline_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.89,
+          "log": "/io/logs/tests__integration__functional__pipelines__test_pipeline_config.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_secrets_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_secrets_store.py.log"
+        },
+        "tests/integration/integrations/label_studio/label_config_generators/test_label_config_generators.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.02,
+          "log": "/io/logs/tests__integration__integrations__label_studio__label_config_generators__test_label_config_generators.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [],
+    "candidate_tests": [
+      "tests/integration/functional/test_zen_server_api.py",
+      "tests/integration/functional/zen_server/test_zen_server.py",
+      "tests/unit/zen_server/test_jwt.py",
+      "tests/unit/zen_server/test_exceptions.py",
+      "tests/integration/functional/zen_stores/test_zen_store.py",
+      "tests/integration/functional/cli/test_server.py",
+      "tests/unit/config/test_compiler.py",
+      "tests/unit/config/test_resource_settings.py",
+      "tests/unit/test_constants.py",
+      "tests/integration/functional/cli/test_config.py",
+      "tests/unit/config/test_secret_reference_mixin.py",
+      "tests/integration/functional/test_client.py",
+      "tests/unit/config/test_step_configurations.py",
+      "tests/unit/config/test_settings_resolver.py",
+      "tests/unit/config/test_base_settings.py",
+      "tests/unit/config/test_docker_settings.py",
+      "tests/unit/config/test_global_config.py",
+      "tests/unit/utils/test_analytics_utils.py",
+      "tests/integration/functional/zen_stores/test_secrets_store.py",
+      "tests/unit/entrypoints/test_base_entrypoint_configuration.py",
+      "tests/unit/pipelines/test_base_pipeline.py",
+      "tests/unit/pipelines/test_build_utils.py",
+      "tests/integration/functional/pipelines/test_pipeline_config.py",
+      "tests/integration/functional/artifacts/test_artifact_config.py",
+      "tests/unit/utils/test_code_repository_utils.py",
+      "tests/integration/functional/model/test_model_version.py",
+      "tests/integration/functional/steps/test_model_version.py",
+      "tests/integration/integrations/kubernetes/orchestrators/test_manifest_utils.py",
+      "tests/unit/orchestrators/test_cache_utils.py",
+      "tests/integration/functional/test_lineage_graph.py"
+    ],
+    "affected_files_used": [
+      "src/zenml/config/server_config.py",
+      "src/zenml/constants.py",
+      "src/zenml/zen_server/zen_server_api.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-zenml-io__zenml-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/integration/functional/test_zen_server_api.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.44,
+          "log": "/io/logs/tests__integration__functional__test_zen_server_api.py.log"
+        },
+        "tests/integration/functional/zen_server/test_zen_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.51,
+          "log": "/io/logs/tests__integration__functional__zen_server__test_zen_server.py.log"
+        },
+        "tests/unit/zen_server/test_jwt.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.62,
+          "log": "/io/logs/tests__unit__zen_server__test_jwt.py.log"
+        },
+        "tests/unit/zen_server/test_exceptions.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.54,
+          "log": "/io/logs/tests__unit__zen_server__test_exceptions.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_zen_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.52,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_zen_store.py.log"
+        },
+        "tests/integration/functional/cli/test_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.27,
+          "log": "/io/logs/tests__integration__functional__cli__test_server.py.log"
+        },
+        "tests/unit/config/test_compiler.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.64,
+          "log": "/io/logs/tests__unit__config__test_compiler.py.log"
+        },
+        "tests/unit/config/test_resource_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.54,
+          "log": "/io/logs/tests__unit__config__test_resource_settings.py.log"
+        },
+        "tests/unit/test_constants.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.66,
+          "log": "/io/logs/tests__unit__test_constants.py.log"
+        },
+        "tests/integration/functional/cli/test_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.02,
+          "log": "/io/logs/tests__integration__functional__cli__test_config.py.log"
+        },
+        "tests/unit/config/test_secret_reference_mixin.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.57,
+          "log": "/io/logs/tests__unit__config__test_secret_reference_mixin.py.log"
+        },
+        "tests/integration/functional/test_client.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.75,
+          "log": "/io/logs/tests__integration__functional__test_client.py.log"
+        },
+        "tests/unit/config/test_step_configurations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.66,
+          "log": "/io/logs/tests__unit__config__test_step_configurations.py.log"
+        },
+        "tests/unit/config/test_settings_resolver.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.69,
+          "log": "/io/logs/tests__unit__config__test_settings_resolver.py.log"
+        },
+        "tests/unit/config/test_base_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.81,
+          "log": "/io/logs/tests__unit__config__test_base_settings.py.log"
+        },
+        "tests/unit/config/test_docker_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.92,
+          "log": "/io/logs/tests__unit__config__test_docker_settings.py.log"
+        },
+        "tests/unit/config/test_global_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.28,
+          "log": "/io/logs/tests__unit__config__test_global_config.py.log"
+        },
+        "tests/unit/utils/test_analytics_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.65,
+          "log": "/io/logs/tests__unit__utils__test_analytics_utils.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_secrets_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.96,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_secrets_store.py.log"
+        },
+        "tests/unit/entrypoints/test_base_entrypoint_configuration.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.61,
+          "log": "/io/logs/tests__unit__entrypoints__test_base_entrypoint_configuration.py.log"
+        },
+        "tests/unit/pipelines/test_base_pipeline.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.81,
+          "log": "/io/logs/tests__unit__pipelines__test_base_pipeline.py.log"
+        },
+        "tests/unit/pipelines/test_build_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.71,
+          "log": "/io/logs/tests__unit__pipelines__test_build_utils.py.log"
+        },
+        "tests/integration/functional/pipelines/test_pipeline_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.69,
+          "log": "/io/logs/tests__integration__functional__pipelines__test_pipeline_config.py.log"
+        },
+        "tests/integration/functional/artifacts/test_artifact_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.81,
+          "log": "/io/logs/tests__integration__functional__artifacts__test_artifact_config.py.log"
+        },
+        "tests/unit/utils/test_code_repository_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.69,
+          "log": "/io/logs/tests__unit__utils__test_code_repository_utils.py.log"
+        },
+        "tests/integration/functional/model/test_model_version.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.95,
+          "log": "/io/logs/tests__integration__functional__model__test_model_version.py.log"
+        },
+        "tests/integration/functional/steps/test_model_version.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.8,
+          "log": "/io/logs/tests__integration__functional__steps__test_model_version.py.log"
+        },
+        "tests/integration/integrations/kubernetes/orchestrators/test_manifest_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.27,
+          "log": "/io/logs/tests__integration__integrations__kubernetes__orchestrators__test_manifest_utils.py.log"
+        },
+        "tests/unit/orchestrators/test_cache_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.0,
+          "log": "/io/logs/tests__unit__orchestrators__test_cache_utils.py.log"
+        },
+        "tests/integration/functional/test_lineage_graph.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.61,
+          "log": "/io/logs/tests__integration__functional__test_lineage_graph.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/integration/functional/test_zen_server_api.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.73,
+          "log": "/io/logs/tests__integration__functional__test_zen_server_api.py.log"
+        },
+        "tests/integration/functional/zen_server/test_zen_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.82,
+          "log": "/io/logs/tests__integration__functional__zen_server__test_zen_server.py.log"
+        },
+        "tests/unit/zen_server/test_jwt.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.69,
+          "log": "/io/logs/tests__unit__zen_server__test_jwt.py.log"
+        },
+        "tests/unit/zen_server/test_exceptions.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__unit__zen_server__test_exceptions.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_zen_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.76,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_zen_store.py.log"
+        },
+        "tests/integration/functional/cli/test_server.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.84,
+          "log": "/io/logs/tests__integration__functional__cli__test_server.py.log"
+        },
+        "tests/unit/config/test_compiler.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__unit__config__test_compiler.py.log"
+        },
+        "tests/unit/config/test_resource_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.55,
+          "log": "/io/logs/tests__unit__config__test_resource_settings.py.log"
+        },
+        "tests/unit/test_constants.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__unit__test_constants.py.log"
+        },
+        "tests/integration/functional/cli/test_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.67,
+          "log": "/io/logs/tests__integration__functional__cli__test_config.py.log"
+        },
+        "tests/unit/config/test_secret_reference_mixin.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.29,
+          "log": "/io/logs/tests__unit__config__test_secret_reference_mixin.py.log"
+        },
+        "tests/integration/functional/test_client.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 3.42,
+          "log": "/io/logs/tests__integration__functional__test_client.py.log"
+        },
+        "tests/unit/config/test_step_configurations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.75,
+          "log": "/io/logs/tests__unit__config__test_step_configurations.py.log"
+        },
+        "tests/unit/config/test_settings_resolver.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.63,
+          "log": "/io/logs/tests__unit__config__test_settings_resolver.py.log"
+        },
+        "tests/unit/config/test_base_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.73,
+          "log": "/io/logs/tests__unit__config__test_base_settings.py.log"
+        },
+        "tests/unit/config/test_docker_settings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.62,
+          "log": "/io/logs/tests__unit__config__test_docker_settings.py.log"
+        },
+        "tests/unit/config/test_global_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.58,
+          "log": "/io/logs/tests__unit__config__test_global_config.py.log"
+        },
+        "tests/unit/utils/test_analytics_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.55,
+          "log": "/io/logs/tests__unit__utils__test_analytics_utils.py.log"
+        },
+        "tests/integration/functional/zen_stores/test_secrets_store.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.6,
+          "log": "/io/logs/tests__integration__functional__zen_stores__test_secrets_store.py.log"
+        },
+        "tests/unit/entrypoints/test_base_entrypoint_configuration.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.5,
+          "log": "/io/logs/tests__unit__entrypoints__test_base_entrypoint_configuration.py.log"
+        },
+        "tests/unit/pipelines/test_base_pipeline.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.5,
+          "log": "/io/logs/tests__unit__pipelines__test_base_pipeline.py.log"
+        },
+        "tests/unit/pipelines/test_build_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.45,
+          "log": "/io/logs/tests__unit__pipelines__test_build_utils.py.log"
+        },
+        "tests/integration/functional/pipelines/test_pipeline_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 4.53,
+          "log": "/io/logs/tests__integration__functional__pipelines__test_pipeline_config.py.log"
+        },
+        "tests/integration/functional/artifacts/test_artifact_config.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.73,
+          "log": "/io/logs/tests__integration__functional__artifacts__test_artifact_config.py.log"
+        },
+        "tests/unit/utils/test_code_repository_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.52,
+          "log": "/io/logs/tests__unit__utils__test_code_repository_utils.py.log"
+        },
+        "tests/integration/functional/model/test_model_version.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.78,
+          "log": "/io/logs/tests__integration__functional__model__test_model_version.py.log"
+        },
+        "tests/integration/functional/steps/test_model_version.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.7,
+          "log": "/io/logs/tests__integration__functional__steps__test_model_version.py.log"
+        },
+        "tests/integration/integrations/kubernetes/orchestrators/test_manifest_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.86,
+          "log": "/io/logs/tests__integration__integrations__kubernetes__orchestrators__test_manifest_utils.py.log"
+        },
+        "tests/unit/orchestrators/test_cache_utils.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.66,
+          "log": "/io/logs/tests__unit__orchestrators__test_cache_utils.py.log"
+        },
+        "tests/integration/functional/test_lineage_graph.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.72,
+          "log": "/io/logs/tests__integration__functional__test_lineage_graph.py.log"
+        }
+      }
+    }
+  }
+}

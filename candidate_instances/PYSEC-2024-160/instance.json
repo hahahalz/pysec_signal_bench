@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2024-160",
+  "repo_url": "https://github.com/fedora-python/lxml_html_clean",
+  "vulnerable_commit": "dcbc16363409481933962e8690b83cfd12cbf3ac",
+  "fixed_commit": "c5d816f86eb3707d72a8ecf5f3823e0daa1b3808",
+  "vulnerable_snapshot": "snapshots/PYSEC-2024-160/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2024-160/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2024-160.patch",
+  "aliases": [
+    "CVE-2024-52595",
+    "GHSA-5jfw-gq64-q45f"
+  ],
+  "cwe": [
+    "CWE-79"
+  ],
+  "signal_probe": {
+    "full_advisory": "lxml_html_clean is a project for HTML cleaning functionalities copied from `lxml.html.clean`. Prior to version 0.4.0, the HTML Parser in lxml does not properly handle context-switching for special HTML tags such as `<svg>`, `<math>` and `<noscript>`. This behavior deviates from how web browsers parse and interpret such tags. Specifically, content in CSS comments is ignored by lxml_html_clean but may be interpreted differently by web browsers, enabling malicious scripts to bypass the cleaning pro",
+    "cwe_only": "CWE-79",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-fedora-python__lxml_html_clean-py310:latest",
+    "dockerfile": "environments/fedora-python__lxml_html_clean-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2022-260",
+  "repo_url": "https://github.com/sqlalchemy/mako",
+  "vulnerable_commit": "7c5b28ac47755598e8c5bdfc995eaf220132e672",
+  "fixed_commit": "925760291d6efec64fda6e9dd1fd9cfbd5be068c",
+  "vulnerable_snapshot": "snapshots/PYSEC-2022-260/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2022-260/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2022-260.patch",
+  "aliases": [
+    "CVE-2022-40023",
+    "GHSA-v973-fxgf-6xhp"
+  ],
+  "cwe": [
+    "CWE-400"
+  ],
+  "signal_probe": {
+    "full_advisory": "Sqlalchemy mako before 1.2.2 is vulnerable to Regular expression Denial of Service when using the Lexer class to parse. This also affects babelplugin and linguaplugin.",
+    "cwe_only": "CWE-400",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-sqlalchemy__mako-py39:latest",
+    "dockerfile": "environments/sqlalchemy__mako-py39/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q test/test_lexer.py",
+    "poc_test": "python /bench/oracles/PYSEC-2022-260/extracted_poc/run_extracted_poc.py",
+    "property_test": null
+  }
+}

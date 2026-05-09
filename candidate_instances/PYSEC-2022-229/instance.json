@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2022-229",
+  "repo_url": "https://github.com/gradio-app/gradio",
+  "vulnerable_commit": "5f907e4235058bf46fa85f27b9df876d54690fc3",
+  "fixed_commit": "80fea89117358ee105973453fdc402398ae20239",
+  "vulnerable_snapshot": "snapshots/PYSEC-2022-229/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2022-229/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2022-229.patch",
+  "aliases": [
+    "CVE-2022-24770",
+    "GHSA-f8xq-q7px-wg8c"
+  ],
+  "cwe": [
+    "CWE-94"
+  ],
+  "signal_probe": {
+    "full_advisory": "`gradio` is an open source framework for building interactive machine learning models and demos. Prior to version 2.8.11, `gradio` suffers from Improper Neutralization of Formula Elements in a CSV File. The `gradio` library has a flagging functionality which saves input/output data into a CSV file on the developer's computer. This can allow a user to save arbitrary text into the CSV file, such as commands. If a program like MS Excel opens such a file, then it automatically runs these commands, w",
+    "cwe_only": "CWE-94",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-gradio-app__gradio-py39:latest",
+    "dockerfile": "environments/gradio-app__gradio-py39/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

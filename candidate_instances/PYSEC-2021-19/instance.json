@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2021-19",
+  "repo_url": "https://github.com/lxml/lxml",
+  "vulnerable_commit": "2d01a1ba8984e0483ce6619b972832377f208a0d",
+  "fixed_commit": "a5f9cb52079dc57477c460dbe6ba0f775e14a999",
+  "vulnerable_snapshot": "snapshots/PYSEC-2021-19/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2021-19/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2021-19.patch",
+  "aliases": [
+    "CVE-2021-28957",
+    "GHSA-jq4v-f5q6-mjqq"
+  ],
+  "cwe": [
+    "CWE-79"
+  ],
+  "signal_probe": {
+    "full_advisory": "An XSS vulnerability was discovered in python-lxml's clean module versions before 4.6.3. When disabling the safe_attrs_only and forms arguments, the Cleaner class does not remove the formaction attribute allowing for JS to bypass the sanitizer. A remote attacker could exploit this flaw to run arbitrary JS code on users who interact with incorrectly sanitized HTML. This issue is patched in lxml 4.6.3.",
+    "cwe_only": "CWE-79",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-lxml__lxml-py38:latest",
+    "dockerfile": "environments/lxml__lxml-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

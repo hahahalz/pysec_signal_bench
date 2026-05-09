@@ -1,0 +1,182 @@
+{
+  "instance_id": "PYSEC-2025-20",
+  "repo_name": "mmaitre314__picklescan",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-20",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "e58e45e0d9e091159c1554f9b04828bbb40b9781",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "f34d091824cb8775711f039b5299c277e2ecc663",
+    "fixed_commit": "e58e45e0d9e091159c1554f9b04828bbb40b9781"
+  },
+  "affected_files": [
+    "src/picklescan/relaxed_zipfile.py",
+    "src/picklescan/scanner.py",
+    "tests/data/malicious1_0x1.zip",
+    "tests/data/malicious1_0x20.zip",
+    "tests/data/malicious1_0x40.zip",
+    "tests/data/malicious1_central_directory.zip",
+    "tests/test_scanner.py"
+  ],
+  "affected_source_files": [
+    "src/picklescan/relaxed_zipfile.py",
+    "src/picklescan/scanner.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "picklescan before 0.0.23 is vulnerable to a ZIP archive manipulation attack that causes it to crash when attempting to extract and scan PyTorch model archives. By modifying the filename in the ZIP header while keeping the original filename in the directory listing, an attacker can make PickleScan raise a BadZipFile error. However, PyTorch's more forgiving ZIP implementation still allows the model to be loaded, enabling malicious payloads to bypass detection.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "src/picklescan/relaxed_zipfile.py",
+      "src/picklescan/scanner.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-20/test_poc.py",
+    "property": "oracles/PYSEC-2025-20/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-20/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/test_scanner.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-20/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-20/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "picklescan before 0.0.23 is vulnerable to a ZIP archive manipulation attack that causes it to crash when attempting to extract and scan PyTorch model archives. By modifying the filename in the ZIP header while keeping the original filename in the directory listing, an attacker can make PickleScan raise a BadZipFile error. However, PyTorch's more forgiving ZIP implementation still allows the model to be loaded, enabling malicious payloads to bypass detection.",
+      "cwe_only": "CWE-502",
+      "symptom_only": "bypass",
+      "exploit_hint_only": "payload,malicious,header,pickle",
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-7q5r-7gvp-wc82",
+    "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-7q5r-7gvp-wc82",
+    "https://sites.google.com/sonatype.com/vulnerabilities/cve-2025-1944",
+    "https://github.com/mmaitre314/picklescan/commit/e58e45e0d9e091159c1554f9b04828bbb40b9781",
+    "https://sites.google.com/sonatype.com/vulnerabilities/cve-2025-1944"
+  ],
+  "patch_stats": {
+    "files_changed": 7,
+    "lines_added": 131,
+    "lines_deleted": 2,
+    "lines_changed": 133
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "mmaitre314__picklescan-py310",
+    "repo_slug": "mmaitre314__picklescan",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9",
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "dockerfile": "environments/mmaitre314__picklescan-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "no_functional_tests_selected",
+    "selected": [],
+    "functional_test": null,
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "tests/test_scanner.py"
+    ],
+    "affected_files_used": [
+      "src/picklescan/relaxed_zipfile.py",
+      "src/picklescan/scanner.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/test_scanner.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 0.9,
+          "log": "/io/logs/tests__test_scanner.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/test_scanner.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 0.92,
+          "log": "/io/logs/tests__test_scanner.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [
+      "tests/test_scanner.py"
+    ],
+    "candidate_tests": [
+      "tests/test_scanner.py"
+    ],
+    "affected_files_used": [
+      "src/picklescan/relaxed_zipfile.py",
+      "src/picklescan/scanner.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/test_scanner.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 0.89,
+          "log": "/io/logs/tests__test_scanner.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/test_scanner.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.01,
+          "log": "/io/logs/tests__test_scanner.py.log"
+        }
+      }
+    }
+  }
+}

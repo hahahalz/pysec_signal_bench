@@ -1,0 +1,33 @@
+{
+  "instance_id": "PYSEC-2025-49",
+  "repo_url": "https://github.com/pypa/setuptools",
+  "vulnerable_commit": "d8390feaa99091d1ba9626bec0e4ba7072fc507a",
+  "fixed_commit": "250a6d17978f9f6ac3ac887091f2d32886fbbb0b",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-49/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-49/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-49.patch",
+  "aliases": [
+    "CVE-2025-47273",
+    "GHSA-5rjg-fvgr-3xxf"
+  ],
+  "cwe": [
+    "CWE-22",
+    "CWE-94"
+  ],
+  "signal_probe": {
+    "full_advisory": "setuptools is a package that allows users to download, build, install, upgrade, and uninstall Python packages. A path traversal vulnerability in `PackageIndex` is present in setuptools prior to version 78.1.1. An attacker would be allowed to write files to arbitrary locations on the filesystem with the permissions of the process running the Python code, which could escalate to remote code execution depending on the context. Version 78.1.1 fixes the issue.",
+    "cwe_only": "CWE-22,CWE-94",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-pypa__setuptools-py310:latest",
+    "dockerfile": "environments/pypa__setuptools-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

@@ -1,0 +1,928 @@
+{
+  "instance_id": "PYSEC-2025-40",
+  "repo_name": "huggingface__transformers",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-40",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "8cb522b4190bd556ce51be04942720650b1a3e57",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "72861e11ebe0b9d9123929b82708a1784ab1900e",
+    "fixed_commit": "8cb522b4190bd556ce51be04942720650b1a3e57"
+  },
+  "affected_files": [
+    "src/transformers/testing_utils.py"
+  ],
+  "affected_source_files": [
+    "src/transformers/testing_utils.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "A vulnerability in the `preprocess_string()` function of the `transformers.testing_utils` module in huggingface/transformers version v4.48.3 allows for a Regular Expression Denial of Service (ReDoS) attack. The regular expression used to process code blocks in docstrings contains nested quantifiers, leading to exponential backtracking when processing input with a large number of newline characters. An attacker can exploit this by providing a specially crafted payload, causing high CPU usage and potential application downtime, effectively resulting in a Denial of Service (DoS) scenario.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "src/transformers/testing_utils.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-40/test_poc.py",
+    "property": "oracles/PYSEC-2025-40/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-40/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/utils/test_versions_utils.py tests/utils/test_tokenization_utils.py tests/utils/test_processing_utils.py tests/utils/test_modeling_utils.py tests/utils/test_modeling_tf_utils.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-40/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-40/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "A vulnerability in the `preprocess_string()` function of the `transformers.testing_utils` module in huggingface/transformers version v4.48.3 allows for a Regular Expression Denial of Service (ReDoS) attack. The regular expression used to process code blocks in docstrings contains nested quantifiers, leading to exponential backtracking when processing input with a large number of newline characters. An attacker can exploit this by providing a specially crafted payload, causing high CPU usage and potential application downtime, effectively resulting in a Denial of Service (DoS) scenario.",
+      "cwe_only": "CWE-400",
+      "symptom_only": "denial of service",
+      "exploit_hint_only": "payload,crafted,regular expression",
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://huntr.com/bounties/97b780f3-ffca-424f-ad5d-0e1c57a5bde4",
+    "https://github.com/huggingface/transformers/commit/8cb522b4190bd556ce51be04942720650b1a3e57",
+    "https://huntr.com/bounties/97b780f3-ffca-424f-ad5d-0e1c57a5bde4"
+  ],
+  "patch_stats": {
+    "files_changed": 1,
+    "lines_added": 2,
+    "lines_deleted": 2,
+    "lines_changed": 4
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "huggingface__transformers-py310",
+    "repo_slug": "huggingface__transformers",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9.0",
+    "docker_image": "pysec-env-huggingface__transformers-py310:latest",
+    "dockerfile": "environments/huggingface__transformers-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "selected",
+    "selected": [
+      "tests/utils/test_activations.py",
+      "tests/utils/test_activations_tf.py",
+      "tests/utils/test_add_new_model_like.py",
+      "tests/utils/test_backbone_utils.py",
+      "tests/utils/test_cache_utils.py"
+    ],
+    "functional_test": "pytest -q tests/utils/test_activations.py tests/utils/test_activations_tf.py tests/utils/test_add_new_model_like.py tests/utils/test_backbone_utils.py tests/utils/test_cache_utils.py",
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "tests/generation/test_utils.py",
+      "tests/utils/test_activations.py",
+      "tests/utils/test_activations_tf.py",
+      "tests/utils/test_add_new_model_like.py",
+      "tests/utils/test_audio_utils.py",
+      "tests/utils/test_backbone_utils.py",
+      "tests/utils/test_cache_utils.py",
+      "tests/utils/test_chat_template_utils.py",
+      "tests/utils/test_cli.py",
+      "tests/utils/test_configuration_utils.py",
+      "tests/utils/test_convert_slow_tokenizer.py",
+      "tests/utils/test_deprecation.py",
+      "tests/utils/test_doc_samples.py",
+      "tests/utils/test_dynamic_module_utils.py",
+      "tests/utils/test_feature_extraction_utils.py",
+      "tests/utils/test_file_utils.py",
+      "tests/utils/test_generic.py",
+      "tests/utils/test_hf_argparser.py",
+      "tests/utils/test_hub_utils.py",
+      "tests/utils/test_image_processing_utils.py",
+      "tests/utils/test_image_utils.py",
+      "tests/utils/test_import_structure.py",
+      "tests/utils/test_import_utils.py",
+      "tests/utils/test_logging.py",
+      "tests/utils/test_model_card.py",
+      "tests/utils/test_model_output.py",
+      "tests/utils/test_modeling_flax_utils.py",
+      "tests/utils/test_modeling_rope_utils.py",
+      "tests/utils/test_modeling_tf_core.py",
+      "tests/utils/test_modeling_tf_utils.py"
+    ],
+    "affected_files_used": [
+      "src/transformers/testing_utils.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-huggingface__transformers-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/generation/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.83,
+          "log": "/io/logs/tests__generation__test_utils.py.log"
+        },
+        "tests/utils/test_activations.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.31,
+          "log": "/io/logs/tests__utils__test_activations.py.log"
+        },
+        "tests/utils/test_activations_tf.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.42,
+          "log": "/io/logs/tests__utils__test_activations_tf.py.log"
+        },
+        "tests/utils/test_add_new_model_like.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.73,
+          "log": "/io/logs/tests__utils__test_add_new_model_like.py.log"
+        },
+        "tests/utils/test_audio_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.21,
+          "log": "/io/logs/tests__utils__test_audio_utils.py.log"
+        },
+        "tests/utils/test_backbone_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.92,
+          "log": "/io/logs/tests__utils__test_backbone_utils.py.log"
+        },
+        "tests/utils/test_cache_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.85,
+          "log": "/io/logs/tests__utils__test_cache_utils.py.log"
+        },
+        "tests/utils/test_chat_template_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.85,
+          "log": "/io/logs/tests__utils__test_chat_template_utils.py.log"
+        },
+        "tests/utils/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.99,
+          "log": "/io/logs/tests__utils__test_cli.py.log"
+        },
+        "tests/utils/test_configuration_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 43.73,
+          "log": "/io/logs/tests__utils__test_configuration_utils.py.log"
+        },
+        "tests/utils/test_convert_slow_tokenizer.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 1.81,
+          "log": "/io/logs/tests__utils__test_convert_slow_tokenizer.py.log"
+        },
+        "tests/utils/test_deprecation.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.77,
+          "log": "/io/logs/tests__utils__test_deprecation.py.log"
+        },
+        "tests/utils/test_doc_samples.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.36,
+          "log": "/io/logs/tests__utils__test_doc_samples.py.log"
+        },
+        "tests/utils/test_dynamic_module_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.74,
+          "log": "/io/logs/tests__utils__test_dynamic_module_utils.py.log"
+        },
+        "tests/utils/test_feature_extraction_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 25.91,
+          "log": "/io/logs/tests__utils__test_feature_extraction_utils.py.log"
+        },
+        "tests/utils/test_file_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 4.24,
+          "log": "/io/logs/tests__utils__test_file_utils.py.log"
+        },
+        "tests/utils/test_generic.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.93,
+          "log": "/io/logs/tests__utils__test_generic.py.log"
+        },
+        "tests/utils/test_hf_argparser.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.83,
+          "log": "/io/logs/tests__utils__test_hf_argparser.py.log"
+        },
+        "tests/utils/test_hub_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 14.09,
+          "log": "/io/logs/tests__utils__test_hub_utils.py.log"
+        },
+        "tests/utils/test_image_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.31,
+          "log": "/io/logs/tests__utils__test_image_processing_utils.py.log"
+        },
+        "tests/utils/test_image_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.11,
+          "log": "/io/logs/tests__utils__test_image_utils.py.log"
+        },
+        "tests/utils/test_import_structure.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.26,
+          "log": "/io/logs/tests__utils__test_import_structure.py.log"
+        },
+        "tests/utils/test_import_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.3,
+          "log": "/io/logs/tests__utils__test_import_utils.py.log"
+        },
+        "tests/utils/test_logging.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.43,
+          "log": "/io/logs/tests__utils__test_logging.py.log"
+        },
+        "tests/utils/test_model_card.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.04,
+          "log": "/io/logs/tests__utils__test_model_card.py.log"
+        },
+        "tests/utils/test_model_output.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.72,
+          "log": "/io/logs/tests__utils__test_model_output.py.log"
+        },
+        "tests/utils/test_modeling_flax_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.75,
+          "log": "/io/logs/tests__utils__test_modeling_flax_utils.py.log"
+        },
+        "tests/utils/test_modeling_rope_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.75,
+          "log": "/io/logs/tests__utils__test_modeling_rope_utils.py.log"
+        },
+        "tests/utils/test_modeling_tf_core.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.88,
+          "log": "/io/logs/tests__utils__test_modeling_tf_core.py.log"
+        },
+        "tests/utils/test_modeling_tf_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.79,
+          "log": "/io/logs/tests__utils__test_modeling_tf_utils.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/generation/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.84,
+          "log": "/io/logs/tests__generation__test_utils.py.log"
+        },
+        "tests/utils/test_activations.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.66,
+          "log": "/io/logs/tests__utils__test_activations.py.log"
+        },
+        "tests/utils/test_activations_tf.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.64,
+          "log": "/io/logs/tests__utils__test_activations_tf.py.log"
+        },
+        "tests/utils/test_add_new_model_like.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.7,
+          "log": "/io/logs/tests__utils__test_add_new_model_like.py.log"
+        },
+        "tests/utils/test_audio_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.08,
+          "log": "/io/logs/tests__utils__test_audio_utils.py.log"
+        },
+        "tests/utils/test_backbone_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.66,
+          "log": "/io/logs/tests__utils__test_backbone_utils.py.log"
+        },
+        "tests/utils/test_cache_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.67,
+          "log": "/io/logs/tests__utils__test_cache_utils.py.log"
+        },
+        "tests/utils/test_chat_template_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.64,
+          "log": "/io/logs/tests__utils__test_chat_template_utils.py.log"
+        },
+        "tests/utils/test_cli.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.77,
+          "log": "/io/logs/tests__utils__test_cli.py.log"
+        },
+        "tests/utils/test_configuration_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 31.47,
+          "log": "/io/logs/tests__utils__test_configuration_utils.py.log"
+        },
+        "tests/utils/test_convert_slow_tokenizer.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.31,
+          "log": "/io/logs/tests__utils__test_convert_slow_tokenizer.py.log"
+        },
+        "tests/utils/test_deprecation.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.71,
+          "log": "/io/logs/tests__utils__test_deprecation.py.log"
+        },
+        "tests/utils/test_doc_samples.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.67,
+          "log": "/io/logs/tests__utils__test_doc_samples.py.log"
+        },
+        "tests/utils/test_dynamic_module_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.64,
+          "log": "/io/logs/tests__utils__test_dynamic_module_utils.py.log"
+        },
+        "tests/utils/test_feature_extraction_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 27.35,
+          "log": "/io/logs/tests__utils__test_feature_extraction_utils.py.log"
+        },
+        "tests/utils/test_file_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.76,
+          "log": "/io/logs/tests__utils__test_file_utils.py.log"
+        },
+        "tests/utils/test_generic.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.79,
+          "log": "/io/logs/tests__utils__test_generic.py.log"
+        },
+        "tests/utils/test_hf_argparser.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.8,
+          "log": "/io/logs/tests__utils__test_hf_argparser.py.log"
+        },
+        "tests/utils/test_hub_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 14.4,
+          "log": "/io/logs/tests__utils__test_hub_utils.py.log"
+        },
+        "tests/utils/test_image_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.22,
+          "log": "/io/logs/tests__utils__test_image_processing_utils.py.log"
+        },
+        "tests/utils/test_image_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.12,
+          "log": "/io/logs/tests__utils__test_image_utils.py.log"
+        },
+        "tests/utils/test_import_structure.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.69,
+          "log": "/io/logs/tests__utils__test_import_structure.py.log"
+        },
+        "tests/utils/test_import_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.28,
+          "log": "/io/logs/tests__utils__test_import_utils.py.log"
+        },
+        "tests/utils/test_logging.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.81,
+          "log": "/io/logs/tests__utils__test_logging.py.log"
+        },
+        "tests/utils/test_model_card.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.89,
+          "log": "/io/logs/tests__utils__test_model_card.py.log"
+        },
+        "tests/utils/test_model_output.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.84,
+          "log": "/io/logs/tests__utils__test_model_output.py.log"
+        },
+        "tests/utils/test_modeling_flax_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.76,
+          "log": "/io/logs/tests__utils__test_modeling_flax_utils.py.log"
+        },
+        "tests/utils/test_modeling_rope_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.77,
+          "log": "/io/logs/tests__utils__test_modeling_rope_utils.py.log"
+        },
+        "tests/utils/test_modeling_tf_core.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.87,
+          "log": "/io/logs/tests__utils__test_modeling_tf_core.py.log"
+        },
+        "tests/utils/test_modeling_tf_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.75,
+          "log": "/io/logs/tests__utils__test_modeling_tf_utils.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [],
+    "candidate_tests": [
+      "tests/generation/test_utils.py",
+      "tests/models/qwen2/test_modeling_qwen2.py",
+      "tests/models/t5/test_modeling_t5.py",
+      "tests/utils/test_modeling_utils.py",
+      "tests/utils/test_image_processing_utils.py",
+      "tests/utils/test_modeling_tf_utils.py",
+      "tests/models/switch_transformers/test_modeling_switch_transformers.py",
+      "tests/utils/test_modeling_tf_core.py",
+      "tests/utils/test_processing_utils.py",
+      "tests/models/t5/test_modeling_tf_t5.py",
+      "tests/utils/test_configuration_utils.py",
+      "tests/models/bart/test_modeling_bart.py",
+      "tests/models/bart/test_modeling_tf_bart.py",
+      "tests/utils/test_add_new_model_like.py",
+      "tests/utils/test_modeling_rope_utils.py",
+      "tests/models/bart/test_modeling_flax_bart.py",
+      "tests/models/t5/test_modeling_flax_t5.py",
+      "tests/utils/test_image_utils.py",
+      "tests/repo_utils/test_check_copies.py",
+      "tests/trainer/test_trainer.py",
+      "tests/trainer/test_trainer_utils.py",
+      "tests/utils/test_cache_utils.py",
+      "tests/utils/test_chat_template_utils.py",
+      "tests/utils/test_tokenization_utils.py",
+      "tests/models/bigbird_pegasus/test_modeling_bigbird_pegasus.py",
+      "tests/models/whisper/test_modeling_whisper.py",
+      "tests/test_modeling_common.py",
+      "tests/utils/test_audio_utils.py",
+      "tests/utils/test_feature_extraction_utils.py",
+      "tests/utils/test_hf_argparser.py"
+    ],
+    "affected_files_used": [
+      "src/transformers/testing_utils.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-huggingface__transformers-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/generation/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.1,
+          "log": "/io/logs/tests__generation__test_utils.py.log"
+        },
+        "tests/models/qwen2/test_modeling_qwen2.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.25,
+          "log": "/io/logs/tests__models__qwen2__test_modeling_qwen2.py.log"
+        },
+        "tests/models/t5/test_modeling_t5.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.34,
+          "log": "/io/logs/tests__models__t5__test_modeling_t5.py.log"
+        },
+        "tests/utils/test_modeling_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.01,
+          "log": "/io/logs/tests__utils__test_modeling_utils.py.log"
+        },
+        "tests/utils/test_image_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 4.03,
+          "log": "/io/logs/tests__utils__test_image_processing_utils.py.log"
+        },
+        "tests/utils/test_modeling_tf_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.88,
+          "log": "/io/logs/tests__utils__test_modeling_tf_utils.py.log"
+        },
+        "tests/models/switch_transformers/test_modeling_switch_transformers.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.52,
+          "log": "/io/logs/tests__models__switch_transformers__test_modeling_switch_transformers.py.log"
+        },
+        "tests/utils/test_modeling_tf_core.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.85,
+          "log": "/io/logs/tests__utils__test_modeling_tf_core.py.log"
+        },
+        "tests/utils/test_processing_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.77,
+          "log": "/io/logs/tests__utils__test_processing_utils.py.log"
+        },
+        "tests/models/t5/test_modeling_tf_t5.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.16,
+          "log": "/io/logs/tests__models__t5__test_modeling_tf_t5.py.log"
+        },
+        "tests/utils/test_configuration_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 31.46,
+          "log": "/io/logs/tests__utils__test_configuration_utils.py.log"
+        },
+        "tests/models/bart/test_modeling_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.0,
+          "log": "/io/logs/tests__models__bart__test_modeling_bart.py.log"
+        },
+        "tests/models/bart/test_modeling_tf_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.99,
+          "log": "/io/logs/tests__models__bart__test_modeling_tf_bart.py.log"
+        },
+        "tests/utils/test_add_new_model_like.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.84,
+          "log": "/io/logs/tests__utils__test_add_new_model_like.py.log"
+        },
+        "tests/utils/test_modeling_rope_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.83,
+          "log": "/io/logs/tests__utils__test_modeling_rope_utils.py.log"
+        },
+        "tests/models/bart/test_modeling_flax_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.89,
+          "log": "/io/logs/tests__models__bart__test_modeling_flax_bart.py.log"
+        },
+        "tests/models/t5/test_modeling_flax_t5.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.87,
+          "log": "/io/logs/tests__models__t5__test_modeling_flax_t5.py.log"
+        },
+        "tests/utils/test_image_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.13,
+          "log": "/io/logs/tests__utils__test_image_utils.py.log"
+        },
+        "tests/repo_utils/test_check_copies.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.01,
+          "log": "/io/logs/tests__repo_utils__test_check_copies.py.log"
+        },
+        "tests/trainer/test_trainer.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.25,
+          "log": "/io/logs/tests__trainer__test_trainer.py.log"
+        },
+        "tests/trainer/test_trainer_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.46,
+          "log": "/io/logs/tests__trainer__test_trainer_utils.py.log"
+        },
+        "tests/utils/test_cache_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.87,
+          "log": "/io/logs/tests__utils__test_cache_utils.py.log"
+        },
+        "tests/utils/test_chat_template_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.7,
+          "log": "/io/logs/tests__utils__test_chat_template_utils.py.log"
+        },
+        "tests/utils/test_tokenization_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 60.36,
+          "log": "/io/logs/tests__utils__test_tokenization_utils.py.log"
+        },
+        "tests/models/bigbird_pegasus/test_modeling_bigbird_pegasus.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.15,
+          "log": "/io/logs/tests__models__bigbird_pegasus__test_modeling_bigbird_pegasus.py.log"
+        },
+        "tests/models/whisper/test_modeling_whisper.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.4,
+          "log": "/io/logs/tests__models__whisper__test_modeling_whisper.py.log"
+        },
+        "tests/test_modeling_common.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.05,
+          "log": "/io/logs/tests__test_modeling_common.py.log"
+        },
+        "tests/utils/test_audio_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.06,
+          "log": "/io/logs/tests__utils__test_audio_utils.py.log"
+        },
+        "tests/utils/test_feature_extraction_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 27.1,
+          "log": "/io/logs/tests__utils__test_feature_extraction_utils.py.log"
+        },
+        "tests/utils/test_hf_argparser.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.89,
+          "log": "/io/logs/tests__utils__test_hf_argparser.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/generation/test_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.13,
+          "log": "/io/logs/tests__generation__test_utils.py.log"
+        },
+        "tests/models/qwen2/test_modeling_qwen2.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.15,
+          "log": "/io/logs/tests__models__qwen2__test_modeling_qwen2.py.log"
+        },
+        "tests/models/t5/test_modeling_t5.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.2,
+          "log": "/io/logs/tests__models__t5__test_modeling_t5.py.log"
+        },
+        "tests/utils/test_modeling_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.02,
+          "log": "/io/logs/tests__utils__test_modeling_utils.py.log"
+        },
+        "tests/utils/test_image_processing_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 3.32,
+          "log": "/io/logs/tests__utils__test_image_processing_utils.py.log"
+        },
+        "tests/utils/test_modeling_tf_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.14,
+          "log": "/io/logs/tests__utils__test_modeling_tf_utils.py.log"
+        },
+        "tests/models/switch_transformers/test_modeling_switch_transformers.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.45,
+          "log": "/io/logs/tests__models__switch_transformers__test_modeling_switch_transformers.py.log"
+        },
+        "tests/utils/test_modeling_tf_core.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.92,
+          "log": "/io/logs/tests__utils__test_modeling_tf_core.py.log"
+        },
+        "tests/utils/test_processing_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.34,
+          "log": "/io/logs/tests__utils__test_processing_utils.py.log"
+        },
+        "tests/models/t5/test_modeling_tf_t5.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.94,
+          "log": "/io/logs/tests__models__t5__test_modeling_tf_t5.py.log"
+        },
+        "tests/utils/test_configuration_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 31.53,
+          "log": "/io/logs/tests__utils__test_configuration_utils.py.log"
+        },
+        "tests/models/bart/test_modeling_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.04,
+          "log": "/io/logs/tests__models__bart__test_modeling_bart.py.log"
+        },
+        "tests/models/bart/test_modeling_tf_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 1.98,
+          "log": "/io/logs/tests__models__bart__test_modeling_tf_bart.py.log"
+        },
+        "tests/utils/test_add_new_model_like.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.97,
+          "log": "/io/logs/tests__utils__test_add_new_model_like.py.log"
+        },
+        "tests/utils/test_modeling_rope_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.98,
+          "log": "/io/logs/tests__utils__test_modeling_rope_utils.py.log"
+        },
+        "tests/models/bart/test_modeling_flax_bart.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.05,
+          "log": "/io/logs/tests__models__bart__test_modeling_flax_bart.py.log"
+        },
+        "tests/models/t5/test_modeling_flax_t5.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.03,
+          "log": "/io/logs/tests__models__t5__test_modeling_flax_t5.py.log"
+        },
+        "tests/utils/test_image_utils.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.14,
+          "log": "/io/logs/tests__utils__test_image_utils.py.log"
+        },
+        "tests/repo_utils/test_check_copies.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.09,
+          "log": "/io/logs/tests__repo_utils__test_check_copies.py.log"
+        },
+        "tests/trainer/test_trainer.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.19,
+          "log": "/io/logs/tests__trainer__test_trainer.py.log"
+        },
+        "tests/trainer/test_trainer_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 2.06,
+          "log": "/io/logs/tests__trainer__test_trainer_utils.py.log"
+        },
+        "tests/utils/test_cache_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.94,
+          "log": "/io/logs/tests__utils__test_cache_utils.py.log"
+        },
+        "tests/utils/test_chat_template_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.86,
+          "log": "/io/logs/tests__utils__test_chat_template_utils.py.log"
+        },
+        "tests/utils/test_tokenization_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 60.12,
+          "log": "/io/logs/tests__utils__test_tokenization_utils.py.log"
+        },
+        "tests/models/bigbird_pegasus/test_modeling_bigbird_pegasus.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.36,
+          "log": "/io/logs/tests__models__bigbird_pegasus__test_modeling_bigbird_pegasus.py.log"
+        },
+        "tests/models/whisper/test_modeling_whisper.py": {
+          "status": "FAIL",
+          "returncode": 2,
+          "duration_sec": 2.44,
+          "log": "/io/logs/tests__models__whisper__test_modeling_whisper.py.log"
+        },
+        "tests/test_modeling_common.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.63,
+          "log": "/io/logs/tests__test_modeling_common.py.log"
+        },
+        "tests/utils/test_audio_utils.py": {
+          "status": "FAIL",
+          "returncode": 1,
+          "duration_sec": 2.23,
+          "log": "/io/logs/tests__utils__test_audio_utils.py.log"
+        },
+        "tests/utils/test_feature_extraction_utils.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 25.81,
+          "log": "/io/logs/tests__utils__test_feature_extraction_utils.py.log"
+        },
+        "tests/utils/test_hf_argparser.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 3.41,
+          "log": "/io/logs/tests__utils__test_hf_argparser.py.log"
+        }
+      }
+    }
+  }
+}

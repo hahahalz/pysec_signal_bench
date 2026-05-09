@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2025-58",
+  "repo_url": "https://github.com/vllm-project/vllm",
+  "vulnerable_commit": "24b0205f58c28e05ac060ec6f0e4defe8e9c32eb",
+  "fixed_commit": "d3d6bb13fb62da3234addf6574922a4ec0513d04",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-58/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-58/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-58.patch",
+  "aliases": [
+    "CVE-2025-24357",
+    "GHSA-rh4j-5rhw-hr54"
+  ],
+  "cwe": [
+    "CWE-502"
+  ],
+  "signal_probe": {
+    "full_advisory": "vLLM is a library for LLM inference and serving. vllm/model_executor/weight_utils.py implements hf_model_weights_iterator to load the model checkpoint, which is downloaded from huggingface. It uses the torch.load function and the weights_only parameter defaults to False. When torch.load loads malicious pickle data, it will execute arbitrary code during unpickling. This vulnerability is fixed in v0.7.0.",
+    "cwe_only": "CWE-502",
+    "symptom_only": null,
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-vllm-project__vllm-py310:latest",
+    "dockerfile": "environments/vllm-project__vllm-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": "pytest -q tests/runai_model_streamer/test_weight_utils.py tests/weight_loading/test_weight_loading.py tests/v1/test_utils.py tests/v1/core/test_kv_cache_utils.py tests/test_utils.py",
+    "poc_test": null,
+    "property_test": null
+  }
+}

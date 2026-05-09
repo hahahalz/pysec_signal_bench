@@ -1,0 +1,340 @@
+{
+  "instance_id": "PYSEC-2025-71",
+  "repo_name": "zmievsa__cadwyn",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-71",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "b424ecd57cd8dabbc8fe39b8f8ccafea629c7728",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "5a6e2b7f009f33d93ea26a50156523ba3e4c42ca",
+    "fixed_commit": "b424ecd57cd8dabbc8fe39b8f8ccafea629c7728"
+  },
+  "affected_files": [
+    ".all-contributorsrc",
+    "CHANGELOG.md",
+    "cadwyn/applications.py",
+    "pyproject.toml",
+    "uv.lock"
+  ],
+  "affected_source_files": [
+    "cadwyn/applications.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "Cadwyn creates production-ready community-driven modern Stripe-like API versioning in FastAPI. In versions before 5.4.3, the version parameter of the \"/docs\" endpoint is vulnerable to a Reflected XSS (Cross-Site Scripting) attack. This XSS would notably allow an attacker to execute JavaScript code on a user's session for any application based on Cadwyn via a one-click attack. The vulnerability has been fixed in version 5.4.3.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "cadwyn/applications.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-71/test_poc.py",
+    "property": "oracles/PYSEC-2025-71/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-71/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/test_applications.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-71/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-71/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "Cadwyn creates production-ready community-driven modern Stripe-like API versioning in FastAPI. In versions before 5.4.3, the version parameter of the \"/docs\" endpoint is vulnerable to a Reflected XSS (Cross-Site Scripting) attack. This XSS would notably allow an attacker to execute JavaScript code on a user's session for any application based on Cadwyn via a one-click attack. The vulnerability has been fixed in version 5.4.3.",
+      "cwe_only": "CWE-79",
+      "symptom_only": "cross-site scripting",
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/zmievsa/cadwyn/security/advisories/GHSA-2gxp-6r36-m97r",
+    "https://github.com/zmievsa/cadwyn/commit/b424ecd57cd8dabbc8fe39b8f8ccafea629c7728"
+  ],
+  "patch_stats": {
+    "files_changed": 5,
+    "lines_added": 12,
+    "lines_deleted": 5,
+    "lines_changed": 17
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "zmievsa__cadwyn-py310",
+    "repo_slug": "zmievsa__cadwyn",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.9",
+    "docker_image": "pysec-env-zmievsa__cadwyn-py310:latest",
+    "dockerfile": "environments/zmievsa__cadwyn-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "no_functional_tests_selected",
+    "selected": [],
+    "functional_test": null,
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "tests/test_applications.py"
+    ],
+    "affected_files_used": [
+      "cadwyn/applications.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-zmievsa__cadwyn-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/test_applications.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 1.63,
+          "log": "/io/logs/tests__test_applications.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/test_applications.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.76,
+          "log": "/io/logs/tests__test_applications.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [],
+    "candidate_tests": [
+      "tests/test_applications.py",
+      "tests/test_router_generation.py",
+      "tests/test_data_migrations.py",
+      "tests/test_structure.py",
+      "tests/test_auth_dependencies.py",
+      "tests/test_changelog.py",
+      "tests/test_router_generation_with_from_future_annotations.py",
+      "tests/test_schema_generation/test_schema_field.py",
+      "tests/test_render.py",
+      "tests/test_routing.py",
+      "tests/test_schema_generation/test_schema_validator.py",
+      "tests/test_schema_generation/test_schema_with_future_annotations.py",
+      "tests/test_cli.py",
+      "tests/test_schema_generation/test_enum.py"
+    ],
+    "affected_files_used": [
+      "cadwyn/applications.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-zmievsa__cadwyn-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "tests/test_applications.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.75,
+          "log": "/io/logs/tests__test_applications.py.log"
+        },
+        "tests/test_router_generation.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/tests__test_router_generation.py.log"
+        },
+        "tests/test_data_migrations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/tests__test_data_migrations.py.log"
+        },
+        "tests/test_structure.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 2.24,
+          "log": "/io/logs/tests__test_structure.py.log"
+        },
+        "tests/test_auth_dependencies.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.8,
+          "log": "/io/logs/tests__test_auth_dependencies.py.log"
+        },
+        "tests/test_changelog.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.86,
+          "log": "/io/logs/tests__test_changelog.py.log"
+        },
+        "tests/test_router_generation_with_from_future_annotations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.81,
+          "log": "/io/logs/tests__test_router_generation_with_from_future_annotations.py.log"
+        },
+        "tests/test_schema_generation/test_schema_field.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.75,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_field.py.log"
+        },
+        "tests/test_render.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.75,
+          "log": "/io/logs/tests__test_render.py.log"
+        },
+        "tests/test_routing.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.77,
+          "log": "/io/logs/tests__test_routing.py.log"
+        },
+        "tests/test_schema_generation/test_schema_validator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.78,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_validator.py.log"
+        },
+        "tests/test_schema_generation/test_schema_with_future_annotations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.77,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_with_future_annotations.py.log"
+        },
+        "tests/test_cli.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.77,
+          "log": "/io/logs/tests__test_cli.py.log"
+        },
+        "tests/test_schema_generation/test_enum.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.81,
+          "log": "/io/logs/tests__test_schema_generation__test_enum.py.log"
+        }
+      },
+      "R_fix": {
+        "tests/test_applications.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.83,
+          "log": "/io/logs/tests__test_applications.py.log"
+        },
+        "tests/test_router_generation.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.8,
+          "log": "/io/logs/tests__test_router_generation.py.log"
+        },
+        "tests/test_data_migrations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.86,
+          "log": "/io/logs/tests__test_data_migrations.py.log"
+        },
+        "tests/test_structure.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.85,
+          "log": "/io/logs/tests__test_structure.py.log"
+        },
+        "tests/test_auth_dependencies.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.83,
+          "log": "/io/logs/tests__test_auth_dependencies.py.log"
+        },
+        "tests/test_changelog.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.8,
+          "log": "/io/logs/tests__test_changelog.py.log"
+        },
+        "tests/test_router_generation_with_from_future_annotations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.85,
+          "log": "/io/logs/tests__test_router_generation_with_from_future_annotations.py.log"
+        },
+        "tests/test_schema_generation/test_schema_field.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.88,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_field.py.log"
+        },
+        "tests/test_render.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.83,
+          "log": "/io/logs/tests__test_render.py.log"
+        },
+        "tests/test_routing.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.96,
+          "log": "/io/logs/tests__test_routing.py.log"
+        },
+        "tests/test_schema_generation/test_schema_validator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 1.04,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_validator.py.log"
+        },
+        "tests/test_schema_generation/test_schema_with_future_annotations.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.93,
+          "log": "/io/logs/tests__test_schema_generation__test_schema_with_future_annotations.py.log"
+        },
+        "tests/test_cli.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.98,
+          "log": "/io/logs/tests__test_cli.py.log"
+        },
+        "tests/test_schema_generation/test_enum.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.85,
+          "log": "/io/logs/tests__test_schema_generation__test_enum.py.log"
+        }
+      }
+    }
+  }
+}

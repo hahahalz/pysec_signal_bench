@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2025-71",
+  "repo_url": "https://github.com/zmievsa/cadwyn",
+  "vulnerable_commit": "5a6e2b7f009f33d93ea26a50156523ba3e4c42ca",
+  "fixed_commit": "b424ecd57cd8dabbc8fe39b8f8ccafea629c7728",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-71/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-71/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-71.patch",
+  "aliases": [
+    "CVE-2025-53528",
+    "GHSA-2gxp-6r36-m97r"
+  ],
+  "cwe": [
+    "CWE-79"
+  ],
+  "signal_probe": {
+    "full_advisory": "Cadwyn creates production-ready community-driven modern Stripe-like API versioning in FastAPI. In versions before 5.4.3, the version parameter of the \"/docs\" endpoint is vulnerable to a Reflected XSS (Cross-Site Scripting) attack. This XSS would notably allow an attacker to execute JavaScript code on a user's session for any application based on Cadwyn via a one-click attack. The vulnerability has been fixed in version 5.4.3.",
+    "cwe_only": "CWE-79",
+    "symptom_only": "cross-site scripting",
+    "exploit_hint_only": null,
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-zmievsa__cadwyn-py310:latest",
+    "dockerfile": "environments/zmievsa__cadwyn-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

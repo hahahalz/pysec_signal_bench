@@ -1,0 +1,100 @@
+{
+  "instance_id": "PYSEC-2019-138",
+  "repo_name": "Pylons__waitress",
+  "language": "python",
+  "advisory_id": "PYSEC-2019-138",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "11d9e138125ad46e951027184b13242a3c1de017",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "f11093a6b3240fc26830b6111e826128af7771c3",
+    "fixed_commit": "11d9e138125ad46e951027184b13242a3c1de017"
+  },
+  "affected_files": [
+    "CHANGES.txt",
+    "setup.py",
+    "waitress/parser.py",
+    "waitress/rfc7230.py",
+    "waitress/tests/test_parser.py",
+    "waitress/utilities.py"
+  ],
+  "affected_source_files": [
+    "setup.py",
+    "waitress/parser.py",
+    "waitress/rfc7230.py",
+    "waitress/utilities.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "In Waitress through version 1.4.0, if a proxy server is used in front of waitress, an invalid request may be sent by an attacker that bypasses the front-end and is parsed differently by waitress leading to a potential for HTTP request smuggling. Specially crafted requests containing special whitespace characters in the Transfer-Encoding header would get parsed by Waitress as being a chunked request, but a front-end server would use the Content-Length instead as the Transfer-Encoding header is co",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "setup.py",
+      "waitress/parser.py",
+      "waitress/rfc7230.py",
+      "waitress/utilities.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2019-138/test_poc.py",
+    "property": "oracles/PYSEC-2019-138/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2019-138/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2019-138/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2019-138/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "In Waitress through version 1.4.0, if a proxy server is used in front of waitress, an invalid request may be sent by an attacker that bypasses the front-end and is parsed differently by waitress leading to a potential for HTTP request smuggling. Specially crafted requests containing special whitespace characters in the Transfer-Encoding header would get parsed by Waitress as being a chunked request, but a front-end server would use the Content-Length instead as the Transfer-Encoding header is co",
+      "cwe_only": "CWE-444",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/Pylons/waitress/commit/11d9e138125ad46e951027184b13242a3c1de017",
+    "https://github.com/github/advisory-review/pull/14604",
+    "https://docs.pylonsproject.org/projects/waitress/en/latest/#security-fixes",
+    "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/GVDHR2DNKCNQ7YQXISJ45NT4IQDX3LJ7/",
+    "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/LYEOTGWJZVKPRXX2HBNVIYWCX73QYPM5/",
+    "https://access.redhat.com/errata/RHSA-2020:0720",
+    "https://github.com/advisories/GHSA-968f-66r5-5v74"
+  ],
+  "patch_stats": {
+    "files_changed": 6,
+    "lines_added": 194,
+    "lines_deleted": 25,
+    "lines_changed": 219
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "Pylons__waitress-py38",
+    "repo_slug": "Pylons__waitress",
+    "python_version": "3.8",
+    "python_requires_detected": "",
+    "docker_image": "pysec-env-Pylons__waitress-py38:latest",
+    "dockerfile": "environments/Pylons__waitress-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "build_failed",
+    "build_log": "environments/Pylons__waitress-py38/build.log",
+    "status": "env_generated",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  }
+}

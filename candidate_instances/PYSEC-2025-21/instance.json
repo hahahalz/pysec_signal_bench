@@ -1,0 +1,33 @@
+{
+  "instance_id": "PYSEC-2025-21",
+  "repo_url": "https://github.com/mmaitre314/picklescan",
+  "vulnerable_commit": "f34d091824cb8775711f039b5299c277e2ecc663",
+  "fixed_commit": "e58e45e0d9e091159c1554f9b04828bbb40b9781",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-21/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-21/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-21.patch",
+  "aliases": [
+    "CVE-2025-1945",
+    "GHSA-w8jq-xcqf-f792"
+  ],
+  "cwe": [
+    "CWE-502",
+    "CWE-94"
+  ],
+  "signal_probe": {
+    "full_advisory": "picklescan before 0.0.23 fails to detect malicious pickle files inside PyTorch model archives when certain ZIP file flag bits are modified. By flipping specific bits in the ZIP file headers, an attacker can embed malicious pickle files that remain undetected by PickleScan while still being successfully loaded by PyTorch's torch.load(). This can lead to arbitrary code execution when loading a compromised model.",
+    "cwe_only": "CWE-502,CWE-94",
+    "symptom_only": "code execution",
+    "exploit_hint_only": "malicious,header,pickle",
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "dockerfile": "environments/mmaitre314__picklescan-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

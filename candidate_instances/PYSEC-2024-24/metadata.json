@@ -1,0 +1,91 @@
+{
+  "instance_id": "PYSEC-2024-24",
+  "repo_name": "aio-libs__aiohttp",
+  "language": "python",
+  "advisory_id": "PYSEC-2024-24",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "1c335944d6a8b1298baf179b7c0b3069f10c514b",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "33ccdfb0a12690af5bb49bda2319ec0907fa7827",
+    "fixed_commit": "1c335944d6a8b1298baf179b7c0b3069f10c514b"
+  },
+  "affected_files": [
+    "CHANGES/8079.bugfix.rst",
+    "aiohttp/web_urldispatcher.py",
+    "docs/web_advanced.rst",
+    "docs/web_reference.rst",
+    "tests/test_web_urldispatcher.py"
+  ],
+  "affected_source_files": [
+    "aiohttp/web_urldispatcher.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. When using aiohttp as a web server and configuring static routes, it is necessary to specify the root path for static files. Additionally, the option 'follow_symlinks' can be used to determine whether to follow symbolic links outside the static root directory. When 'follow_symlinks' is set to True, there is no validation to check if reading a file is within the root directory. This can lead to directory traversal vul",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "aiohttp/web_urldispatcher.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2024-24/test_poc.py",
+    "property": "oracles/PYSEC-2024-24/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2024-24/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "python -m pytest -q tests/test_web_urldispatcher.py",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2024-24/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2024-24/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. When using aiohttp as a web server and configuring static routes, it is necessary to specify the root path for static files. Additionally, the option 'follow_symlinks' can be used to determine whether to follow symbolic links outside the static root directory. When 'follow_symlinks' is set to True, there is no validation to check if reading a file is within the root directory. This can lead to directory traversal vul",
+      "cwe_only": "CWE-22",
+      "symptom_only": null,
+      "exploit_hint_only": null,
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/aio-libs/aiohttp/security/advisories/GHSA-5h86-8mv2-jq9f",
+    "https://github.com/aio-libs/aiohttp/security/advisories/GHSA-5h86-8mv2-jq9f",
+    "https://github.com/aio-libs/aiohttp/pull/8079",
+    "https://github.com/aio-libs/aiohttp/commit/1c335944d6a8b1298baf179b7c0b3069f10c514b",
+    "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XXWVZIVAYWEBHNRIILZVB3R3SDQNNAA7/"
+  ],
+  "patch_stats": {
+    "files_changed": 5,
+    "lines_added": 128,
+    "lines_deleted": 10,
+    "lines_changed": 138
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "aio-libs__aiohttp-py38",
+    "repo_slug": "aio-libs__aiohttp",
+    "python_version": "3.8",
+    "python_requires_detected": ">=3.8",
+    "docker_image": "pysec-env-aio-libs__aiohttp-py38:latest",
+    "dockerfile": "environments/aio-libs__aiohttp-py38/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  }
+}

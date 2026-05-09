@@ -1,0 +1,699 @@
+{
+  "instance_id": "PYSEC-2025-26",
+  "repo_name": "snowflakedb__snowflake-connector-python",
+  "language": "python",
+  "advisory_id": "PYSEC-2025-26",
+  "construction": {
+    "strategy": "direct_commit",
+    "source_ref": "f3f9b666518d29c31a49384bbaa9a65889e72056",
+    "notes": "R_vuln = fix_commit^1, R_fix = fix_commit",
+    "vulnerable_commit": "3769b43822357c3874c40f5e74068458c2dc79af",
+    "fixed_commit": "f3f9b666518d29c31a49384bbaa9a65889e72056"
+  },
+  "affected_files": [
+    "src/snowflake/connector/cursor.py",
+    "src/snowflake/connector/pandas_tools.py",
+    "test/integ/pandas/test_pandas_tools.py"
+  ],
+  "affected_source_files": [
+    "src/snowflake/connector/cursor.py",
+    "src/snowflake/connector/pandas_tools.py",
+    "test/integ/pandas/test_pandas_tools.py"
+  ],
+  "affected_regions": [],
+  "task_description": "Repair the target security vulnerability in the vulnerable repository snapshot. Output a unified diff patch.",
+  "security_description": "The Snowflake Connector for Python provides an interface for developing Python applications that can connect to Snowflake and perform all standard operations. Snowflake discovered and remediated a vulnerability in the Snowflake Connector for Python. A function from the snowflake.connector.pandas_tools module is vulnerable to SQL injection. This vulnerability affects versions 2.2.5 through 3.13.0. Snowflake fixed the issue in version 3.13.1.",
+  "entry_scopes": {
+    "open_repo_access": true,
+    "affected_files_gold": [
+      "src/snowflake/connector/cursor.py",
+      "src/snowflake/connector/pandas_tools.py",
+      "test/integ/pandas/test_pandas_tools.py"
+    ],
+    "note": "affected_files_gold is metadata for evaluation and analysis. Do not expose it in no-location settings."
+  },
+  "security_tests": {
+    "poc": "oracles/PYSEC-2025-26/test_poc.py",
+    "property": "oracles/PYSEC-2025-26/test_property.py",
+    "status": "todo_manual",
+    "oracle_plan": "instances/PYSEC-2025-26/oracle_plan.md"
+  },
+  "test_scripts": {
+    "functional": "",
+    "security_poc": "python -m pytest -q oracles/PYSEC-2025-26/test_poc.py",
+    "security_property": "python -m pytest -q oracles/PYSEC-2025-26/test_property.py"
+  },
+  "signal_probe_review": {
+    "signal_probe": {
+      "full_advisory": "The Snowflake Connector for Python provides an interface for developing Python applications that can connect to Snowflake and perform all standard operations. Snowflake discovered and remediated a vulnerability in the Snowflake Connector for Python. A function from the snowflake.connector.pandas_tools module is vulnerable to SQL injection. This vulnerability affects versions 2.2.5 through 3.13.0. Snowflake fixed the issue in version 3.13.1.",
+      "cwe_only": "CWE-89",
+      "symptom_only": null,
+      "exploit_hint_only": "sql",
+      "root_cause_only": null
+    },
+    "status": "auto_draft_needs_manual_review",
+    "note": "SignalProbe fields are automatically drafted from the scanner output. Manually check them against the original advisory / issue / PR before use."
+  },
+  "references": [
+    "https://github.com/snowflakedb/snowflake-connector-python/security/advisories/GHSA-2vpq-fh52-j3wv",
+    "https://github.com/snowflakedb/snowflake-connector-python/commit/f3f9b666518d29c31a49384bbaa9a65889e72056"
+  ],
+  "patch_stats": {
+    "files_changed": 3,
+    "lines_added": 148,
+    "lines_deleted": 36,
+    "lines_changed": 184
+  },
+  "construction_validation": {
+    "patch_apply_check": true,
+    "patch_apply_log": "",
+    "install_verified": null,
+    "install_log": "",
+    "status": "constructed",
+    "warning": "This instance still requires manual oracle construction and validation."
+  },
+  "environment_generation": {
+    "environment_id": "snowflakedb__snowflake-connector-python-py310",
+    "repo_slug": "snowflakedb__snowflake-connector-python",
+    "python_version": "3.10",
+    "python_requires_detected": ">=3.8",
+    "docker_image": "pysec-env-snowflakedb__snowflake-connector-python-py310:latest",
+    "dockerfile": "environments/snowflakedb__snowflake-connector-python-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "dockerfile_status": "kept_existing",
+    "build_status": "built",
+    "build_log": null,
+    "status": "env_built",
+    "note": "This is automatically generated environment metadata. The main instance.json keeps only the compact environment fields. Manually verify dependency pins before marking the environment as curated."
+  },
+  "functional_test_selection": {
+    "status": "selected",
+    "selected": [
+      "test/unit/test_cursor.py"
+    ],
+    "functional_test": "pytest -q test/unit/test_cursor.py",
+    "pytest_prefix": "pytest -q",
+    "candidate_tests": [
+      "test/integ/pandas/test_pandas_tools.py",
+      "test/integ/test_cursor.py",
+      "test/integ/test_cursor_binding.py",
+      "test/integ/test_cursor_context_manager.py",
+      "test/unit/test_cursor.py",
+      "test/integ/pandas/test_arrow_chunk_iterator.py",
+      "test/integ/pandas/test_arrow_pandas.py",
+      "test/integ/pandas/test_error_arrow_pandas_stream.py",
+      "test/integ/pandas/test_logging.py",
+      "test/integ/pandas/test_unit_arrow_chunk_iterator.py",
+      "test/integ/pandas/test_unit_options.py",
+      "test/integ/test_reuse_cursor.py"
+    ],
+    "affected_files_used": [
+      "src/snowflake/connector/cursor.py",
+      "src/snowflake/connector/pandas_tools.py"
+    ],
+    "selection_rule": "selected test files that PASS on both R_vuln and R_fix",
+    "limits": {
+      "max_candidates": 30,
+      "max_tests": 5,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-snowflakedb__snowflake-connector-python-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/integ/pandas/test_pandas_tools.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.75,
+          "log": "/io/logs/test__integ__pandas__test_pandas_tools.py.log"
+        },
+        "test/integ/test_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_cursor.py.log"
+        },
+        "test/integ/test_cursor_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_cursor_binding.py.log"
+        },
+        "test/integ/test_cursor_context_manager.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__test_cursor_context_manager.py.log"
+        },
+        "test/unit/test_cursor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 12.91,
+          "log": "/io/logs/test__unit__test_cursor.py.log"
+        },
+        "test/integ/pandas/test_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/pandas/test_arrow_pandas.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.75,
+          "log": "/io/logs/test__integ__pandas__test_arrow_pandas.py.log"
+        },
+        "test/integ/pandas/test_error_arrow_pandas_stream.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.68,
+          "log": "/io/logs/test__integ__pandas__test_error_arrow_pandas_stream.py.log"
+        },
+        "test/integ/pandas/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_logging.py.log"
+        },
+        "test/integ/pandas/test_unit_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__pandas__test_unit_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/pandas/test_unit_options.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.72,
+          "log": "/io/logs/test__integ__pandas__test_unit_options.py.log"
+        },
+        "test/integ/test_reuse_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_reuse_cursor.py.log"
+        }
+      },
+      "R_fix": {
+        "test/integ/pandas/test_pandas_tools.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.72,
+          "log": "/io/logs/test__integ__pandas__test_pandas_tools.py.log"
+        },
+        "test/integ/test_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_cursor.py.log"
+        },
+        "test/integ/test_cursor_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_cursor_binding.py.log"
+        },
+        "test/integ/test_cursor_context_manager.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_cursor_context_manager.py.log"
+        },
+        "test/unit/test_cursor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 12.9,
+          "log": "/io/logs/test__unit__test_cursor.py.log"
+        },
+        "test/integ/pandas/test_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/pandas/test_arrow_pandas.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_arrow_pandas.py.log"
+        },
+        "test/integ/pandas/test_error_arrow_pandas_stream.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__pandas__test_error_arrow_pandas_stream.py.log"
+        },
+        "test/integ/pandas/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__pandas__test_logging.py.log"
+        },
+        "test/integ/pandas/test_unit_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__pandas__test_unit_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/pandas/test_unit_options.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__pandas__test_unit_options.py.log"
+        },
+        "test/integ/test_reuse_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__test_reuse_cursor.py.log"
+        }
+      }
+    }
+  },
+  "poc_test_selection": {
+    "status": "no_poc_tests_selected",
+    "selected": [],
+    "poc_test": null,
+    "pytest_prefix": "pytest -q",
+    "changed_test_files": [
+      "test/integ/pandas/test_pandas_tools.py"
+    ],
+    "candidate_tests": [
+      "test/integ/pandas/test_pandas_tools.py",
+      "test/integ/test_cursor.py",
+      "test/integ/test_cursor_binding.py",
+      "test/integ/pandas/test_arrow_pandas.py",
+      "test/unit/test_cursor.py",
+      "test/integ/pandas/test_arrow_chunk_iterator.py",
+      "test/integ/test_connection.py",
+      "test/integ/test_cursor_context_manager.py",
+      "test/unit/test_retry_network.py",
+      "test/integ/test_query_cancelling.py",
+      "test/integ/pandas/test_logging.py",
+      "test/integ/pandas/test_unit_options.py",
+      "test/integ/test_bindings.py",
+      "test/integ/test_snowsql_timestamp_format.py",
+      "test/integ/pandas/test_unit_arrow_chunk_iterator.py",
+      "test/unit/test_connection.py",
+      "test/unit/test_result_batch.py",
+      "test/integ/pandas/test_error_arrow_pandas_stream.py",
+      "test/integ/test_dbapi.py",
+      "test/integ/test_reuse_cursor.py",
+      "test/integ/test_multi_statement.py",
+      "test/integ/test_session_parameters.py",
+      "test/integ/test_arrow_result.py",
+      "test/integ/test_put_get.py",
+      "test/integ/test_statement_parameter_binding.py",
+      "test/integ/test_converter.py",
+      "test/unit/test_query_context_cache.py",
+      "test/integ/test_async.py",
+      "test/integ/test_large_result_set.py",
+      "test/integ/test_network.py"
+    ],
+    "affected_files_used": [
+      "src/snowflake/connector/cursor.py",
+      "src/snowflake/connector/pandas_tools.py"
+    ],
+    "selection_rule": "selected fixed-version regression tests that FAIL on R_vuln and PASS on R_fix",
+    "used_fixed_test_overlay": true,
+    "exported_oracle": false,
+    "limits": {
+      "poc_max_candidates": 30,
+      "poc_max_tests": 3,
+      "per_test_timeout": 300,
+      "docker_timeout": 7200
+    },
+    "used_docker": true,
+    "docker_image": "pysec-env-snowflakedb__snowflake-connector-python-py310:latest",
+    "install": "python -m pip install -e .",
+    "results": {
+      "R_vuln": {
+        "test/integ/pandas/test_pandas_tools.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.72,
+          "log": "/io/logs/test__integ__pandas__test_pandas_tools.py.log"
+        },
+        "test/integ/test_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.79,
+          "log": "/io/logs/test__integ__test_cursor.py.log"
+        },
+        "test/integ/test_cursor_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.76,
+          "log": "/io/logs/test__integ__test_cursor_binding.py.log"
+        },
+        "test/integ/pandas/test_arrow_pandas.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__pandas__test_arrow_pandas.py.log"
+        },
+        "test/unit/test_cursor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 12.91,
+          "log": "/io/logs/test__unit__test_cursor.py.log"
+        },
+        "test/integ/pandas/test_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__pandas__test_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/test_connection.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_connection.py.log"
+        },
+        "test/integ/test_cursor_context_manager.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__test_cursor_context_manager.py.log"
+        },
+        "test/unit/test_retry_network.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 78.2,
+          "log": "/io/logs/test__unit__test_retry_network.py.log"
+        },
+        "test/integ/test_query_cancelling.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_query_cancelling.py.log"
+        },
+        "test/integ/pandas/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__pandas__test_logging.py.log"
+        },
+        "test/integ/pandas/test_unit_options.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.67,
+          "log": "/io/logs/test__integ__pandas__test_unit_options.py.log"
+        },
+        "test/integ/test_bindings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.68,
+          "log": "/io/logs/test__integ__test_bindings.py.log"
+        },
+        "test/integ/test_snowsql_timestamp_format.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_snowsql_timestamp_format.py.log"
+        },
+        "test/integ/pandas/test_unit_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.67,
+          "log": "/io/logs/test__integ__pandas__test_unit_arrow_chunk_iterator.py.log"
+        },
+        "test/unit/test_connection.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 27.07,
+          "log": "/io/logs/test__unit__test_connection.py.log"
+        },
+        "test/unit/test_result_batch.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.26,
+          "log": "/io/logs/test__unit__test_result_batch.py.log"
+        },
+        "test/integ/pandas/test_error_arrow_pandas_stream.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__pandas__test_error_arrow_pandas_stream.py.log"
+        },
+        "test/integ/test_dbapi.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_dbapi.py.log"
+        },
+        "test/integ/test_reuse_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_reuse_cursor.py.log"
+        },
+        "test/integ/test_multi_statement.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.77,
+          "log": "/io/logs/test__integ__test_multi_statement.py.log"
+        },
+        "test/integ/test_session_parameters.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__test_session_parameters.py.log"
+        },
+        "test/integ/test_arrow_result.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_arrow_result.py.log"
+        },
+        "test/integ/test_put_get.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.76,
+          "log": "/io/logs/test__integ__test_put_get.py.log"
+        },
+        "test/integ/test_statement_parameter_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_statement_parameter_binding.py.log"
+        },
+        "test/integ/test_converter.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_converter.py.log"
+        },
+        "test/unit/test_query_context_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.25,
+          "log": "/io/logs/test__unit__test_query_context_cache.py.log"
+        },
+        "test/integ/test_async.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_async.py.log"
+        },
+        "test/integ/test_large_result_set.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__test_large_result_set.py.log"
+        },
+        "test/integ/test_network.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.72,
+          "log": "/io/logs/test__integ__test_network.py.log"
+        }
+      },
+      "R_fix": {
+        "test/integ/pandas/test_pandas_tools.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.78,
+          "log": "/io/logs/test__integ__pandas__test_pandas_tools.py.log"
+        },
+        "test/integ/test_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.77,
+          "log": "/io/logs/test__integ__test_cursor.py.log"
+        },
+        "test/integ/test_cursor_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.76,
+          "log": "/io/logs/test__integ__test_cursor_binding.py.log"
+        },
+        "test/integ/pandas/test_arrow_pandas.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.8,
+          "log": "/io/logs/test__integ__pandas__test_arrow_pandas.py.log"
+        },
+        "test/unit/test_cursor.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 11.39,
+          "log": "/io/logs/test__unit__test_cursor.py.log"
+        },
+        "test/integ/pandas/test_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_arrow_chunk_iterator.py.log"
+        },
+        "test/integ/test_connection.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_connection.py.log"
+        },
+        "test/integ/test_cursor_context_manager.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.78,
+          "log": "/io/logs/test__integ__test_cursor_context_manager.py.log"
+        },
+        "test/unit/test_retry_network.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 77.27,
+          "log": "/io/logs/test__unit__test_retry_network.py.log"
+        },
+        "test/integ/test_query_cancelling.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__test_query_cancelling.py.log"
+        },
+        "test/integ/pandas/test_logging.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_logging.py.log"
+        },
+        "test/integ/pandas/test_unit_options.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__pandas__test_unit_options.py.log"
+        },
+        "test/integ/test_bindings.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__test_bindings.py.log"
+        },
+        "test/integ/test_snowsql_timestamp_format.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_snowsql_timestamp_format.py.log"
+        },
+        "test/integ/pandas/test_unit_arrow_chunk_iterator.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.74,
+          "log": "/io/logs/test__integ__pandas__test_unit_arrow_chunk_iterator.py.log"
+        },
+        "test/unit/test_connection.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 27.77,
+          "log": "/io/logs/test__unit__test_connection.py.log"
+        },
+        "test/unit/test_result_batch.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.26,
+          "log": "/io/logs/test__unit__test_result_batch.py.log"
+        },
+        "test/integ/pandas/test_error_arrow_pandas_stream.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__pandas__test_error_arrow_pandas_stream.py.log"
+        },
+        "test/integ/test_dbapi.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_dbapi.py.log"
+        },
+        "test/integ/test_reuse_cursor.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_reuse_cursor.py.log"
+        },
+        "test/integ/test_multi_statement.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.69,
+          "log": "/io/logs/test__integ__test_multi_statement.py.log"
+        },
+        "test/integ/test_session_parameters.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_session_parameters.py.log"
+        },
+        "test/integ/test_arrow_result.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.72,
+          "log": "/io/logs/test__integ__test_arrow_result.py.log"
+        },
+        "test/integ/test_put_get.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_put_get.py.log"
+        },
+        "test/integ/test_statement_parameter_binding.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.73,
+          "log": "/io/logs/test__integ__test_statement_parameter_binding.py.log"
+        },
+        "test/integ/test_converter.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.71,
+          "log": "/io/logs/test__integ__test_converter.py.log"
+        },
+        "test/unit/test_query_context_cache.py": {
+          "status": "PASS",
+          "returncode": 0,
+          "duration_sec": 1.2,
+          "log": "/io/logs/test__unit__test_query_context_cache.py.log"
+        },
+        "test/integ/test_async.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_async.py.log"
+        },
+        "test/integ/test_large_result_set.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_large_result_set.py.log"
+        },
+        "test/integ/test_network.py": {
+          "status": "FAIL",
+          "returncode": 4,
+          "duration_sec": 0.7,
+          "log": "/io/logs/test__integ__test_network.py.log"
+        }
+      }
+    }
+  }
+}

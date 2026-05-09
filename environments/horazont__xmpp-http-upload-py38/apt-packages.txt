@@ -1,0 +1,12 @@
+build-essential
+git
+curl
+ca-certificates
+python3-dev
+pkg-config
+libffi-dev
+libssl-dev
+libjpeg-dev
+zlib1g-dev
+libxml2-dev
+libxslt1-dev

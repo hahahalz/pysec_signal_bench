@@ -1,0 +1,32 @@
+{
+  "instance_id": "PYSEC-2025-18",
+  "repo_url": "https://github.com/mmaitre314/picklescan",
+  "vulnerable_commit": "25d753f4b9a27ce141a43df3bf88d731800593d9",
+  "fixed_commit": "78ce704227c51f070c0c5fb4b466d92c62a7aa3d",
+  "vulnerable_snapshot": "snapshots/PYSEC-2025-18/R_vuln",
+  "fixed_snapshot": "snapshots/PYSEC-2025-18/R_fix",
+  "gold_patch": "gold_patches/PYSEC-2025-18.patch",
+  "aliases": [
+    "CVE-2025-1716",
+    "GHSA-655q-fx9r-782v"
+  ],
+  "cwe": [
+    "CWE-502"
+  ],
+  "signal_probe": {
+    "full_advisory": "picklescan before 0.0.21 does not treat 'pip' as an unsafe global. An attacker could craft a malicious model that uses Pickle to pull in a malicious PyPI package (hosted, for example, on pypi.org or GitHub) via `pip.main()`. Because pip is not a restricted global, the model, when scanned with picklescan, would pass security checks and appear to be safe, when it could instead prove to be problematic.",
+    "cwe_only": "CWE-502",
+    "symptom_only": null,
+    "exploit_hint_only": "malicious,pickle",
+    "root_cause_only": null
+  },
+  "environment": {
+    "docker_image": "pysec-env-mmaitre314__picklescan-py310:latest",
+    "dockerfile": "environments/mmaitre314__picklescan-py310/Dockerfile",
+    "install": "python -m pip install --no-deps --no-build-isolation -e .",
+    "build": "python -c 'import sys; print(sys.version)'",
+    "functional_test": null,
+    "poc_test": null,
+    "property_test": null
+  }
+}

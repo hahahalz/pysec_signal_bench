@@ -1,0 +1,9 @@
+{
+  "instance_id": "PYSEC-2025-65",
+  "source": "fixed_snapshot_regression_tests",
+  "test_files": [
+    "llama-index-core/tests/schema/test_image_document.py"
+  ],
+  "pytest_prefix": "pytest -q",
+  "note": "These files are copied into /repo by run_extracted_poc.py before pytest is executed."
+}
